@@ -1,9 +1,76 @@
+
 .heroWelcome {
   width: 100%;
   border-radius: 24px;
   background-color: #C1DCDC;
   padding: 48px;
-  gap: 24px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+
+  aside {
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+
+    .search {
+      width: fit-content;
+      position: relative;
+      overflow: hidden;
+
+      input {
+        padding: 18px;
+        background-color: #fff;
+        border-radius: 12px;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      span {
+        position: absolute;
+        right: 8px;
+        padding: 14px;
+        top: 50%;
+        transform: translate(60px, -80px) rotate(360deg) scale(0.8);
+        width: auto;
+        background-color: #C1DCDC;
+        border-radius: 12px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: all 1s cubic-bezier(.82,-0.45,.18,1.45);
+      }
+
+      &:focus-within {
+        span {
+          transform: translate(0, -50%) rotate(0) scale(1);
+        }
+      }
+    }
+  }
+
+  >div {
+    position: absolute;
+    right: 100px;
+    bottom: -70px;
+    img {
+      z-index: 5;
+    }
+    &::before {
+      content: "";
+      width: 450px;
+      height: 400px;
+      background-color: #1e1e1e;
+      border-top-left-radius: 999px;
+      border-bottom-left-radius: 999px;
+      border-top-right-radius: 999px;
+      z-index: -1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-60%, -40%);
+    }
+  }
 }

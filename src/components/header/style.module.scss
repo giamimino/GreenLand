@@ -1,0 +1,47 @@
+.active {
+  opacity: 1 !important;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  padding: 28px;
+  transition: all 1s cubic-bezier(.82,-0.45,.18,1.45);
+
+  main {
+    display: flex;
+    gap: 96px;
+
+    ul {
+      display: flex;
+      gap: 48px;
+
+      li {
+        opacity: 0.5;
+        font-size: 18px;
+        color: #1E1E1E;
+        font-weight: 500;
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  ol {
+    display: flex;
+    gap: 48px;
+  }
+}
+
+.scrolled {
+  padding-top: 48px;
+  padding-inline: 96px;
+}

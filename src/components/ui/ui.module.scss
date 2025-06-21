@@ -1,0 +1,152 @@
+.button {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  background-color: #fff;
+  border-radius: 8px;
+  gap: 10px;
+  cursor: pointer;
+
+  span {
+    font-size: 18px;
+    font-weight: 500;
+    transition: all .5s ease;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    transition: all .5s ease;
+  }
+
+  &:hover {
+    span {
+      transform: translate(-5px, 0) rotate(-8deg);
+    }
+
+    svg {
+      transform: translate(5px, 0) rotate(-330deg);
+    }
+  }
+}
+
+.featureCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  gap: 12px;
+  
+  aside {
+    padding: 18px;
+    border-radius: 999px;
+    background-color: #C1DCDC;
+    svg {
+      font-size: 40px;
+    }
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    
+    h1 {
+      font-size: 18px;
+      color: #000;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 18px;
+      opacity: 0.5;
+      color: #1E1E1E;
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: fit-content;
+  perspective: 1000px;
+  img {
+    opacity: 0;
+  }
+  h1 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+  }
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #1E1E1E;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 12px;
+  opacity: 0;
+  transition: all .4s ease;
+
+  h1 {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  p {
+    color: #1E1E1E;
+    opacity: 0.5;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 70%;
+  }
+
+  &:hover {
+    background-color: #fcfcfc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5),
+                5px 5px 5px rgba(0, 0, 0, 0.2);
+    transform: translate(-5px, -5px);
+  }
+}
+
+
+// animations
+
+.rotateY {
+  animation: rotateY .8s ease forwards;
+}
+
+.fadeDown {
+  animation: fadeDown 0.8s ease forwards;
+}
+
+@keyframes fadeDown {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+    filter: blur(20px);
+  } to {
+    transform: translate(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes rotateY {
+  from {
+    transform: translateY(-200px) rotateY(360deg);
+    opacity: 0;
+    filter: blur(20px);
+  } to {
+    transform: translateY(0) rotateY(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}

@@ -28,6 +28,7 @@ type Button = {
   title: string,
   icon?: string,
   bgColor?: string,
+  type?: "button" | "submit" | "reset",
 }
 
 type Product = {
@@ -120,7 +121,7 @@ export function Product(props: Product) {
 
 export function Button(props: Button) {
   return (
-    <button className={styles.button} style={{
+    <button type={props.type || "button"} className={styles.button} style={{
       backgroundColor: `#${props.bgColor || "fff"}` 
     }}>
       <span>{props.title}</span>

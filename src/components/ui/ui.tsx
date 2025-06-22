@@ -4,6 +4,8 @@ import React, {useState, useEffect, useRef} from "react"
 import styles from "./ui.module.scss"
 import { Icon } from "@iconify/react"
 import Image from "next/image"
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
 
 type FeatureCard = {
   icon: string,
@@ -34,6 +36,39 @@ type Product = {
   price: number,
   id?: string,
   delay?: number,
+}
+
+type CommentSlider = {
+  objects: any[],
+
+}
+
+export function CommentSlider(props: CommentSlider) {
+  return (
+    <Swiper
+      spaceBetween={48}
+      slidesPerView={2}
+      className={styles.sliderWrapper}
+    >
+      {props.objects.map((com, index) => (
+        <SwiperSlide className={styles.slider}>
+          <p>{com.comment}</p>
+          <main>
+            <Image
+              src={`https://raw.githubusercontent.com/giamimino/images/refs/heads/main/greenland/${com.image}.webp`}
+              alt={com.image}
+              width={150}
+              height={205}
+            />
+            <div>
+              <h1>{com.name}</h1>
+              <p>{com.job}</p>
+            </div>
+          </main>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  )
 }
 
 export function Product(props: Product) {
@@ -81,6 +116,7 @@ export function Product(props: Product) {
     </div>
   )
 }
+
 
 export function Button(props: Button) {
   return (

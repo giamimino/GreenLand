@@ -4,9 +4,10 @@ import styles from './page.module.scss'
 import { Counting } from '@/components/animations/animations';
 import Image from 'next/image';
 import { Icon } from '@iconify/react';
-import { Button, Category, FeatureCard, Product, Title } from '@/components/ui/ui';
+import { CommentSlider, Button, Category, FeatureCard, Product, Title } from '@/components/ui/ui';
 import bestSelling from "@/data/json/bestselling.json"
 import Link from 'next/link';
+import comments from '@/data/json/comments.json'
 
 export default function Home() {
   
@@ -105,6 +106,14 @@ export default function Home() {
               title='Explore'
             />
           </aside>
+        </main>
+      </section>
+      <section className='flex flex-col gap-12'>
+        <h1 className='text-[32px] font-bold '>What customers say about GREEMIND?</h1>
+        <main>
+          <CommentSlider
+            objects={comments}
+           />
         </main>
       </section>
     </div>

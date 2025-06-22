@@ -44,11 +44,12 @@ export default function Header() {
         <li>
           <Icon icon="cuida:user-outline" width={24} height={24} />
         </li>
-        <li>
+        <input type="checkbox" hidden id='menu-toggle' className={styles.menuToggle} />
+        <label htmlFor='menu-toggle'>
           <span></span>
           <span></span>
           <span></span>
-        </li>
+        </label>
       </ol>
     </header>
   )

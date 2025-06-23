@@ -118,7 +118,6 @@ export function Product(props: Product) {
   )
 }
 
-
 export function Button(props: Button) {
   return (
     <button type={props.type || "button"} className={styles.button} style={{

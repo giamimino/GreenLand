@@ -9,6 +9,25 @@ export default function page() {
   const [isLogin, setIsLogin] = useState(false)
   const [passwordValue, setPasswordValue] = useState("")
   const [WrongPas, setWrongPas] = useState(false)
+  const [errors, setErrors] = useState<string[]>([]);
+  const [success, setSuccess] = useState("");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const result = await createProduct(formData);
+
+    if (!result.success) {
+      setErrors(result.errors ?? []);
+      setSuccess("");
+    } else {
+      setSuccess("Product created successfully!");
+      setErrors([]);
+      e.currentTarget.reset();
+    }
+  }
 
   function passwordCheck() {
     if (passwordValue === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
@@ -32,7 +51,7 @@ export default function page() {
       height: "120vh"
     }}>
       {isLogin ? <div className={styles.admin}>
-        <form action={createProduct}>
+        <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="Title">Title</label>
             <input type="text" name='title' placeholder='Type Title' id='Title' />
@@ -45,12 +64,24 @@ export default function page() {
 
           <div>
             <label htmlFor="Price">Price</label>
-            <input type="number" name='price' placeholder='Type price name' id='Price' />
+            <input type="number" name='price' placeholder='Type price' id='Price' />
           </div>
           
           <div>
+            <label htmlFor="category">Category</label>
+            <input type="text" name='category' placeholder='Type category' id='category' />
+          </div>
+
+          <div>
             <label htmlFor="image">Image</label>
             <input type="text" name='image' placeholder='Type image name' id='image' />
+          </div>
+
+          <div>
+            <div>
+              <label htmlFor="isSale">isSale?</label>
+              <input type="checkbox" name='isSale' id='isSale' />
+            </div>
           </div>
 
           <Button
@@ -58,6 +89,10 @@ export default function page() {
             title='Submit'
             />
         </form>
+        {errors && errors.map((error:string, index:number) => (
+          <p style={{ color: "red" }} key={index}>{error}</p>
+        ))}
+        {success && <p style={{ color: "green" }}>{success}</p>}
       </div> :
       <div className={styles.login}>
         <div>
@@ -74,6 +109,7 @@ export default function page() {
         {WrongPas && <p>Wrong Password pls try again</p>}
       </div>
       }
+      
     </div>
   )
 }

@@ -2,11 +2,34 @@
   padding: 96px;
   display: flex;
   flex-direction: column;
+  gap: 64px;
 
   .inSaleWrapper {
     padding: 48px;
     background-color: red;
     border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+
+
+    >h1 {
+      color: #fff;
+      font-size: 32px;
+      font-weight: 700;
+      width: fit-content;
+      rotate: -12deg;
+      filter: blur(10px);
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: autoBlur 1s ease forwards;
+      line-height: 0;
+    }
+
+    >div {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 48px;
+    }
   }
   
   main {
@@ -15,4 +38,15 @@
     gap: 48px;
   }
   
+}
+
+
+// animations
+
+@keyframes autoBlur {
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

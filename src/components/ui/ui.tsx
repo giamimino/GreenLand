@@ -37,6 +37,7 @@ type Product = {
   price: number,
   id?: string,
   delay?: number,
+  prevPrice?: number,
 }
 
 type CommentSlider = {
@@ -103,7 +104,7 @@ export function Product(props: Product) {
       animationDelay: `${props.delay || 0}ms`
     }}>
       <Image
-        src={`https://raw.githubusercontent.com/giamimino/images/refs/heads/main/greenland/${props.image}.webp`}
+        src={`https://raw.githubusercontent.com/giamimino/images/refs/heads/main/greenland/products/${props.image}.webp`}
         alt={props.image}
         width={299}
         height={363}
@@ -112,7 +113,7 @@ export function Product(props: Product) {
         {props.title}
       </h1>
       <p>
-        $ {props.price}
+        $ {props.prevPrice && <span>{props.prevPrice}</span>} {props.price}
       </p>
     </div>
   )

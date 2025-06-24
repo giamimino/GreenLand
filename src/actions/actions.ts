@@ -8,9 +8,9 @@ export async function createProduct(formData: FormData) {
     const category = formData.get("category") as string;
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
-    const image = formData.get("image") as string;
     const price = Number(formData.get("price"));
     const isSale = formData.get("isSale") === "on";
+    const prevPrice = isSale? Number(formData.get("prevPrice")) : null
 
     const categoryArr = [
       "indoor_plants",
@@ -28,12 +28,12 @@ export async function createProduct(formData: FormData) {
       errors.push("Invalid category.");
     }
 
-    if (!title || !description || !image || price <= 0) {
+    if (!title || !description || price <= 0) {
       errors.push("Some fields are missing. Please fill in all required information.");
     }
 
-    if (/[<>]/.test(title) || /[<>]/.test(description) || /[<>]/.test(image)) {
-      errors.push("Some fields contain illegal characters.")
+    if (/[<>]/.test(title) || /[<>]/.test(description)) {
+      errors.push("title or description contain illegal characters.")
     }
 
     if (errors.length > 0) {
@@ -45,12 +45,13 @@ export async function createProduct(formData: FormData) {
         title,
         slug: title.replace(/\s+/g, "-").toLowerCase(),
         Description: description,
-        image,
+        image: title.replace(/\s+/g, "-").toLocaleLowerCase(),
         price,
         category,
         isSale,
         isBestSelling: false,
         view: 0,
+        prevPrice,
       },
     });
 
@@ -62,4 +63,12 @@ export async function createProduct(formData: FormData) {
       errors: ["Something went wrong. Please try again."],
     };
   }
+}
+
+export async function deleteProduct(formData: FormData) {
+  await prisma.products.delete({
+    where: {
+      id: formData.get("id") as string,
+    }
+  })
 }

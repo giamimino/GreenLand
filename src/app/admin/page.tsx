@@ -11,6 +11,7 @@ export default function page() {
   const [WrongPas, setWrongPas] = useState(false)
   const [errors, setErrors] = useState<string[]>([]);
   const [success, setSuccess] = useState("");
+  const [checked, setChecked] = useState(false)
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -73,16 +74,17 @@ export default function page() {
           </div>
 
           <div>
-            <label htmlFor="image">Image</label>
-            <input type="text" name='image' placeholder='Type image name' id='image' />
-          </div>
-
-          <div>
             <div>
               <label htmlFor="isSale">isSale?</label>
-              <input type="checkbox" name='isSale' id='isSale' />
+              <input type="checkbox" name='isSale' id='isSale' onChange={() => setChecked(!checked)} />
             </div>
           </div>
+
+          {checked &&
+          <div>
+            <label htmlFor="prevPrice">Previus price?</label>
+            <input type="text" name='prevPrice' placeholder='Type Previus price' id='prevPrice' />
+          </div>}
 
           <Button
             type='submit'

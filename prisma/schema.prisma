@@ -19,4 +19,12 @@ model Products {
   category String
   createAt DateTime @default(now())
   view Int
+  prevPrice Int?
+}
+
+model admin {
+  id String @id @default(cuid())
+  specialCode String @unique
+  user String
+  personCode String
 }

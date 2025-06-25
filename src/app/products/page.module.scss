@@ -49,6 +49,7 @@
 
   >div {
     position: relative;
+    z-index: 99;
     >div {
       position: absolute;
     }
@@ -69,17 +70,19 @@
       row-gap: 18px;
       border: 1px solid #000;
       top:150%;
-      filter: blur(10px);
-      opacity: 0;
-      transform: translateX(-30px);
-      animation: autoBlur 0.5s ease forwards;
 
-      li {
+      input:checked + label {
+        opacity: 1;
+        font-weight: 500;
+      }
+
+      label {
         width: fit-content;
         text-wrap: nowrap;
         cursor: pointer;
         opacity: 0.8;
         transition: .3s;
+
 
         &:hover {
           opacity: 1;

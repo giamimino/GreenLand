@@ -1,23 +1,26 @@
 import prisma from '@/lib/prisma'
 import ClientComponent from './clientComponent';
-import { addView } from '@/actions/actions';
 import View from './view';
 
-export default async function page({ params }: { params: { slug: string } }) {
+type ProductPageProps = {
+  params: {
+    slug: string;
+  };
+};
+
+export default async function Product({ params }: ProductPageProps) {
   const product = await prisma.products.findUnique({
-    where: {
-      slug: params.slug,
-    },
+    where: { slug: params.slug },
   });
+
+  if (!product) {
+    return <div>Product not found</div>;
+  }
 
   return (
     <>
-      <ClientComponent
-        product={product}
-      />
-      <View 
-        product={product}
-      />
+      <ClientComponent product={product} />
+      <View product={product} />
     </>
   );
 }

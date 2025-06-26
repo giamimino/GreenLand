@@ -1,12 +1,12 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './page.module.scss'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { Button } from '@/components/ui/ui'
 import { createProduct } from '@/actions/actions'
 import clsx from 'clsx'
 
-export default function page() {
+export default function Admin() {
   const [isLogin, setIsLogin] = useState(true)
   const [passwordValue, setPasswordValue] = useState("")
   const [WrongPas, setWrongPas] = useState(false)

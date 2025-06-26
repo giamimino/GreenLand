@@ -1,0 +1,33 @@
+// Define database connection via the `DATABASE_URL` env var
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Define custom output path for generated Prisma Client
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/app/generated/prisma-client"
+}
+
+model Products {
+  id            String   @id @default(cuid())
+  image         String
+  title         String
+  Description   String
+  price         Int
+  slug          String   @unique
+  isSale        Boolean  @default(false)
+  isBestSelling Boolean  @default(false)
+  category      String
+  createAt      DateTime @default(now())
+  view          Int
+  prevPrice     Int?
+}
+
+model admin {
+  id          String @id @default(cuid())
+  specialCode String @unique
+  user        String
+  personCode  String
+}

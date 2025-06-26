@@ -1,9 +1,9 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import prisma from '@/lib/prisma';
-import { deleteProduct } from '@/actions/actions';
+import { deleteProduct, backupDatabase } from '@/actions/actions';
 
-export default async function page() {
+export default async function Tables() {
 
   const products = await prisma.products.findMany()
 
@@ -52,6 +52,9 @@ export default async function page() {
         ))}
       </tbody>
     </table>
+    <form action={backupDatabase}>
+      <button type='submit'>backup</button>
+    </form>
     </div>
   )
 }

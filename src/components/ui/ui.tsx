@@ -1,12 +1,12 @@
 "use client"
 
-import React, {useState, useEffect, useRef} from "react"
-import styles from "./ui.module.scss"
-import { Icon } from "@iconify/react"
-import Image from "next/image"
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import { redirect } from "next/navigation"
+import React, {useState, useEffect, useRef} from "react";
+import styles from "./ui.module.scss";
+import { Icon } from "@iconify/react";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import { redirect } from "next/navigation";
 
 type FeatureCard = {
   icon: string,

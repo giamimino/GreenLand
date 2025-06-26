@@ -24,3 +24,4 @@ export default function ClientComponent({ product }: Props) {
     </form>
   );
 }
+

@@ -16,10 +16,13 @@ export async function createProduct(formData: FormData) {
       "indoor_plants",
       "outdoor_plants",
       "succulents_cacti",
-      "flowering_plants",
       "air_purifying_plants",
-      "herbs_edibles",
-      "bonsai",
+      "flowering_plants",
+      "pet-friendly_plants",
+      "herbs",
+      "hanging_plants",
+      "rare_exotic_plants",
+      "low_maintenance_plants",
     ];
 
     const errors: string[] = [];
@@ -45,7 +48,7 @@ export async function createProduct(formData: FormData) {
         title,
         slug: title.replace(/\s+/g, "-").toLowerCase(),
         Description: description,
-        image: title.replace(/\s+/g, "-").toLocaleLowerCase(),
+        image: title.replace(/\s+/g, "-").toLowerCase(),
         price,
         category,
         isSale,
@@ -71,4 +74,17 @@ export async function deleteProduct(formData: FormData) {
       id: formData.get("id") as string,
     }
   })
+}
+
+export async function addView(formData: FormData) {
+  const id = formData.get("id") as string;
+
+  await prisma.products.update({
+    where: { id },
+    data: {
+      view: {
+        increment: 1,
+      },
+    },
+  });
 }

@@ -1,17 +1,62 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './page.module.scss'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { Button } from '@/components/ui/ui'
 import { createProduct } from '@/actions/actions'
+import clsx from 'clsx'
 
 export default function page() {
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(true)
   const [passwordValue, setPasswordValue] = useState("")
   const [WrongPas, setWrongPas] = useState(false)
   const [errors, setErrors] = useState<string[]>([]);
   const [success, setSuccess] = useState("");
   const [checked, setChecked] = useState(false)
+  const [category, setCategory] = useState("")
+
+  const categoryTechs = [
+    {
+      key: "indoor_plants",
+      label: "Indoor Plants"
+    },
+    {
+      key: "outdoor_plants",
+      label: "Outdoor Plants"
+    },
+    {
+      key: "succulents_cacti",
+      label: "Succulents & Cacti"
+    },
+    {
+      key: "air_purifying_plants",
+      label: "Air-Purifying Plants"
+    },
+    {
+      key: "flowering_plants",
+      label: "Flowering Plants"
+    },
+    {
+      key: "pet-friendly_plants",
+      label: "Pet-Friendly Plants"
+    },
+    {
+      key: "herbs",
+      label: "Herbs"
+    },
+    {
+      key: "hanging_plants",
+      label: "Hanging Plants"
+    },
+    {
+      key: "rare_exotic_plants",
+      label: "Rare & Exotic Plants"
+    },
+    {
+      key: "low_maintenance_plants",
+      label: "Low-Maintenance Plants"
+    }
+  ]
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -69,16 +114,26 @@ export default function page() {
           </div>
           
           <div>
-            <label htmlFor="category">Category</label>
-            <input type="text" name='category' placeholder='Type category' id='category' />
-          </div>
-
-          <div>
+            <h1>Chosse category</h1>
+            <input type="text" hidden defaultValue={category} name='category' />
             <div>
-              <label htmlFor="isSale">isSale?</label>
-              <input type="checkbox" name='isSale' id='isSale' onChange={() => setChecked(!checked)} />
+              {categoryTechs.map((cat) => (
+                  <p key={cat.key} 
+                  className={clsx(
+                    {
+                      'bg-gray-100 text-black': category === cat.key,
+                      'text-gray-500': category !== cat.key,
+                    },
+                  )} 
+                  onClick={() => setCategory(cat.key)}>{cat.label}</p>
+                ))}
             </div>
           </div>
+
+          <aside className='flex flex-row gap-1.5'>
+            <label htmlFor="isSale">isSale?</label>
+            <input type="checkbox" className='hover:cursor-pointer' name='isSale' id='isSale' onChange={() => setChecked(!checked)} />
+          </aside>
 
           {checked &&
           <div>

@@ -10,18 +10,29 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+    user-select: none;
 
     > div {
       display: flex;
       flex-direction: column;
       gap: 6px;
 
-      div {
-        display: flex;
-        gap: 6px;
-
-        input  {
+      >div {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        border: 1px solid #000;
+        gap: 24px;
+        padding: 12px;
+        border-radius: 8px;
+        
+        p {
+          text-wrap: nowrap;
           cursor: pointer;
+          
+          &:hover {
+            color: #000;
+            font-weight: 500;
+          }
         }
       }
     }

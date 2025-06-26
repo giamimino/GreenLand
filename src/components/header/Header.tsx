@@ -25,6 +25,13 @@ export default function Header() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  const navLinks = [
+    {name: "Home", href:"/"},
+    {name: "products", href:"/products"},
+    {name: "contact", href:"/contact"},
+  ]
+
   return (
     <>
       <header className={`${styles.header} ${isScrolled? styles.scrolled : ""}`}>
@@ -34,9 +41,9 @@ export default function Header() {
           </svg>
 
           <ul>
-            <Link href="/"><li className={pathname === '/' ? styles.active : ""}>Home</li></Link>
-            <Link href="./products"><li className={pathname === '/products' ? styles.active : ""}>products</li></Link>
-            <Link href="./contact"><li className={pathname === '/contact' ? styles.active : ""}>contact</li></Link>
+            {navLinks.map(({name, href}) => (
+              <Link key={name.toLowerCase()} href={href}><li className={pathname === href ? styles.active : ""}>{name}</li></Link>
+            ))}
           </ul>
         </main>
         <ol>

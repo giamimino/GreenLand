@@ -6,6 +6,7 @@ import { Icon } from "@iconify/react"
 import Image from "next/image"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
+import { redirect } from "next/navigation"
 
 type FeatureCard = {
   icon: string,
@@ -102,7 +103,7 @@ export function Product(props: Product) {
     className={`${styles.product} ${inView? styles.fadeDown : ""}`}
     style={{
       animationDelay: `${props.delay || 0}ms`
-    }}>
+    }} onClick={() => redirect(`/products/${props.title.replace(/\s+/g, "-").toLowerCase()}`)}>
       <Image
         src={`https://raw.githubusercontent.com/giamimino/images/refs/heads/main/greenland/products/${props.image}.webp`}
         alt={props.image}

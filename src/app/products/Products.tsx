@@ -124,7 +124,7 @@ export default function ProductsPage({products}: Props) {
             .map((product, index) => (
               <Product
                 key={product.slug}
-                title={product.title + index}
+                title={product.title}
                 price={product.price}
                 image={product.image}
                 prevPrice={product.prevPrice ?? undefined}

@@ -34,6 +34,7 @@ export default function ProductsPage({products}: Props) {
   const [showFilterCategoy, setShowFilterCategory] = useState(false)
   const [filter, setFilter] = useState<string[]>([])
   const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([])
+  const [searchValue, setSearchValue] = useState<string>("")
   const categoryTechs = [
     {
       key: "indoor_plants",
@@ -88,6 +89,14 @@ export default function ProductsPage({products}: Props) {
     );
   }
 
+  function handleSearch() {
+    setFilteredProducts(products.filter(products => products.title === searchValue))
+  }
+
+  useEffect(() => {
+    setFilteredProducts(products.filter(products => products.title.toLowerCase().includes(searchValue.toLowerCase())))
+  }, [searchValue])
+
   useEffect(() => {
     if(filter.length >= 1) {
       setFilteredProducts(products.filter(product => filter.some(category => product.category === category)))
@@ -127,7 +136,14 @@ export default function ProductsPage({products}: Props) {
           title="Category"
           object={categoryTechs}
         />
-        <input type="text" name="search" placeholder="What are you looking for?" />
+        <div className={styes.search}>
+          <input type="text" placeholder='What are you looking for?'
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}/>
+          <span onClick={handleSearch}>
+            <Icon icon="lets-icons:search"  />
+          </span>
+        </div>
       </main>
       {filteredProducts.length >= 1 &&
       <>

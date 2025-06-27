@@ -4,7 +4,6 @@ import styles from './page.module.scss'
 import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import { CommentSlider, Button, Category, FeatureCard, Product, Title } from '@/components/ui/ui';
-import bestSelling from "@/data/json/bestselling.json"
 import Link from 'next/link';
 import comments from '@/data/json/comments.json'
 

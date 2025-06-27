@@ -10,6 +10,9 @@
     border-radius: 24px;
     display: flex;
     flex-direction: column;
+    position: relative;
+    width: 100%;
+    overflow: hid;
 
 
     >h1 {
@@ -48,17 +51,50 @@
   display: flex;
   align-items: center !important;
 
-  input {
-    padding: 6px 18px;
-    background-color: #fff;
-    border-radius: 12px;
-    border: 1px solid #000;
-    width: 449px;
+  .search {
+      width: fit-content;
+      position: relative;
+      overflow: hidden;
 
-    &:focus {
-      outline: none;
+      input {
+        padding: 10px 18px;
+        background-color: #fff;
+        border-radius: 12px;
+        width: 449px;
+        border: 1px solid #000;
+        font-size: 16px;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      span {
+        position: absolute;
+        right: 7px;
+        padding: 8px;
+        top: 50%;
+        transform: translate(60px, -80px) rotate(360deg) scale(0.8);
+        width: auto;
+        background-color: #C1DCDC;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 1s cubic-bezier(.82,-0.45,.18,1.45);
+
+        &:hover {
+          opacity: 0.9;
+          top: 53.1%;
+          scale: 1.1;
+        }
+      }
+
+      &:focus-within {
+        span {
+          transform: translate(0, -50%) rotate(0) scale(1);
+        }
+      }
     }
-  }
 
   >div {
     position: relative;

@@ -4,6 +4,7 @@ import styes from "./page.module.scss"
 import React, { useEffect, useState } from 'react';
 import { Product } from "@/components/ui/ui";
 import clsx from "clsx";
+import { useSearchParams } from "next/navigation";
 
 type ProductType = {
   id?: string
@@ -35,6 +36,7 @@ export default function ProductsPage({products}: Props) {
   const [filter, setFilter] = useState<string[]>([])
   const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([])
   const [searchValue, setSearchValue] = useState<string>("")
+  const searchParams = useSearchParams()
   const categoryTechs = [
     {
       key: "indoor_plants",
@@ -77,6 +79,18 @@ export default function ProductsPage({products}: Props) {
       label: "Low-Maintenance Plants"
     }
   ]
+
+  useEffect(() => {
+    const query = searchParams.get("p");
+    if (query) {
+      setSearchValue(query); 
+    } else {
+      setFilteredProducts(products);
+    }
+  }, [searchParams, products]);
+
+
+
 
   useEffect(() => {
     setFilteredProducts(products)

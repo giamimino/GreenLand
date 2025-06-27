@@ -18,6 +18,7 @@ type ProductsType = {
 
 export default function Home() {
   const [products, setProducts] = useState<ProductsType[]>([])
+  const [searchValue, setSearchValue] = useState<string>("");
 
   useEffect(() => {
     fetch('/api/products')
@@ -43,10 +44,14 @@ export default function Home() {
             </div>
           </div>
           <div className={styles.search}>
-            <input type="text" placeholder='What are you looking for?'/>
-            <span>
-              <Icon icon="lets-icons:search"  />
-            </span>
+            <input type="text" placeholder='What are you looking for?' 
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)} />
+            <Link href={`/products?p=${searchValue}`}>
+              <span>
+                <Icon icon="lets-icons:search"  />
+              </span>
+            </Link>
           </div>
         </aside>
         <div>

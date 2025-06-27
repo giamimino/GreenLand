@@ -21,6 +21,10 @@
       display: flex;
       gap: 48px;
 
+      @media (width <= 840px) {
+        display: none;
+      }
+
       li {
         opacity: 0.5;
         font-size: 18px;
@@ -41,6 +45,12 @@
     display: flex;
     gap: 48px;
     align-items: center;
+
+    li {
+      @media (width <= 450px) {
+        display: none;
+      }
+    }
     
     li:nth-child(2) {
       padding-right: 48px;

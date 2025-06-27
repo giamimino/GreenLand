@@ -2,7 +2,7 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
-import { Product as ProductType } from "@prisma/client";
+import { Products as ProductType } from "@/app/generated/prisma-client";
 import { Product } from "@/components/ui/ui";
 
 export default function InSaleSwiper({ products }: { products: ProductType[] }) {

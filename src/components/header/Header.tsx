@@ -6,7 +6,6 @@ import styles from './style.module.scss'
 import Link from 'next/link';
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false);
 

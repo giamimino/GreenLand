@@ -4,11 +4,21 @@ import styles from './page.module.scss'
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
-type Props = {
-  product: any,
+type ProductType = {
+  id?: string,
+  title: string,
+  image: string,
+  price: number,
+  prevPrice?: number,
+  slug: string,
+  category: string,
+  isSale: boolean,
+  isBestSelling: boolean,
+  Description: string,
+  view: number,
 }
 
-export default function ClientComponent({product}:Props) {
+export default function ClientComponent({ product }: { product: ProductType }) {
   return (
     <div className={styles.product}>
       <main>

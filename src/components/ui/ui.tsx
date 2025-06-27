@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { redirect } from "next/navigation";
+import { addView } from "@/actions/actions";
 
 type FeatureCard = {
   icon: string,
@@ -41,9 +42,16 @@ type Product = {
   prevPrice?: number,
 }
 
-type CommentSlider = {
-  objects: any[],
+type CommentObject = {
+  name: string,
+  image: string,
+  comment: string,
+  job: string,
+  key: string
+}
 
+type CommentSlider = {
+  objects: CommentObject[],
 }
 
 export function CommentSlider(props: CommentSlider) {
@@ -53,8 +61,8 @@ export function CommentSlider(props: CommentSlider) {
       slidesPerView={2}
       className={styles.sliderWrapper}
     >
-      {props.objects.map((com, index) => (
-        <SwiperSlide className={styles.slider}>
+      {props.objects.map((com) => (
+        <SwiperSlide key={com.key} className={styles.slider}>
           <p>{com.comment}</p>
           <main>
             <Image
@@ -98,24 +106,46 @@ export function Product(props: Product) {
     };
   }, [])
 
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const result = await addView(formData);
+    
+    if (!result.success) {
+      console.log("error brother", JSON.stringify(result.errors), result.id);
+    } else {
+      const slug = props.title.replace(/\s+/g, "-").toLowerCase();
+      redirect(`/products/${slug}`);
+    }
+  }
+
   return (
     <div ref={productRef}
     className={`${styles.product} ${inView? styles.fadeDown : ""}`}
     style={{
       animationDelay: `${props.delay || 0}ms`
-    }} onClick={() => redirect(`/products/${props.title.replace(/\s+/g, "-").toLowerCase()}`)}>
+    }}>
       <Image
         src={`https://raw.githubusercontent.com/giamimino/images/refs/heads/main/greenland/products/${props.image}.webp`}
         alt={props.image}
         width={299}
         height={363}
       />
-      <h1>
-        {props.title}
-      </h1>
-      <p>
-        $ {props.prevPrice && <span>{props.prevPrice}</span>} {props.price}
-      </p>
+      <main>
+        <div>
+          <h1>
+            {props.title}
+          </h1>
+          <p>
+            $ {props.prevPrice && <span>{props.prevPrice}</span>} {props.price}
+          </p>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="id" defaultValue={props.id} hidden  />
+          <button type="submit"><Icon icon="mdi:cart" /></button>
+        </form>
+      </main>
     </div>
   )
 }

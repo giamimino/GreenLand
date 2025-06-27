@@ -1,13 +1,15 @@
+// layout.tsx (SERVER COMPONENT, keep it default)
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
+import ClientWrapper from "@/components/common/ClientWrapper";
 
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["100", "200", "300","400", "500", "600", "700", "800", "900"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -17,17 +19,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.variable} antialiased`}
-      >
-        <Header />
-        {children}
-        <Footer />
+      <body className={`${poppins.variable} antialiased`}>
+        <ClientWrapper>
+          <Header />
+          {children}
+          <Footer />
+        </ClientWrapper>
       </body>
     </html>
   );

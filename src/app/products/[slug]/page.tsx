@@ -1,16 +1,16 @@
 import prisma from '@/lib/prisma'
 import ClientComponent from './clientComponent';
-import View from './view';
 
 type ProductPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
+
 
 export default async function Product({ params }: ProductPageProps) {
   const product = await prisma.products.findUnique({
-    where: { slug: params.slug },
+    where: { slug: (await params).slug },
   });
 
   if (!product) {
@@ -19,8 +19,10 @@ export default async function Product({ params }: ProductPageProps) {
 
   return (
     <>
-      <ClientComponent product={product} />
-      <View product={product} />
+      <ClientComponent product={{
+        ...product,
+        prevPrice: product.prevPrice === null ? undefined : product.prevPrice
+      }} />
     </>
   );
 }

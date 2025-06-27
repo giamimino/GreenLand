@@ -85,7 +85,7 @@ export default function Admin() {
     }
   }
 
-  function typePass (e: any) {
+  function typePass (e: React.ChangeEvent<HTMLInputElement>) {
     if(WrongPas) {
       setWrongPas(false)
     }

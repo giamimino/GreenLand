@@ -163,7 +163,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../../../.env",
     "schemaEnvPath": "../../../../.env"
   },
   "relativePath": "../../../../prisma",
@@ -184,7 +184,7 @@ const config = {
   },
   "inlineSchema": "// Define database connection via the `DATABASE_URL` env var\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// Define custom output path for generated Prisma Client\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/app/generated/prisma-client\"\n}\n\nmodel Products {\n  id            String   @id @default(cuid())\n  image         String\n  title         String\n  Description   String\n  price         Int\n  slug          String   @unique\n  isSale        Boolean  @default(false)\n  isBestSelling Boolean  @default(false)\n  category      String\n  createAt      DateTime @default(now())\n  view          Int\n  prevPrice     Int?\n}\n\nmodel admin {\n  id          String @id @default(cuid())\n  specialCode String @unique\n  user        String\n  personCode  String\n}\n",
   "inlineSchemaHash": "cc6ccae2d091e8b81ce19aa0acdccb46f3066bca75231eebfa3b866ab0bd776f",
-  "copyEngine": false
+  "copyEngine": true
 }
 config.dirname = '/'
 

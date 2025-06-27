@@ -3,21 +3,37 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import styes from "./page.module.scss"
 import React, { useEffect, useState } from 'react';
 import { Product } from "@/components/ui/ui";
+import clsx from "clsx";
+
+type ProductType = {
+  id?: string
+  title: string
+  image: string
+  price: number
+  prevPrice?: number
+  slug: string
+  category: string
+  isSale: boolean
+}
 
 type Props = {
-  products: any[],
+  products: ProductType[],
 }
 
 type FilterProps = {
   title: string,
-  object: any[],
+  object: {
+    key: string;
+    label: string;
+  }[],
 }
+
 
 
 export default function ProductsPage({products}: Props) {
   const [showFilterCategoy, setShowFilterCategory] = useState(false)
   const [filter, setFilter] = useState<string[]>([])
-  const [filteredProducts, setFilteredProducts] = useState<any[]>([])
+  const [filteredProducts, setFilteredProducts] = useState<ProductType[]>([])
   const categoryTechs = [
     {
       key: "indoor_plants",
@@ -63,11 +79,7 @@ export default function ProductsPage({products}: Props) {
 
   useEffect(() => {
     setFilteredProducts(products)
-  }, [])
-
-  useEffect(() => {
-
-  })
+  }, [products])
 
   function handleFilterChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { value, checked } = event.target;
@@ -82,16 +94,20 @@ export default function ProductsPage({products}: Props) {
     } else {
       setFilteredProducts(products)
     }
-  }, [filter])
+  }, [filter, products])
   
   function FilterDropDown(props:FilterProps) {
     return (
       <div>
-        <div>
-          <button onClick={() => setShowFilterCategory(!showFilterCategoy)}>{props.title} <Icon icon={showFilterCategoy ? 'iconamoon:arrow-down-2-bold' : 'iconamoon:arrow-right-2-bold'} /></button>
+          <button onClick={() => setShowFilterCategory(!showFilterCategoy)}>{props.title} <Icon icon={'iconamoon:arrow-right-2-bold'} className={clsx(
+            {
+              'rotate-90': showFilterCategoy,
+              'rotate-0': !showFilterCategoy,
+            }
+          )} /></button>
           {showFilterCategoy &&
           <ul>
-            {categoryTechs.map((cat:any) => (
+            {props.object.map((cat) => (
               <div key={cat.key}>
                 <input type="checkbox" id={cat.key} value={cat.key} checked={filter.includes(cat.key)} hidden onChange={handleFilterChange} />
                 <label htmlFor={cat.key} >{cat.label}</label>
@@ -99,7 +115,6 @@ export default function ProductsPage({products}: Props) {
             ))}
           </ul>
           }
-        </div>
       </div>
     )
   }
@@ -112,6 +127,7 @@ export default function ProductsPage({products}: Props) {
           title="Category"
           object={categoryTechs}
         />
+        <input type="text" name="search" placeholder="What are you looking for?" />
       </main>
       {filteredProducts.length >= 1 &&
       <>
@@ -124,6 +140,7 @@ export default function ProductsPage({products}: Props) {
             .map((product, index) => (
               <Product
                 key={product.slug}
+                id={product.id}
                 title={product.title}
                 price={product.price}
                 image={product.image}
@@ -141,6 +158,7 @@ export default function ProductsPage({products}: Props) {
           !product.isSale &&
             <Product
               key={product.slug}
+              id={product.id}
               title={product.title}
               price={product.price}
               image={product.image}

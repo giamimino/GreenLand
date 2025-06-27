@@ -1,7 +1,6 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './page.module.scss'
-import { Counting } from '@/components/animations/animations';
 import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import { CommentSlider, Button, Category, FeatureCard, Product, Title } from '@/components/ui/ui';
@@ -9,16 +8,40 @@ import bestSelling from "@/data/json/bestselling.json"
 import Link from 'next/link';
 import comments from '@/data/json/comments.json'
 
+type ProductsType = {
+  slug: string
+  title: string
+  image: string
+  price: number
+  prevPrice: number
+  id: string
+}
+
 export default function Home() {
-  
+  const [products, setProducts] = useState<ProductsType[]>([])
+
+  useEffect(() => {
+    fetch('/api/products')
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .then((err) => console.log("error in api:", err))
+  }, [])
+
   return (
     <div className="p-24 flex flex-col gap-24">
       <section className={styles.heroWelcome}>
         <aside>
           <h1 className='font-extrabold text-6xl w-[400px]'>Buy your dream plants</h1>
           <div className='flex'>
-            <Counting end={50} content="Plant Species" style={{borderRight: "1px solid black", paddingLeft: "0"}} />
-            <Counting end={100} content="Costumers" />
+            <div style={{borderRight: "1px solid black", paddingLeft: "0"}} className='px-[48px]'>
+              <h1 className='text-3xl font-medium'>50+</h1>
+              <p className='text-[18px] font-medium'>Plant Species</p>
+            </div>
+
+            <div className='px-[48px]'>
+              <h1 className='text-3xl font-medium'>100+</h1>
+              <p className='text-[18px] font-medium'>Costumers</p>
+            </div>
           </div>
           <div className={styles.search}>
             <input type="text" placeholder='What are you looking for?'/>
@@ -45,12 +68,14 @@ export default function Home() {
           </Link>
         </div>
         <main>
-          {bestSelling.map((product, index) => (
+          {products.map((product, index) => (
             <Product
-              key={product.image}
+              key={product.slug}
               title={product.title}
               image={product.image}
               price={product.price}
+              prevPrice={product.prevPrice ?? undefined}
+              id={product.id}
               delay={ index * 100}
             />
           ))}
@@ -102,9 +127,11 @@ export default function Home() {
           </div>
           <aside>
             <p>Horem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <Button
-              title='Explore'
-            />
+            <Link href='/products'>
+              <Button
+                title='Explore'
+              />
+            </Link>
           </aside>
         </main>
       </section>

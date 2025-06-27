@@ -1,7 +1,6 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
 
 export async function createProduct(formData: FormData) {
   try {
@@ -59,7 +58,7 @@ export async function createProduct(formData: FormData) {
     });
 
     return { success: true };
-  } catch (error: any) {
+  } catch (error) {
     console.error("Create product failed:", error);
     return {
       success: false,
@@ -77,16 +76,30 @@ export async function deleteProduct(formData: FormData) {
 }
 
 export async function addView(formData: FormData) {
-  const id = formData.get("id") as string;
+  
+  try {
+    const id = formData.get("id") as string;
 
-  await prisma.products.update({
-    where: { id },
-    data: {
-      view: {
-        increment: 1,
+    await prisma.products.update({
+      where: { id },
+      data: {
+        view: {
+          increment: 1,
+        },
       },
-    },
-  });
+    });
+
+    return {success: true}
+  } catch (error) {
+    const id = formData.get("id") as string;
+    console.log("enter to product failed:", error);
+    return {
+      success: false,
+      errors: ["Something went wrong. Please try again."],
+      id: id
+    };
+  }
+
 }
 
 

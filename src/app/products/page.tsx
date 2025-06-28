@@ -10,6 +10,7 @@ export default async function Products() {
       products={products.map(product => ({
         ...product,
         prevPrice: product.prevPrice === null ? undefined : product.prevPrice,
+        createdAt: product.createAt, // map createAt to createdAt
       }))}
     />
   )

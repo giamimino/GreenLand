@@ -102,6 +102,87 @@ export async function addView(formData: FormData) {
 
 }
 
+export async function signUp(formData: FormData) {
+  try {
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
+    if (!name || !email || !password) {
+      return { success: false, error: "All fields are required" };
+    }
+
+    // Check if email already exists
+    const existingUser = await prisma.users.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      return { success: false, error: "Email already in use" };
+    }
+
+    const user = await prisma.users.create({
+      data: {
+        name,
+        email,
+        password,
+        cart: {},
+      },
+    });
+
+    await prisma.sessionToken.create({
+      data: {
+        userId: user.id,
+        token: user.token,
+      },
+    });
+
+    return {
+      success: true,
+      token: user.token,
+    };
+
+  } catch (error) {
+    console.error("sign up error:", error);
+    return {
+      success: false,
+      error: "Something went wrong",
+    };
+  }
+}
+
+export async function signIn(formData: FormData) {
+  try {
+    const email = formData.get('email') as string
+    const password = formData.get('password') as string
+
+    const user = await prisma.users.findFirst({
+      where: {
+        email,
+        password
+      }
+    })
+    
+    if (!user) {
+      return {
+        success: false,
+        error: "Invalid email or password"
+      }
+    }
+
+    return {
+      success: true,
+      token: user.token
+    }
+  } catch(error) {
+    console.error("sign in error:", error);
+    return {
+      success: false,
+      error: "Something went wrong",
+    };
+  }
+
+}
 
 export async function backupDatabase() {
   await prisma.products.createMany({

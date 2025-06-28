@@ -142,9 +142,29 @@ exports.Prisma.AdminScalarFieldEnum = {
   personCode: 'personCode'
 };
 
+exports.Prisma.UsersScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  password: 'password',
+  cart: 'cart',
+  token: 'token',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.SessionTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -157,10 +177,18 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
 
 exports.Prisma.ModelName = {
   Products: 'Products',
-  admin: 'admin'
+  admin: 'admin',
+  Users: 'Users',
+  SessionToken: 'SessionToken'
 };
 
 /**

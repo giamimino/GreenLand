@@ -204,7 +204,7 @@ export default function Home() {
       <section className={styles.categories}>
         <Title
           title='Categories'
-          content='Find what you are looking for'
+          content='Find what you are looking for?'
         />
         <main>
           {CategoriesSection}

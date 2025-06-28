@@ -8,6 +8,13 @@ import Link from 'next/link';
 export default function Header() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLogin(!token);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,9 +56,11 @@ export default function Header() {
           <li>
             <Icon icon="bi:cart" width={24} height={24} />
           </li>
-          <li>
-            <Icon icon="cuida:user-outline" width={24} height={24} />
-          </li>
+          <Link href={isLogin? '/auth/signUp' : '/profile'}>
+            <li>
+              <Icon icon="cuida:user-outline" width={24} height={24} />
+            </li>
+          </Link>
           <input type="checkbox" hidden id='menu-toggle' className={styles.menuToggle} />
           <label htmlFor='menu-toggle'>
             <span></span>

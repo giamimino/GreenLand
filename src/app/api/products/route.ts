@@ -6,7 +6,8 @@ export async function GET() {
     const products = await prisma.products.findMany({
       where: {
         isBestSelling: true
-      }
+      },
+      take: 5
     });
     return NextResponse.json(products);
   } catch (error) {

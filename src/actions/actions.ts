@@ -126,7 +126,7 @@ export async function signUp(formData: FormData) {
         name,
         email,
         password,
-        cart: {},
+        cart: [],
       },
     });
 
@@ -182,6 +182,64 @@ export async function signIn(formData: FormData) {
     };
   }
 
+}
+
+export async function addCart(formData: FormData) {
+  try {
+    const productId = formData.get('id') as string
+    const token = formData.get('token') as string
+
+    const user = await prisma.users.findUnique({
+      where: { token: token },
+      select: { cart: true }
+    });
+
+    const currentCart = Array.isArray(user?.cart) ? user.cart : [];
+
+    await prisma.users.update({
+      where: {
+        token: token
+      },
+      data: {
+        cart: [...currentCart, productId].filter((id) => id !== null)
+      }
+    })
+
+    return { success: true }
+  } catch(error) {
+    console.log("error cant add product", error);
+    return {
+      success: false
+    }
+  }
+}
+
+export async function deleteCart(formData: FormData) {
+  try {
+    const product_id = formData.get("id") as string
+    const token = formData.get("token") as string
+
+    const user = await prisma.users.findUnique({
+      where: { token: token },
+      select: { cart: true }
+    });
+
+    const currentCart = Array.isArray(user?.cart) ? user.cart : [];
+
+    await prisma.users.update({
+      where: {
+        token: token
+      },
+      data: {
+        cart: [currentCart.filter((accCart) => accCart === product_id ? !accCart : accCart)]
+      }
+    })
+
+    return { success: true }
+  } catch(error) {
+    console.log("somthing wrong cant delete cart", error);
+    return {success: false}
+  }
 }
 
 export async function backupDatabase() {

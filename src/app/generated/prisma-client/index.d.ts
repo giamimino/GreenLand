@@ -3437,7 +3437,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    cart: JsonValue
+    cart: JsonValue[]
     token: string
     createdAt: Date
     _count: UsersCountAggregateOutputType | null
@@ -3522,7 +3522,7 @@ export namespace Prisma {
       name: string
       email: string
       password: string
-      cart: Prisma.JsonValue
+      cart: Prisma.JsonValue[]
       token: string
       createdAt: Date
     }, ExtArgs["result"]["users"]>
@@ -3954,7 +3954,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Users", 'String'>
     readonly email: FieldRef<"Users", 'String'>
     readonly password: FieldRef<"Users", 'String'>
-    readonly cart: FieldRef<"Users", 'Json'>
+    readonly cart: FieldRef<"Users", 'Json[]'>
     readonly token: FieldRef<"Users", 'String'>
     readonly createdAt: FieldRef<"Users", 'DateTime'>
   }
@@ -5523,13 +5523,6 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-  export const JsonNullValueInput: {
-    JsonNull: typeof JsonNull
-  };
-
-  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
-
-
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
@@ -5544,15 +5537,6 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-  export const JsonNullValueFilter: {
-    DbNull: typeof DbNull,
-    JsonNull: typeof JsonNull,
-    AnyNull: typeof AnyNull
-  };
-
-  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -5610,16 +5594,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Json'
+   * Reference to a field of type 'Json[]'
    */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+  export type ListJsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json[]'>
     
 
 
   /**
-   * Reference to a field of type 'QueryMode'
+   * Reference to a field of type 'Json'
    */
-  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
     
 
 
@@ -5784,7 +5768,7 @@ export namespace Prisma {
     name?: StringFilter<"Users"> | string
     email?: StringFilter<"Users"> | string
     password?: StringFilter<"Users"> | string
-    cart?: JsonFilter<"Users">
+    cart?: JsonNullableListFilter<"Users">
     token?: StringFilter<"Users"> | string
     createdAt?: DateTimeFilter<"Users"> | Date | string
     sessionByUserId?: SessionTokenListRelationFilter
@@ -5812,7 +5796,7 @@ export namespace Prisma {
     NOT?: UsersWhereInput | UsersWhereInput[]
     name?: StringFilter<"Users"> | string
     password?: StringFilter<"Users"> | string
-    cart?: JsonFilter<"Users">
+    cart?: JsonNullableListFilter<"Users">
     createdAt?: DateTimeFilter<"Users"> | Date | string
     sessionByUserId?: SessionTokenListRelationFilter
     sessionByToken?: SessionTokenListRelationFilter
@@ -5839,7 +5823,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Users"> | string
     email?: StringWithAggregatesFilter<"Users"> | string
     password?: StringWithAggregatesFilter<"Users"> | string
-    cart?: JsonWithAggregatesFilter<"Users">
+    cart?: JsonNullableListFilter<"Users">
     token?: StringWithAggregatesFilter<"Users"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Users"> | Date | string
   }
@@ -6051,7 +6035,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    cart: JsonNullValueInput | InputJsonValue
+    cart?: UsersCreatecartInput | InputJsonValue[]
     token?: string
     createdAt?: Date | string
     sessionByUserId?: SessionTokenCreateNestedManyWithoutUserInput
@@ -6063,7 +6047,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    cart: JsonNullValueInput | InputJsonValue
+    cart?: UsersCreatecartInput | InputJsonValue[]
     token?: string
     createdAt?: Date | string
     sessionByUserId?: SessionTokenUncheckedCreateNestedManyWithoutUserInput
@@ -6075,7 +6059,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    cart?: JsonNullValueInput | InputJsonValue
+    cart?: UsersUpdatecartInput | InputJsonValue[]
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessionByUserId?: SessionTokenUpdateManyWithoutUserNestedInput
@@ -6087,7 +6071,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    cart?: JsonNullValueInput | InputJsonValue
+    cart?: UsersUpdatecartInput | InputJsonValue[]
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessionByUserId?: SessionTokenUncheckedUpdateManyWithoutUserNestedInput
@@ -6099,7 +6083,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    cart: JsonNullValueInput | InputJsonValue
+    cart?: UsersCreatecartInput | InputJsonValue[]
     token?: string
     createdAt?: Date | string
   }
@@ -6109,7 +6093,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    cart?: JsonNullValueInput | InputJsonValue
+    cart?: UsersUpdatecartInput | InputJsonValue[]
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6119,7 +6103,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    cart?: JsonNullValueInput | InputJsonValue
+    cart?: UsersUpdatecartInput | InputJsonValue[]
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -6371,28 +6355,19 @@ export namespace Prisma {
     user?: SortOrder
     personCode?: SortOrder
   }
-  export type JsonFilter<$PrismaModel = never> =
+  export type JsonNullableListFilter<$PrismaModel = never> =
     | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonFilterBase<$PrismaModel>>
+        Either<Required<JsonNullableListFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableListFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableListFilterBase<$PrismaModel>>
       >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+    | OptionalFlat<Omit<Required<JsonNullableListFilterBase<$PrismaModel>>, 'path'>>
 
-  export type JsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  export type JsonNullableListFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue[] | ListJsonFieldRefInput<$PrismaModel> | null
+    has?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    hasEvery?: InputJsonValue[] | ListJsonFieldRefInput<$PrismaModel>
+    hasSome?: InputJsonValue[] | ListJsonFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
   }
 
   export type SessionTokenListRelationFilter = {
@@ -6431,32 +6406,6 @@ export namespace Prisma {
     password?: SortOrder
     token?: SortOrder
     createdAt?: SortOrder
-  }
-  export type JsonWithAggregatesFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedJsonFilter<$PrismaModel>
-    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type UsersScalarRelationFilter = {
@@ -6510,6 +6459,10 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type UsersCreatecartInput = {
+    set: InputJsonValue[]
+  }
+
   export type SessionTokenCreateNestedManyWithoutUserInput = {
     create?: XOR<SessionTokenCreateWithoutUserInput, SessionTokenUncheckedCreateWithoutUserInput> | SessionTokenCreateWithoutUserInput[] | SessionTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: SessionTokenCreateOrConnectWithoutUserInput | SessionTokenCreateOrConnectWithoutUserInput[]
@@ -6536,6 +6489,11 @@ export namespace Prisma {
     connectOrCreate?: SessionTokenCreateOrConnectWithoutUserByTokenInput | SessionTokenCreateOrConnectWithoutUserByTokenInput[]
     createMany?: SessionTokenCreateManyUserByTokenInputEnvelope
     connect?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
+  }
+
+  export type UsersUpdatecartInput = {
+    set?: InputJsonValue[]
+    push?: InputJsonValue | InputJsonValue[]
   }
 
   export type SessionTokenUpdateManyWithoutUserNestedInput = {
@@ -6766,29 +6724,6 @@ export namespace Prisma {
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
-  export type NestedJsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type NestedJsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
 
   export type SessionTokenCreateWithoutUserInput = {
     id?: string
@@ -6876,7 +6811,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    cart: JsonNullValueInput | InputJsonValue
+    cart?: UsersCreatecartInput | InputJsonValue[]
     token?: string
     createdAt?: Date | string
     sessionByToken?: SessionTokenCreateNestedManyWithoutUserByTokenInput
@@ -6887,7 +6822,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    cart: JsonNullValueInput | InputJsonValue
+    cart?: UsersCreatecartInput | InputJsonValue[]
     token?: string
     createdAt?: Date | string
     sessionByToken?: SessionTokenUncheckedCreateNestedManyWithoutUserByTokenInput
@@ -6903,7 +6838,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    cart: JsonNullValueInput | InputJsonValue
+    cart?: UsersCreatecartInput | InputJsonValue[]
     token?: string
     createdAt?: Date | string
     sessionByUserId?: SessionTokenCreateNestedManyWithoutUserInput
@@ -6914,7 +6849,7 @@ export namespace Prisma {
     name: string
     email: string
     password: string
-    cart: JsonNullValueInput | InputJsonValue
+    cart?: UsersCreatecartInput | InputJsonValue[]
     token?: string
     createdAt?: Date | string
     sessionByUserId?: SessionTokenUncheckedCreateNestedManyWithoutUserInput
@@ -6941,7 +6876,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    cart?: JsonNullValueInput | InputJsonValue
+    cart?: UsersUpdatecartInput | InputJsonValue[]
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessionByToken?: SessionTokenUpdateManyWithoutUserByTokenNestedInput
@@ -6952,7 +6887,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    cart?: JsonNullValueInput | InputJsonValue
+    cart?: UsersUpdatecartInput | InputJsonValue[]
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessionByToken?: SessionTokenUncheckedUpdateManyWithoutUserByTokenNestedInput
@@ -6974,7 +6909,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    cart?: JsonNullValueInput | InputJsonValue
+    cart?: UsersUpdatecartInput | InputJsonValue[]
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessionByUserId?: SessionTokenUpdateManyWithoutUserNestedInput
@@ -6985,7 +6920,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
-    cart?: JsonNullValueInput | InputJsonValue
+    cart?: UsersUpdatecartInput | InputJsonValue[]
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessionByUserId?: SessionTokenUncheckedUpdateManyWithoutUserNestedInput

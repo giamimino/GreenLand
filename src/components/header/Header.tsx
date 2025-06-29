@@ -53,9 +53,11 @@ export default function Header() {
           </ul>
         </main>
         <ol>
-          <li>
-            <Icon icon="bi:cart" width={24} height={24} />
-          </li>
+          <Link href="/cart">
+            <li>
+              <Icon icon="bi:cart" width={24} height={24} />
+            </li>
+          </Link>
           <Link href={isLogin? '/auth/signUp' : '/profile'}>
             <li>
               <Icon icon="cuida:user-outline" width={24} height={24} />

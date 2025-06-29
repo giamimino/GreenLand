@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { redirect } from "next/navigation";
-import { addView } from "@/actions/actions";
+import { addView, deleteCart } from "@/actions/actions";
 
 type FeatureCard = {
   icon: string,
@@ -52,6 +52,63 @@ type CommentObject = {
 
 type CommentSlider = {
   objects: CommentObject[],
+}
+
+type Cart = {
+  id: string,
+  image: string,
+  title: string,
+  delay: number,
+  price: number,
+  slug: string,
+}
+
+export function Cart(props: Cart) {
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
+
+
+  async function handleDelete(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget)
+    const result = await deleteCart(formData)
+
+    if(!result.success) {
+      setError("somthing went wrong")
+    } else {
+      if(result.success) {
+        setSuccess("succesFuly deleted cart")
+      }
+    }
+  }
+  
+  return (
+    <div>
+      <Image
+        src={`https://raw.githubusercontent.com/giamimino/images/refs/heads/main/greenland/products/${props.image}.webp`}
+        alt={props.image}
+        width={150}
+        height={205}
+      />
+      <div>
+        <h1>{props.title}</h1>
+        <p>{props.price}</p>
+        <div>
+          <button type="button" onClick={() => redirect(`/products/${props.slug}`)}>
+            <Icon icon='gravity-ui:eyes-look-right' />
+          </button>
+          <form onSubmit={handleDelete}>
+            <button type="submit" >
+              <Icon icon="material-symbols:delete-rounded" />
+            </button>
+          </form>
+        </div>
+      </div>
+      {error && <p className="text-[#ff6347]">{error}</p>}
+      {success && <p className="text-[#00ff00]">{success}</p>}
+    </div>
+  )
 }
 
 export function CommentSlider(props: CommentSlider) {

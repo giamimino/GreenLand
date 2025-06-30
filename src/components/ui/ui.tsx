@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { redirect } from "next/navigation";
 import { addView, deleteCart } from "@/actions/actions";
+import Link from "next/link";
 
 type FeatureCard = {
   icon: string,
@@ -61,11 +62,20 @@ type Cart = {
   delay: number,
   price: number,
   slug: string,
+  prevPrice?: number,
+  token: string,
+  description: string,
+  category: string,
+  view: number,
+  isSale: boolean,
+  isBestProducts: boolean,
+  stock: number
 }
 
 export function Cart(props: Cart) {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
+  const [isCart, setIsCart] = useState(true)
 
 
   async function handleDelete(e: React.FormEvent<HTMLFormElement>) {
@@ -76,37 +86,79 @@ export function Cart(props: Cart) {
 
     if(!result.success) {
       setError("somthing went wrong")
+      console.log(result.error, result.resurces);
+      
     } else {
       if(result.success) {
         setSuccess("succesFuly deleted cart")
+        setIsCart(false)
       }
     }
   }
   
-  return (
-    <div>
-      <Image
-        src={`https://raw.githubusercontent.com/giamimino/images/refs/heads/main/greenland/products/${props.image}.webp`}
-        alt={props.image}
-        width={150}
-        height={205}
-      />
+  return ( isCart ?
+    <div className={styles.cart}>
       <div>
-        <h1>{props.title}</h1>
-        <p>{props.price}</p>
+        <Image
+          src={`https://raw.githubusercontent.com/giamimino/images/refs/heads/main/greenland/products/${props.image}.webp`}
+          alt={props.image}
+          width={150}
+          height={205}
+        />
         <div>
-          <button type="button" onClick={() => redirect(`/products/${props.slug}`)}>
-            <Icon icon='gravity-ui:eyes-look-right' />
-          </button>
-          <form onSubmit={handleDelete}>
-            <button type="submit" >
-              <Icon icon="material-symbols:delete-rounded" />
+          <p>{props.description}</p>
+          <div>
+            <div style={{
+                "--hint": '"category"',
+              } as React.CSSProperties}>
+              {props?.category}
+            </div>
+            <div style={{
+                "--hint": '"stock"',
+              } as React.CSSProperties}>
+              {props.stock}
+            </div>
+            {props?.isSale &&
+            <div>
+              {props?.isSale ? "Sale" : ''}
+            </div>
+            }
+            {props?.isBestProducts &&
+            <div>
+              {props?.isBestProducts ? "BestSelling" : ''}
+            </div>
+            }
+            <div style={{
+                "--hint": '"views"',
+              } as React.CSSProperties}>
+              {props?.view}
+            </div>
+          </div>
+          <main> 
+            {props.stock !== 0 ?
+              <form>
+                <input type="number" min={1} max={props.stock} defaultValue={1} />
+              </form> : <p className="red font-medium">out of stock</p>
+            }
+            <button type="button" onClick={() => redirect(`/products/${props.slug}`)}>
+              <Icon icon='gravity-ui:eyes-look-right' />
             </button>
-          </form>
+            <form onSubmit={handleDelete}>
+              <input type="text" name="id" defaultValue={props.id} hidden />
+              <input type="text" name="token" defaultValue={props.token} hidden />
+              <button type="submit" >
+                <Icon icon="material-symbols:delete-rounded" />
+              </button>
+            </form>
+          </main>
         </div>
       </div>
-      {error && <p className="text-[#ff6347]">{error}</p>}
-      {success && <p className="text-[#00ff00]">{success}</p>}
+      <h1><span className='line-through'>{props.prevPrice ? `${props.prevPrice}$`  : ''}</span> {props.price}$</h1>
+    </div> :
+    <div>
+      {error && <div role="alert" className={styles.error}>{error}</div>}
+      {success && <div role="alert" className={styles.success}>{success}</div>}
+      <p><Link className='underline' href={`/products/${props.slug}`}>{props.title}</Link> product was removed</p> 
     </div>
   )
 }
@@ -195,7 +247,7 @@ export function Product(props: Product) {
             {props.title}
           </h1>
           <p>
-            $ {props.prevPrice && <span>{props.prevPrice}</span>} {props.price}
+            {props.prevPrice && <span>{props.prevPrice ? `${props.prevPrice}$`  : ''}</span>} {props.price}$
           </p>
         </div>
         <form onSubmit={handleSubmit}>

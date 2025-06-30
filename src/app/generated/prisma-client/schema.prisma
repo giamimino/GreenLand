@@ -23,6 +23,7 @@ model Products {
   createAt      DateTime @default(now())
   view          Int      @default(0)
   prevPrice     Int?
+  stock         Int      @default(1)
 }
 
 model admin {
@@ -37,7 +38,7 @@ model Users {
   name      String
   email     String   @unique
   password  String
-  cart      Json[]
+  cart      Json
   token     String   @unique @default(cuid())
   createdAt DateTime @default(now())
 

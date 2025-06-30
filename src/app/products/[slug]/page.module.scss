@@ -60,6 +60,34 @@
           padding: 8px 12px;
           background-color: #e6e6e6;
           border-radius: 12px;
+          position: relative;
+          cursor: pointer;
+
+          &::before {
+            content: var(--hint);
+            color: #fff;
+            padding: 8px 12px;
+            position: absolute;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            opacity: 0;
+            filter: blur(10px);
+            align-items: center;
+            width: fit-content;
+            left: 50%;
+            bottom: 0;
+            border-radius: 8px;
+            transform: translate(-50%) scale(0);
+            transition: all 1s cubic-bezier(.82,-0.45,.18,1.45);
+          }
+
+          &:hover::before {
+            bottom: -130%;
+            transform: translate(-50%) scale(1);
+            filter: blur(0);
+            opacity: 1;
+          }
         }
       }
     }

@@ -114,6 +114,11 @@ export default function Admin() {
           </div>
           
           <div>
+            <label htmlFor="stock">Stock</label>
+            <input type="number" name='stock' placeholder='Type stock' id='stock' />
+          </div>
+
+          <div>
             <h1>Chosse category</h1>
             <input type="text" hidden defaultValue={category} name='category' />
             <div>

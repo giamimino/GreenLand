@@ -10,6 +10,7 @@ export async function createProduct(formData: FormData) {
     const price = Number(formData.get("price"));
     const isSale = formData.get("isSale") === "on";
     const prevPrice = isSale? Number(formData.get("prevPrice")) : null
+    const stock = Number(formData.get("stock"));
 
     const categoryArr = [
       "indoor_plants",
@@ -30,7 +31,7 @@ export async function createProduct(formData: FormData) {
       errors.push("Invalid category.");
     }
 
-    if (!title || !description || price <= 0) {
+    if (!title || !description || price <= 0 || stock <= 0) {
       errors.push("Some fields are missing. Please fill in all required information.");
     }
 
@@ -54,6 +55,7 @@ export async function createProduct(formData: FormData) {
         isBestSelling: false,
         view: 0,
         prevPrice,
+        stock,
       },
     });
 
@@ -215,32 +217,41 @@ export async function addCart(formData: FormData) {
 }
 
 export async function deleteCart(formData: FormData) {
+  const product_id = formData.get("id") as string;
+  const token = formData.get("token") as string;
   try {
-    const product_id = formData.get("id") as string
-    const token = formData.get("token") as string
+
+    if (!product_id || !token) {
+      return { success: false, error: "Missing id or token" };
+    }
 
     const user = await prisma.users.findUnique({
-      where: { token: token },
+      where: { token },
       select: { cart: true }
     });
 
-    const currentCart = Array.isArray(user?.cart) ? user.cart : [];
+    if (!user) {
+      return { success: false, error: "User not found" };
+    }
+
+    const currentCart: string[] = Array.isArray(user?.cart)
+      ? (user.cart as unknown[]).filter((id): id is string => typeof id === "string")
+      : [];
+
+    const updatedCart = currentCart.filter(id => id !== product_id);
 
     await prisma.users.update({
-      where: {
-        token: token
-      },
-      data: {
-        cart: [currentCart.filter((accCart) => accCart === product_id ? !accCart : accCart)]
-      }
-    })
+      where: { token },
+      data: { cart: updatedCart }
+    });
 
-    return { success: true }
-  } catch(error) {
-    console.log("somthing wrong cant delete cart", error);
-    return {success: false}
+    return { success: true };
+  } catch (error) {
+    console.error("Something went wrong deleting from cart:", error);
+    return { success: false, error, resurces: [product_id, token] };
   }
 }
+
 
 export async function backupDatabase() {
   await prisma.products.createMany({
@@ -258,6 +269,7 @@ export async function backupDatabase() {
         createAt: new Date(1750780880671),
         view: 0,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcaqaz350002j7kbe50e07pc',
@@ -272,6 +284,7 @@ export async function backupDatabase() {
         createAt: new Date(1750781841954),
         view: 0,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcaqbhtf0003j7kb5yqsvi1y',
@@ -286,6 +299,7 @@ export async function backupDatabase() {
         createAt: new Date(1750781866227),
         view: 1,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcaqbyx50004j7kbutazgwdq',
@@ -300,6 +314,7 @@ export async function backupDatabase() {
         createAt: new Date(1750781888393),
         view: 1,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcaqci5p0005j7kb05qvwo12',
@@ -314,6 +329,7 @@ export async function backupDatabase() {
         createAt: new Date(1750781913325),
         view: 1,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcaqcvkg0008j7kbmt19lj8z',
@@ -328,6 +344,7 @@ export async function backupDatabase() {
         createAt: new Date(1750781930704),
         view: 3,
         prevPrice: 24,
+        stock: 12,
       },
       {
         id: 'cmcaqd6fj0009j7kb9fqv61ju',
@@ -342,6 +359,7 @@ export async function backupDatabase() {
         createAt: new Date(1750781944783),
         view: 1,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcaqdghv000aj7kbesmuetxr',
@@ -356,6 +374,7 @@ export async function backupDatabase() {
         createAt: new Date(1750781957827),
         view: 0,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcaqduxw000bj7kbzr3y5ie2',
@@ -370,6 +389,7 @@ export async function backupDatabase() {
         createAt: new Date(1750781976548),
         view: 0,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcaqe65e000cj7kb2vjnelo2',
@@ -384,6 +404,7 @@ export async function backupDatabase() {
         createAt: new Date(1750781991074),
         view: 0,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcdgv3s00001j7s03b1t2vph',
@@ -398,6 +419,7 @@ export async function backupDatabase() {
         createAt: new Date(1750947383521),
         view: 3,
         prevPrice: 10,
+        stock: 12,
       },
       {
         id: 'cmcdgvne10002j7s0cxnv8g0u',
@@ -412,6 +434,7 @@ export async function backupDatabase() {
         createAt: new Date(1750947408938),
         view: 1,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcdgw6dt0004j7s0av60u6r5',
@@ -426,6 +449,7 @@ export async function backupDatabase() {
         createAt: new Date(1750947433554),
         view: 0,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcdgwiu70005j7s0jnwk7nhd',
@@ -440,6 +464,7 @@ export async function backupDatabase() {
         createAt: new Date(1750947449695),
         view: 0,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcdgwxyt0006j7s0sp7v3i1z',
@@ -453,7 +478,8 @@ export async function backupDatabase() {
         category: 'outdoor_plants',
         createAt: new Date(1750947469301),
         view: 14,
-        prevPrice: 17,
+        prevPrice: 19,
+        stock: 12,
       },
       {
         id: 'cmcdgxi9p0007j7s0kmu1yos3',
@@ -468,6 +494,7 @@ export async function backupDatabase() {
         createAt: new Date(1750947495613),
         view: 0,
         prevPrice: 10,
+        stock: 12,
       },
       {
         id: 'cmcdgxtsc0008j7s0gdj6hagt',
@@ -482,6 +509,7 @@ export async function backupDatabase() {
         createAt: new Date(1750947510540),
         view: 0,
         prevPrice: 20,
+        stock: 12,
       },
       {
         id: 'cmcdgy6gx0009j7s0old5wonu',
@@ -496,6 +524,7 @@ export async function backupDatabase() {
         createAt: new Date(1750947526977),
         view: 0,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcdgyosi000aj7s00fpf9h89',
@@ -510,6 +539,7 @@ export async function backupDatabase() {
         createAt: new Date(1750947550723),
         view: 0,
         prevPrice: null,
+        stock: 12,
       },
       {
         id: 'cmcdgz0rg000bj7s0n0y9dq4h',
@@ -524,6 +554,7 @@ export async function backupDatabase() {
         createAt: new Date(1750947566236),
         view: 0,
         prevPrice: null,
+        stock: 12,
       },
     ],
     skipDuplicates: true,

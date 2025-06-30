@@ -17,6 +17,7 @@ type ProductType = {
   isBestSelling: boolean,
   Description: string,
   view: number,
+  stock: number,
 }
 
 export default function ClientComponent({ product }: { product: ProductType }) {
@@ -62,8 +63,15 @@ export default function ClientComponent({ product }: { product: ProductType }) {
         <div>
           <h1>{product?.title}</h1>
           <div>
-            <div>
-              {product?.category}
+            <div style={{
+                "--hint": '"category"',
+              } as React.CSSProperties}>
+              {product?.category.replace("_", " ")}
+            </div>
+            <div style={{
+                "--hint": '"stock"',
+              } as React.CSSProperties}>
+              {product?.stock}
             </div>
             {product?.isSale &&
             <div>
@@ -75,12 +83,14 @@ export default function ClientComponent({ product }: { product: ProductType }) {
               {product?.isBestSelling ? "BestSelling" : ''}
             </div>
             }
-            <div>
+            <div style={{
+                "--hint": '"views"',
+              } as React.CSSProperties}>
               {product?.view}
             </div>
           </div>
           <p>{product?.Description}</p>
-          <h2>$ {product?.prevPrice && <span>{product.prevPrice}</span>} {product?.price}</h2>
+          <h2>{product?.prevPrice && <span>{product.prevPrice ? `${product.prevPrice}$`  : ''}</span>} {product?.price}$</h2>
           <div className='mt-auto'>
             <button type='button' onClick={() => redirect('/products')}>Back</button>
             <form onSubmit={handleSubmit}>

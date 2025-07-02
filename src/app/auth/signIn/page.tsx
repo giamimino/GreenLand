@@ -3,6 +3,7 @@ import { signIn } from '@/actions/actions'
 import Link from 'next/link'
 import { redirect } from 'next/navigation';
 import React, { useState } from 'react'
+import styles from '../page.module.scss'
 
 export default function SignIn() {
   const [error, setError] = useState<string | null>(null);
@@ -25,8 +26,8 @@ export default function SignIn() {
   }
 
   return (
-    <div className='p-24'>
-      <form onSubmit={handleSubmit}>
+    <div className='p-24 flex justify-center items-center h-[100vh]'>
+      <form onSubmit={handleSubmit} className={styles.auth}>
         <div>
           <label htmlFor="email">Email:</label>
           <input type="email" name="email" id="email" placeholder='email...' />
@@ -40,7 +41,10 @@ export default function SignIn() {
         {error && <div className="text-red-500">{error}</div>}
 
         <button type='submit'>Sign In</button>
-        <Link href="/auth/signUp">Already have any account?</Link>
+        <p>
+          <span>Don't have an account?</span>
+          <Link href="/auth/signUp">sign up</Link>
+        </p>
       </form>
     </div>
   )

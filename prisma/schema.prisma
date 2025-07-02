@@ -26,13 +26,6 @@ model Products {
   stock Int @default(1)
 }
 
-model admin {
-  id String @id @default(cuid())
-  specialCode String @unique
-  user String
-  personCode String
-}
-
 model Users {
   id String @id @default(cuid())
   name String
@@ -41,6 +34,7 @@ model Users {
   cart Json
   token String @unique @default(cuid())
   createdAt DateTime @default(now())
+  role String @default("user")
 
   sessionByUserId  SessionToken[]
   sessionByToken   SessionToken[] @relation("TokenRelation")

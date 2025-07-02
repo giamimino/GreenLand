@@ -1,19 +1,54 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './page.module.scss'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import { Button } from '@/components/ui/ui'
 import { createProduct } from '@/actions/actions'
 import clsx from 'clsx'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+
+type User = {
+  id: string
+  name: string
+  email: string
+  role: string
+}
 
 export default function Admin() {
-  const [isLogin, setIsLogin] = useState(true)
-  const [passwordValue, setPasswordValue] = useState("")
-  const [WrongPas, setWrongPas] = useState(false)
+  const [isLogin, setIsLogin] = useState(false)
   const [errors, setErrors] = useState<string[]>([]);
   const [success, setSuccess] = useState("");
   const [checked, setChecked] = useState(false)
   const [category, setCategory] = useState("")
+  const [user, setUser] = useState<User | null>(null)
+  const router = useRouter()
+
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if(!token) return
+
+    fetch('/api/getUser', {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.user) {
+        setUser(data.user)
+      }
+    })
+  }, [router])
+
+  useEffect(() => {
+    if(user?.role === "admin") {
+      setIsLogin(true)
+    } else {
+      setIsLogin(false)
+    }
+  }, [user])
 
   const categoryTechs = [
     {
@@ -74,27 +109,10 @@ export default function Admin() {
       e.currentTarget.reset();
     }
   }
-
-  function passwordCheck() {
-    if (passwordValue === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-      setWrongPas(true)
-      setPasswordValue("")
-    }
-  }
-
-  function typePass (e: React.ChangeEvent<HTMLInputElement>) {
-    if(WrongPas) {
-      setWrongPas(false)
-    }
-    setPasswordValue(e.target.value)
-  }
   
   return (
     <div style={{
-      height: "120vh"
+      height: "140vh"
     }}>
       {isLogin ? <div className={styles.admin}>
         <form onSubmit={handleSubmit}>
@@ -157,18 +175,9 @@ export default function Admin() {
         {success && <p style={{ color: "green" }}>{success}</p>}
       </div> :
       <div className={styles.login}>
-        <div>
-          <input
-            type="text"
-            placeholder="password"
-            value={passwordValue}
-            onChange={typePass}
-          />
-          <button onClick={passwordCheck}>
-            <Icon icon="formkit:submit" />
-          </button>
-        </div>
-        {WrongPas && <p>Wrong Password pls try again</p>}
+        <Link href="/">
+          <p>Don't have accses</p>
+        </Link>
       </div>
       }
       

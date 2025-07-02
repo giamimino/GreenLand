@@ -136,13 +136,6 @@ exports.Prisma.ProductsScalarFieldEnum = {
   stock: 'stock'
 };
 
-exports.Prisma.AdminScalarFieldEnum = {
-  id: 'id',
-  specialCode: 'specialCode',
-  user: 'user',
-  personCode: 'personCode'
-};
-
 exports.Prisma.UsersScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -150,7 +143,8 @@ exports.Prisma.UsersScalarFieldEnum = {
   password: 'password',
   cart: 'cart',
   token: 'token',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  role: 'role'
 };
 
 exports.Prisma.SessionTokenScalarFieldEnum = {
@@ -187,7 +181,6 @@ exports.Prisma.JsonNullValueFilter = {
 
 exports.Prisma.ModelName = {
   Products: 'Products',
-  admin: 'admin',
   Users: 'Users',
   SessionToken: 'SessionToken'
 };

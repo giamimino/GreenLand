@@ -90,7 +90,7 @@ export function Cart(props: Cart) {
       
     } else {
       if(result.success) {
-        setSuccess("succesFuly deleted cart")
+        setSuccess("successfully deleted cart")
         setIsCart(false)
       }
     }
@@ -157,8 +157,8 @@ export function Cart(props: Cart) {
     </div> :
     <div>
       {error && <div role="alert" className={styles.error}>{error}</div>}
-      {success && <div role="alert" className={styles.success}>{success}</div>}
-      <p><Link className='underline' href={`/products/${props.slug}`}>{props.title}</Link> product was removed</p> 
+      <p><Link className='text-blue-500 cursor-pointer'
+      style={{textDecoration: "underline"}} href={`/products/${props.slug}`}>{props.title}</Link> product was removed</p> 
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { signUp } from '@/actions/actions';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import React, { useState } from 'react';
+import styles from '../page.module.scss'
 
 export default function SignUp() {
   const [error, setError] = useState<string | null>(null);
@@ -26,26 +27,26 @@ export default function SignUp() {
   }
 
   return (
-    <div className='p-24'>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className='p-24 flex justify-center items-center h-[100vh]'>
+      <form onSubmit={handleSubmit} className={styles.auth}>
         <div>
-          <label htmlFor="email">Email:</label><br/>
+          <label htmlFor="email">Email:</label>
           <input type="email" name="email" id="email" placeholder='email...' required />
         </div>
 
         <div>
-          <label htmlFor="name">Name:</label><br/>
+          <label htmlFor="name">Name:</label>
           <input type="text" name="name" id="name" placeholder='name...' required />
         </div>
 
         <div>
-          <label htmlFor="password">Password:</label><br/>
+          <label htmlFor="password">Password:</label>
           <input type="password" name="password" id="password" placeholder='password...' required />
         </div>
 
         {error && <div className="text-red-500">{error}</div>}
 
-        <button type='submit' className="bg-green-600 text-white px-4 py-2 rounded">Sign Up</button>
+        <button type='submit'>Sign Up</button>
         <p>
           Already have an account? <Link href="/auth/signIn" className="text-blue-500 underline">Sign in</Link>
         </p>

@@ -108,7 +108,7 @@ export default function Profile() {
       setError("somthing went wrong cant change email");
     } else {
       if(result.success) {
-        setSuccess("successfuly changed email");
+        setSuccess("successfully changed email");
         setIsEditEmail(false)
         setUser(prev => prev? {...prev, name} : prev)
       }
@@ -116,7 +116,7 @@ export default function Profile() {
   }
 
   return (
-    <div className='p-24 flex items-center justify-center h-[70vh]'>
+    <div className='p-24 flex items-center justify-center h-[100vh]'>
         <main className={styles.profile}>
           <h1>Profile</h1>
           <div>

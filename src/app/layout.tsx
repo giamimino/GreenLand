@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import ClientWrapper from "@/components/common/ClientWrapper";
+import Up from "@/components/up/Up";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -29,6 +30,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <Up />
         </ClientWrapper>
       </body>
     </html>

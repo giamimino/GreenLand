@@ -6,6 +6,7 @@ import { Icon } from '@iconify/react';
 import { CommentSlider, Button, Category, FeatureCard, Product, Title } from '@/components/ui/ui';
 import Link from 'next/link';
 import comments from '@/data/json/comments.json'
+import { useRouter } from 'next/navigation';
 
 type ProductsType = {
   slug: string
@@ -47,6 +48,7 @@ export default function Home() {
   const [searchValue, setSearchValue] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter()
 
   const fetchProducts = useCallback(async () => {
     try {
@@ -131,19 +133,20 @@ export default function Home() {
         <aside>
           <h1 className='font-extrabold text-6xl w-[400px]'>Buy your dream plants</h1>
           {StatsSection}
-          <div className={styles.search}>
+          <form className={styles.search} onSubmit={(e) => {
+            e.preventDefault()
+            router.push(searchUrl)
+          }}>
             <input 
               type="text" 
               placeholder='What are you looking for?' 
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)} 
             />
-            <Link href={searchUrl}>
-              <span>
+              <button type='submit'>
                 <Icon icon="lets-icons:search" />
-              </span>
-            </Link>
-          </div>
+              </button>
+          </form>
         </aside>
         <div>
           <Image 

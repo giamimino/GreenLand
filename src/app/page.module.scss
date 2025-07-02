@@ -31,7 +31,7 @@
         }
       }
 
-      span {
+      button {
         position: absolute;
         right: 8px;
         padding: 14px;
@@ -46,7 +46,7 @@
       }
 
       &:focus-within {
-        span {
+        button {
           transform: translate(0, -50%) rotate(0) scale(1);
         }
       }

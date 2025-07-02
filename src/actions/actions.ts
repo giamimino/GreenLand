@@ -1,6 +1,7 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+import cuid from "cuid";
 
 export async function createProduct(formData: FormData) {
   try {
@@ -216,6 +217,26 @@ export async function addCart(formData: FormData) {
   }
 }
 
+export async function LogOut(formData: FormData) {
+  try {
+    const id = formData.get("id") as string
+
+    await prisma.users.update({
+      where: {id},
+      data: {
+        token: cuid()
+      }
+    })
+
+    return {success: true}
+  } catch(err) {
+    console.log("error cant logout:", err);
+    return {
+      success: false
+    }
+  }
+}
+
 export async function deleteCart(formData: FormData) {
   const product_id = formData.get("id") as string;
   const token = formData.get("token") as string;
@@ -249,6 +270,48 @@ export async function deleteCart(formData: FormData) {
   } catch (error) {
     console.error("Something went wrong deleting from cart:", error);
     return { success: false, error, resurces: [product_id, token] };
+  }
+}
+
+export async function editName(formData: FormData) {
+  try {
+    const name = formData.get("name") as string
+    const id = formData.get("id") as string
+
+    await prisma.users.update({
+      where: { id },
+      data: {
+        name
+      }
+    })
+
+    return {success: true}
+  } catch (err) {
+    console.log("somthing went wrong edit name:", err);
+    return {
+      success: false
+    }
+  }
+}
+
+export async function editEmail(formData: FormData) {
+  try {
+    const email = formData.get("email") as string
+    const id = formData.get("id") as string
+
+    await prisma.users.update({
+      where: { id },
+      data: {
+        email
+      }
+    })
+
+    return {success: true}
+  } catch (err) {
+    console.log("somthing went wrong edit email:", err);
+    return {
+      success: false
+    }
   }
 }
 

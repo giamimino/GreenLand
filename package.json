@@ -17,6 +17,7 @@
     "@prisma/extension-accelerate": "^2.0.1",
     "bootstrap": "^5.3.7",
     "clsx": "^2.1.1",
+    "cuid": "^3.0.0",
     "next": "15.3.4",
     "next-auth": "^5.0.0-beta.29",
     "react": "^18.2.0",

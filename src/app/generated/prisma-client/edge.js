@@ -213,7 +213,7 @@ const config = {
   },
   "inlineSchema": "// Define database connection via the `DATABASE_URL` env var\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// Define custom output path for generated Prisma Client\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/app/generated/prisma-client\"\n}\n\nmodel Products {\n  id            String   @id @default(cuid())\n  image         String\n  title         String\n  Description   String\n  price         Int\n  slug          String   @unique\n  isSale        Boolean  @default(false)\n  isBestSelling Boolean  @default(false)\n  category      String\n  createAt      DateTime @default(now())\n  view          Int      @default(0)\n  prevPrice     Int?\n  stock         Int      @default(1)\n}\n\nmodel admin {\n  id          String @id @default(cuid())\n  specialCode String @unique\n  user        String\n  personCode  String\n}\n\nmodel Users {\n  id        String   @id @default(cuid())\n  name      String\n  email     String   @unique\n  password  String\n  cart      Json\n  token     String   @unique @default(cuid())\n  createdAt DateTime @default(now())\n\n  sessionByUserId SessionToken[]\n  sessionByToken  SessionToken[] @relation(\"TokenRelation\")\n}\n\nmodel SessionToken {\n  id          String @id @default(cuid())\n  user        Users  @relation(fields: [userId], references: [id])\n  userId      String\n  userByToken Users  @relation(\"TokenRelation\", fields: [token], references: [token])\n  token       String\n}\n",
   "inlineSchemaHash": "caca0012833b39d0d40fa45771f0767627341117649c0b0c0828fe1190465823",
-  "copyEngine": true
+  "copyEngine": false
 }
 config.dirname = '/'
 

@@ -74,7 +74,6 @@ type Cart = {
 
 export function Cart(props: Cart) {
   const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
   const [isCart, setIsCart] = useState(true)
 
 
@@ -90,7 +89,6 @@ export function Cart(props: Cart) {
       
     } else {
       if(result.success) {
-        setSuccess("successfully deleted cart")
         setIsCart(false)
       }
     }

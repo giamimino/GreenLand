@@ -42,7 +42,7 @@ export default function SignIn() {
 
         <button type='submit'>Sign In</button>
         <p>
-          <span>Don't have an account?</span>
+          <span>{"Don't have an account?"}</span>
           <Link href="/auth/signUp">sign up</Link>
         </p>
       </form>

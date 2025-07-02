@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import styles from './page.module.scss'
-import { Icon } from '@iconify/react/dist/iconify.js'
 import { Button } from '@/components/ui/ui'
 import { createProduct } from '@/actions/actions'
 import clsx from 'clsx'
@@ -176,7 +175,7 @@ export default function Admin() {
       </div> :
       <div className={styles.login}>
         <Link href="/">
-          <p>Don't have accses</p>
+          <p>{"Don't have accses"}</p>
         </Link>
       </div>
       }

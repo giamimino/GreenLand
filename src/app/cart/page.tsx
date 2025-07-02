@@ -1,5 +1,5 @@
 "use client"
-import { Cart, Product } from '@/components/ui/ui'
+import { Cart } from '@/components/ui/ui'
 import { redirect } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import styles from './page.module.scss'
@@ -25,7 +25,7 @@ type ProductType = {
   stock: number
 }
 
-export default function cart() {
+export default function CartPage() {
   const [user, setUser] = useState<User | null>(null)
   const [products, setProducts] = useState<ProductType[]>([])
   const [token, setToken] = useState<string | null>(null);

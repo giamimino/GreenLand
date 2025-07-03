@@ -1,14 +1,21 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { Icon } from "@iconify/react";
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import styles from './style.module.scss'
 import Link from 'next/link';
+
+type User = {
+  name: string
+}
 
 export default function Header() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [user, setUser] = useState<User | null>(null)
+  const [menu, setMenu] = useState(false)
+  const router = useRouter()
 
 
   useEffect(() => {
@@ -32,10 +39,35 @@ export default function Header() {
     }
   }, [])
 
+  useEffect(() => {
+    const token = localStorage.getItem('token') || null;
+    if(!token) return
+
+    fetch('/api/getUser', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.user) {
+        setUser(data.user)
+      }
+    })
+  }, [router])
+
   const navLinks = [
     {name: "Home", href:"/"},
     {name: "products", href:"/products"},
     {name: "contact", href:"/contact"},
+  ]
+
+  const menuLinks  = [
+    {name: "Home", href:"/"},
+    {name: "products", href:"/products"},
+    {name: "contact", href:"/contact"},
+    {name: "cart", href:"/cart"},
+    {name: user?.name ? user.name : "Sign Up", href: user ? "/profile" : "/auth/signUp"},
   ]
 
   return (
@@ -63,7 +95,10 @@ export default function Header() {
               <Icon icon="cuida:user-outline" width={24} height={24} />
             </li>
           </Link>
-          <input type="checkbox" hidden id='menu-toggle' className={styles.menuToggle} />
+          <input type="checkbox" hidden id='menu-toggle' 
+          className={styles.menuToggle} 
+          checked={menu}
+          onChange={() => setMenu(prev => !prev)}/>
           <label htmlFor='menu-toggle'>
             <span></span>
             <span></span>
@@ -71,6 +106,13 @@ export default function Header() {
           </label>
         </ol>
       </header>
+      <main className={`${styles.menu} ${menu ? styles.open : ""}`}>
+          {menuLinks.map(({ name, href }) => (
+            <Link href={href} key={name.toLowerCase()} onClick={() => setMenu(false)}>
+              {name}
+            </Link>
+          ))}
+      </main>
     </>
   )
 }

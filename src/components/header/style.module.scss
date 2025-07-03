@@ -106,3 +106,35 @@
   padding-top: 48px;
   padding-inline: 96px;
 }
+
+.menu {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  padding: 28px;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 1px solid #1E1E1E;
+  transform: translate(0, -100%);
+  transition: all .5s ease;
+
+  a {
+    display: flex;
+    justify-content: center;
+    padding: 8px 18px;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+}
+.open {
+  transform: translate(0, 0);
+}

@@ -24,10 +24,10 @@ export type Products = $Result.DefaultSelection<Prisma.$ProductsPayload>
  */
 export type Users = $Result.DefaultSelection<Prisma.$UsersPayload>
 /**
- * Model SessionToken
+ * Model EmailVerificationCode
  * 
  */
-export type SessionToken = $Result.DefaultSelection<Prisma.$SessionTokenPayload>
+export type EmailVerificationCode = $Result.DefaultSelection<Prisma.$EmailVerificationCodePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -175,14 +175,14 @@ export class PrismaClient<
   get users(): Prisma.UsersDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.sessionToken`: Exposes CRUD operations for the **SessionToken** model.
+   * `prisma.emailVerificationCode`: Exposes CRUD operations for the **EmailVerificationCode** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more SessionTokens
-    * const sessionTokens = await prisma.sessionToken.findMany()
+    * // Fetch zero or more EmailVerificationCodes
+    * const emailVerificationCodes = await prisma.emailVerificationCode.findMany()
     * ```
     */
-  get sessionToken(): Prisma.SessionTokenDelegate<ExtArgs, ClientOptions>;
+  get emailVerificationCode(): Prisma.EmailVerificationCodeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -625,7 +625,7 @@ export namespace Prisma {
   export const ModelName: {
     Products: 'Products',
     Users: 'Users',
-    SessionToken: 'SessionToken'
+    EmailVerificationCode: 'EmailVerificationCode'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -644,7 +644,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "products" | "users" | "sessionToken"
+      modelProps: "products" | "users" | "emailVerificationCode"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -796,77 +796,77 @@ export namespace Prisma {
           }
         }
       }
-      SessionToken: {
-        payload: Prisma.$SessionTokenPayload<ExtArgs>
-        fields: Prisma.SessionTokenFieldRefs
+      EmailVerificationCode: {
+        payload: Prisma.$EmailVerificationCodePayload<ExtArgs>
+        fields: Prisma.EmailVerificationCodeFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.SessionTokenFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionTokenPayload> | null
+            args: Prisma.EmailVerificationCodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationCodePayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.SessionTokenFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionTokenPayload>
+            args: Prisma.EmailVerificationCodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationCodePayload>
           }
           findFirst: {
-            args: Prisma.SessionTokenFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionTokenPayload> | null
+            args: Prisma.EmailVerificationCodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationCodePayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.SessionTokenFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionTokenPayload>
+            args: Prisma.EmailVerificationCodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationCodePayload>
           }
           findMany: {
-            args: Prisma.SessionTokenFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionTokenPayload>[]
+            args: Prisma.EmailVerificationCodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationCodePayload>[]
           }
           create: {
-            args: Prisma.SessionTokenCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionTokenPayload>
+            args: Prisma.EmailVerificationCodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationCodePayload>
           }
           createMany: {
-            args: Prisma.SessionTokenCreateManyArgs<ExtArgs>
+            args: Prisma.EmailVerificationCodeCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.SessionTokenCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionTokenPayload>[]
+            args: Prisma.EmailVerificationCodeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationCodePayload>[]
           }
           delete: {
-            args: Prisma.SessionTokenDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionTokenPayload>
+            args: Prisma.EmailVerificationCodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationCodePayload>
           }
           update: {
-            args: Prisma.SessionTokenUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionTokenPayload>
+            args: Prisma.EmailVerificationCodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationCodePayload>
           }
           deleteMany: {
-            args: Prisma.SessionTokenDeleteManyArgs<ExtArgs>
+            args: Prisma.EmailVerificationCodeDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.SessionTokenUpdateManyArgs<ExtArgs>
+            args: Prisma.EmailVerificationCodeUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.SessionTokenUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionTokenPayload>[]
+            args: Prisma.EmailVerificationCodeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationCodePayload>[]
           }
           upsert: {
-            args: Prisma.SessionTokenUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SessionTokenPayload>
+            args: Prisma.EmailVerificationCodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EmailVerificationCodePayload>
           }
           aggregate: {
-            args: Prisma.SessionTokenAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateSessionToken>
+            args: Prisma.EmailVerificationCodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEmailVerificationCode>
           }
           groupBy: {
-            args: Prisma.SessionTokenGroupByArgs<ExtArgs>
-            result: $Utils.Optional<SessionTokenGroupByOutputType>[]
+            args: Prisma.EmailVerificationCodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EmailVerificationCodeGroupByOutputType>[]
           }
           count: {
-            args: Prisma.SessionTokenCountArgs<ExtArgs>
-            result: $Utils.Optional<SessionTokenCountAggregateOutputType> | number
+            args: Prisma.EmailVerificationCodeCountArgs<ExtArgs>
+            result: $Utils.Optional<EmailVerificationCodeCountAggregateOutputType> | number
           }
         }
       }
@@ -956,7 +956,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     products?: ProductsOmit
     users?: UsersOmit
-    sessionToken?: SessionTokenOmit
+    emailVerificationCode?: EmailVerificationCodeOmit
   }
 
   /* Types for Logging */
@@ -1045,45 +1045,6 @@ export namespace Prisma {
    * Count Types
    */
 
-
-  /**
-   * Count Type UsersCountOutputType
-   */
-
-  export type UsersCountOutputType = {
-    sessionByUserId: number
-    sessionByToken: number
-  }
-
-  export type UsersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sessionByUserId?: boolean | UsersCountOutputTypeCountSessionByUserIdArgs
-    sessionByToken?: boolean | UsersCountOutputTypeCountSessionByTokenArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * UsersCountOutputType without action
-   */
-  export type UsersCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the UsersCountOutputType
-     */
-    select?: UsersCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UsersCountOutputType without action
-   */
-  export type UsersCountOutputTypeCountSessionByUserIdArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionTokenWhereInput
-  }
-
-  /**
-   * UsersCountOutputType without action
-   */
-  export type UsersCountOutputTypeCountSessionByTokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionTokenWhereInput
-  }
 
 
   /**
@@ -2241,8 +2202,18 @@ export namespace Prisma {
 
   export type AggregateUsers = {
     _count: UsersCountAggregateOutputType | null
+    _avg: UsersAvgAggregateOutputType | null
+    _sum: UsersSumAggregateOutputType | null
     _min: UsersMinAggregateOutputType | null
     _max: UsersMaxAggregateOutputType | null
+  }
+
+  export type UsersAvgAggregateOutputType = {
+    verificationAttempts: number | null
+  }
+
+  export type UsersSumAggregateOutputType = {
+    verificationAttempts: number | null
   }
 
   export type UsersMinAggregateOutputType = {
@@ -2253,6 +2224,10 @@ export namespace Prisma {
     token: string | null
     createdAt: Date | null
     role: string | null
+    status: string | null
+    isVerified: boolean | null
+    verificationAttempts: number | null
+    canChangeEmail: boolean | null
   }
 
   export type UsersMaxAggregateOutputType = {
@@ -2263,6 +2238,10 @@ export namespace Prisma {
     token: string | null
     createdAt: Date | null
     role: string | null
+    status: string | null
+    isVerified: boolean | null
+    verificationAttempts: number | null
+    canChangeEmail: boolean | null
   }
 
   export type UsersCountAggregateOutputType = {
@@ -2274,9 +2253,21 @@ export namespace Prisma {
     token: number
     createdAt: number
     role: number
+    status: number
+    isVerified: number
+    verificationAttempts: number
+    canChangeEmail: number
     _all: number
   }
 
+
+  export type UsersAvgAggregateInputType = {
+    verificationAttempts?: true
+  }
+
+  export type UsersSumAggregateInputType = {
+    verificationAttempts?: true
+  }
 
   export type UsersMinAggregateInputType = {
     id?: true
@@ -2286,6 +2277,10 @@ export namespace Prisma {
     token?: true
     createdAt?: true
     role?: true
+    status?: true
+    isVerified?: true
+    verificationAttempts?: true
+    canChangeEmail?: true
   }
 
   export type UsersMaxAggregateInputType = {
@@ -2296,6 +2291,10 @@ export namespace Prisma {
     token?: true
     createdAt?: true
     role?: true
+    status?: true
+    isVerified?: true
+    verificationAttempts?: true
+    canChangeEmail?: true
   }
 
   export type UsersCountAggregateInputType = {
@@ -2307,6 +2306,10 @@ export namespace Prisma {
     token?: true
     createdAt?: true
     role?: true
+    status?: true
+    isVerified?: true
+    verificationAttempts?: true
+    canChangeEmail?: true
     _all?: true
   }
 
@@ -2348,6 +2351,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UsersAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UsersSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UsersMinAggregateInputType
@@ -2378,6 +2393,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UsersCountAggregateInputType | true
+    _avg?: UsersAvgAggregateInputType
+    _sum?: UsersSumAggregateInputType
     _min?: UsersMinAggregateInputType
     _max?: UsersMaxAggregateInputType
   }
@@ -2391,7 +2408,13 @@ export namespace Prisma {
     token: string
     createdAt: Date
     role: string
+    status: string
+    isVerified: boolean
+    verificationAttempts: number
+    canChangeEmail: boolean
     _count: UsersCountAggregateOutputType | null
+    _avg: UsersAvgAggregateOutputType | null
+    _sum: UsersSumAggregateOutputType | null
     _min: UsersMinAggregateOutputType | null
     _max: UsersMaxAggregateOutputType | null
   }
@@ -2419,9 +2442,10 @@ export namespace Prisma {
     token?: boolean
     createdAt?: boolean
     role?: boolean
-    sessionByUserId?: boolean | Users$sessionByUserIdArgs<ExtArgs>
-    sessionByToken?: boolean | Users$sessionByTokenArgs<ExtArgs>
-    _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
+    status?: boolean
+    isVerified?: boolean
+    verificationAttempts?: boolean
+    canChangeEmail?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type UsersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2433,6 +2457,10 @@ export namespace Prisma {
     token?: boolean
     createdAt?: boolean
     role?: boolean
+    status?: boolean
+    isVerified?: boolean
+    verificationAttempts?: boolean
+    canChangeEmail?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type UsersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2444,6 +2472,10 @@ export namespace Prisma {
     token?: boolean
     createdAt?: boolean
     role?: boolean
+    status?: boolean
+    isVerified?: boolean
+    verificationAttempts?: boolean
+    canChangeEmail?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type UsersSelectScalar = {
@@ -2455,23 +2487,17 @@ export namespace Prisma {
     token?: boolean
     createdAt?: boolean
     role?: boolean
+    status?: boolean
+    isVerified?: boolean
+    verificationAttempts?: boolean
+    canChangeEmail?: boolean
   }
 
-  export type UsersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "cart" | "token" | "createdAt" | "role", ExtArgs["result"]["users"]>
-  export type UsersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    sessionByUserId?: boolean | Users$sessionByUserIdArgs<ExtArgs>
-    sessionByToken?: boolean | Users$sessionByTokenArgs<ExtArgs>
-    _count?: boolean | UsersCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type UsersIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type UsersIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UsersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "cart" | "token" | "createdAt" | "role" | "status" | "isVerified" | "verificationAttempts" | "canChangeEmail", ExtArgs["result"]["users"]>
 
   export type $UsersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Users"
-    objects: {
-      sessionByUserId: Prisma.$SessionTokenPayload<ExtArgs>[]
-      sessionByToken: Prisma.$SessionTokenPayload<ExtArgs>[]
-    }
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
@@ -2481,6 +2507,10 @@ export namespace Prisma {
       token: string
       createdAt: Date
       role: string
+      status: string
+      isVerified: boolean
+      verificationAttempts: number
+      canChangeEmail: boolean
     }, ExtArgs["result"]["users"]>
     composites: {}
   }
@@ -2875,8 +2905,6 @@ export namespace Prisma {
    */
   export interface Prisma__UsersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    sessionByUserId<T extends Users$sessionByUserIdArgs<ExtArgs> = {}>(args?: Subset<T, Users$sessionByUserIdArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    sessionByToken<T extends Users$sessionByTokenArgs<ExtArgs> = {}>(args?: Subset<T, Users$sessionByTokenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2914,6 +2942,10 @@ export namespace Prisma {
     readonly token: FieldRef<"Users", 'String'>
     readonly createdAt: FieldRef<"Users", 'DateTime'>
     readonly role: FieldRef<"Users", 'String'>
+    readonly status: FieldRef<"Users", 'String'>
+    readonly isVerified: FieldRef<"Users", 'Boolean'>
+    readonly verificationAttempts: FieldRef<"Users", 'Int'>
+    readonly canChangeEmail: FieldRef<"Users", 'Boolean'>
   }
     
 
@@ -2930,10 +2962,6 @@ export namespace Prisma {
      * Omit specific fields from the Users
      */
     omit?: UsersOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsersInclude<ExtArgs> | null
     /**
      * Filter, which Users to fetch.
      */
@@ -2953,10 +2981,6 @@ export namespace Prisma {
      */
     omit?: UsersOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsersInclude<ExtArgs> | null
-    /**
      * Filter, which Users to fetch.
      */
     where: UsersWhereUniqueInput
@@ -2974,10 +2998,6 @@ export namespace Prisma {
      * Omit specific fields from the Users
      */
     omit?: UsersOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsersInclude<ExtArgs> | null
     /**
      * Filter, which Users to fetch.
      */
@@ -3027,10 +3047,6 @@ export namespace Prisma {
      */
     omit?: UsersOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsersInclude<ExtArgs> | null
-    /**
      * Filter, which Users to fetch.
      */
     where?: UsersWhereInput
@@ -3079,10 +3095,6 @@ export namespace Prisma {
      */
     omit?: UsersOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsersInclude<ExtArgs> | null
-    /**
      * Filter, which Users to fetch.
      */
     where?: UsersWhereInput
@@ -3125,10 +3137,6 @@ export namespace Prisma {
      * Omit specific fields from the Users
      */
     omit?: UsersOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsersInclude<ExtArgs> | null
     /**
      * The data needed to create a Users.
      */
@@ -3177,10 +3185,6 @@ export namespace Prisma {
      * Omit specific fields from the Users
      */
     omit?: UsersOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsersInclude<ExtArgs> | null
     /**
      * The data needed to update a Users.
      */
@@ -3248,10 +3252,6 @@ export namespace Prisma {
      */
     omit?: UsersOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsersInclude<ExtArgs> | null
-    /**
      * The filter to search for the Users to update in case it exists.
      */
     where: UsersWhereUniqueInput
@@ -3278,10 +3278,6 @@ export namespace Prisma {
      */
     omit?: UsersOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsersInclude<ExtArgs> | null
-    /**
      * Filter which Users to delete.
      */
     where: UsersWhereUniqueInput
@@ -3302,54 +3298,6 @@ export namespace Prisma {
   }
 
   /**
-   * Users.sessionByUserId
-   */
-  export type Users$sessionByUserIdArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionToken
-     */
-    select?: SessionTokenSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionToken
-     */
-    omit?: SessionTokenOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionTokenInclude<ExtArgs> | null
-    where?: SessionTokenWhereInput
-    orderBy?: SessionTokenOrderByWithRelationInput | SessionTokenOrderByWithRelationInput[]
-    cursor?: SessionTokenWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SessionTokenScalarFieldEnum | SessionTokenScalarFieldEnum[]
-  }
-
-  /**
-   * Users.sessionByToken
-   */
-  export type Users$sessionByTokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionToken
-     */
-    select?: SessionTokenSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionToken
-     */
-    omit?: SessionTokenOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionTokenInclude<ExtArgs> | null
-    where?: SessionTokenWhereInput
-    orderBy?: SessionTokenOrderByWithRelationInput | SessionTokenOrderByWithRelationInput[]
-    cursor?: SessionTokenWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SessionTokenScalarFieldEnum | SessionTokenScalarFieldEnum[]
-  }
-
-  /**
    * Users without action
    */
   export type UsersDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3361,341 +3309,340 @@ export namespace Prisma {
      * Omit specific fields from the Users
      */
     omit?: UsersOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: UsersInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model SessionToken
+   * Model EmailVerificationCode
    */
 
-  export type AggregateSessionToken = {
-    _count: SessionTokenCountAggregateOutputType | null
-    _min: SessionTokenMinAggregateOutputType | null
-    _max: SessionTokenMaxAggregateOutputType | null
+  export type AggregateEmailVerificationCode = {
+    _count: EmailVerificationCodeCountAggregateOutputType | null
+    _min: EmailVerificationCodeMinAggregateOutputType | null
+    _max: EmailVerificationCodeMaxAggregateOutputType | null
   }
 
-  export type SessionTokenMinAggregateOutputType = {
+  export type EmailVerificationCodeMinAggregateOutputType = {
     id: string | null
-    userId: string | null
-    token: string | null
+    email: string | null
+    code: string | null
+    expiresAt: Date | null
+    createdAt: Date | null
   }
 
-  export type SessionTokenMaxAggregateOutputType = {
+  export type EmailVerificationCodeMaxAggregateOutputType = {
     id: string | null
-    userId: string | null
-    token: string | null
+    email: string | null
+    code: string | null
+    expiresAt: Date | null
+    createdAt: Date | null
   }
 
-  export type SessionTokenCountAggregateOutputType = {
+  export type EmailVerificationCodeCountAggregateOutputType = {
     id: number
-    userId: number
-    token: number
+    email: number
+    code: number
+    expiresAt: number
+    createdAt: number
     _all: number
   }
 
 
-  export type SessionTokenMinAggregateInputType = {
+  export type EmailVerificationCodeMinAggregateInputType = {
     id?: true
-    userId?: true
-    token?: true
+    email?: true
+    code?: true
+    expiresAt?: true
+    createdAt?: true
   }
 
-  export type SessionTokenMaxAggregateInputType = {
+  export type EmailVerificationCodeMaxAggregateInputType = {
     id?: true
-    userId?: true
-    token?: true
+    email?: true
+    code?: true
+    expiresAt?: true
+    createdAt?: true
   }
 
-  export type SessionTokenCountAggregateInputType = {
+  export type EmailVerificationCodeCountAggregateInputType = {
     id?: true
-    userId?: true
-    token?: true
+    email?: true
+    code?: true
+    expiresAt?: true
+    createdAt?: true
     _all?: true
   }
 
-  export type SessionTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmailVerificationCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which SessionToken to aggregate.
+     * Filter which EmailVerificationCode to aggregate.
      */
-    where?: SessionTokenWhereInput
+    where?: EmailVerificationCodeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of SessionTokens to fetch.
+     * Determine the order of EmailVerificationCodes to fetch.
      */
-    orderBy?: SessionTokenOrderByWithRelationInput | SessionTokenOrderByWithRelationInput[]
+    orderBy?: EmailVerificationCodeOrderByWithRelationInput | EmailVerificationCodeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: SessionTokenWhereUniqueInput
+    cursor?: EmailVerificationCodeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` SessionTokens from the position of the cursor.
+     * Take `±n` EmailVerificationCodes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` SessionTokens.
+     * Skip the first `n` EmailVerificationCodes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned SessionTokens
+     * Count returned EmailVerificationCodes
     **/
-    _count?: true | SessionTokenCountAggregateInputType
+    _count?: true | EmailVerificationCodeCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: SessionTokenMinAggregateInputType
+    _min?: EmailVerificationCodeMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: SessionTokenMaxAggregateInputType
+    _max?: EmailVerificationCodeMaxAggregateInputType
   }
 
-  export type GetSessionTokenAggregateType<T extends SessionTokenAggregateArgs> = {
-        [P in keyof T & keyof AggregateSessionToken]: P extends '_count' | 'count'
+  export type GetEmailVerificationCodeAggregateType<T extends EmailVerificationCodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateEmailVerificationCode]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateSessionToken[P]>
-      : GetScalarType<T[P], AggregateSessionToken[P]>
+        : GetScalarType<T[P], AggregateEmailVerificationCode[P]>
+      : GetScalarType<T[P], AggregateEmailVerificationCode[P]>
   }
 
 
 
 
-  export type SessionTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SessionTokenWhereInput
-    orderBy?: SessionTokenOrderByWithAggregationInput | SessionTokenOrderByWithAggregationInput[]
-    by: SessionTokenScalarFieldEnum[] | SessionTokenScalarFieldEnum
-    having?: SessionTokenScalarWhereWithAggregatesInput
+  export type EmailVerificationCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EmailVerificationCodeWhereInput
+    orderBy?: EmailVerificationCodeOrderByWithAggregationInput | EmailVerificationCodeOrderByWithAggregationInput[]
+    by: EmailVerificationCodeScalarFieldEnum[] | EmailVerificationCodeScalarFieldEnum
+    having?: EmailVerificationCodeScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: SessionTokenCountAggregateInputType | true
-    _min?: SessionTokenMinAggregateInputType
-    _max?: SessionTokenMaxAggregateInputType
+    _count?: EmailVerificationCodeCountAggregateInputType | true
+    _min?: EmailVerificationCodeMinAggregateInputType
+    _max?: EmailVerificationCodeMaxAggregateInputType
   }
 
-  export type SessionTokenGroupByOutputType = {
+  export type EmailVerificationCodeGroupByOutputType = {
     id: string
-    userId: string
-    token: string
-    _count: SessionTokenCountAggregateOutputType | null
-    _min: SessionTokenMinAggregateOutputType | null
-    _max: SessionTokenMaxAggregateOutputType | null
+    email: string
+    code: string
+    expiresAt: Date
+    createdAt: Date
+    _count: EmailVerificationCodeCountAggregateOutputType | null
+    _min: EmailVerificationCodeMinAggregateOutputType | null
+    _max: EmailVerificationCodeMaxAggregateOutputType | null
   }
 
-  type GetSessionTokenGroupByPayload<T extends SessionTokenGroupByArgs> = Prisma.PrismaPromise<
+  type GetEmailVerificationCodeGroupByPayload<T extends EmailVerificationCodeGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<SessionTokenGroupByOutputType, T['by']> &
+      PickEnumerable<EmailVerificationCodeGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof SessionTokenGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof EmailVerificationCodeGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], SessionTokenGroupByOutputType[P]>
-            : GetScalarType<T[P], SessionTokenGroupByOutputType[P]>
+              : GetScalarType<T[P], EmailVerificationCodeGroupByOutputType[P]>
+            : GetScalarType<T[P], EmailVerificationCodeGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type SessionTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type EmailVerificationCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
-    token?: boolean
-    user?: boolean | UsersDefaultArgs<ExtArgs>
-    userByToken?: boolean | UsersDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["sessionToken"]>
+    email?: boolean
+    code?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["emailVerificationCode"]>
 
-  export type SessionTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type EmailVerificationCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
-    token?: boolean
-    user?: boolean | UsersDefaultArgs<ExtArgs>
-    userByToken?: boolean | UsersDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["sessionToken"]>
+    email?: boolean
+    code?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["emailVerificationCode"]>
 
-  export type SessionTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type EmailVerificationCodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    userId?: boolean
-    token?: boolean
-    user?: boolean | UsersDefaultArgs<ExtArgs>
-    userByToken?: boolean | UsersDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["sessionToken"]>
+    email?: boolean
+    code?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["emailVerificationCode"]>
 
-  export type SessionTokenSelectScalar = {
+  export type EmailVerificationCodeSelectScalar = {
     id?: boolean
-    userId?: boolean
-    token?: boolean
+    email?: boolean
+    code?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
   }
 
-  export type SessionTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "token", ExtArgs["result"]["sessionToken"]>
-  export type SessionTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UsersDefaultArgs<ExtArgs>
-    userByToken?: boolean | UsersDefaultArgs<ExtArgs>
-  }
-  export type SessionTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UsersDefaultArgs<ExtArgs>
-    userByToken?: boolean | UsersDefaultArgs<ExtArgs>
-  }
-  export type SessionTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UsersDefaultArgs<ExtArgs>
-    userByToken?: boolean | UsersDefaultArgs<ExtArgs>
-  }
+  export type EmailVerificationCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "code" | "expiresAt" | "createdAt", ExtArgs["result"]["emailVerificationCode"]>
 
-  export type $SessionTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "SessionToken"
-    objects: {
-      user: Prisma.$UsersPayload<ExtArgs>
-      userByToken: Prisma.$UsersPayload<ExtArgs>
-    }
+  export type $EmailVerificationCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EmailVerificationCode"
+    objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      userId: string
-      token: string
-    }, ExtArgs["result"]["sessionToken"]>
+      email: string
+      code: string
+      expiresAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["emailVerificationCode"]>
     composites: {}
   }
 
-  type SessionTokenGetPayload<S extends boolean | null | undefined | SessionTokenDefaultArgs> = $Result.GetResult<Prisma.$SessionTokenPayload, S>
+  type EmailVerificationCodeGetPayload<S extends boolean | null | undefined | EmailVerificationCodeDefaultArgs> = $Result.GetResult<Prisma.$EmailVerificationCodePayload, S>
 
-  type SessionTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SessionTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: SessionTokenCountAggregateInputType | true
+  type EmailVerificationCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EmailVerificationCodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EmailVerificationCodeCountAggregateInputType | true
     }
 
-  export interface SessionTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SessionToken'], meta: { name: 'SessionToken' } }
+  export interface EmailVerificationCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EmailVerificationCode'], meta: { name: 'EmailVerificationCode' } }
     /**
-     * Find zero or one SessionToken that matches the filter.
-     * @param {SessionTokenFindUniqueArgs} args - Arguments to find a SessionToken
+     * Find zero or one EmailVerificationCode that matches the filter.
+     * @param {EmailVerificationCodeFindUniqueArgs} args - Arguments to find a EmailVerificationCode
      * @example
-     * // Get one SessionToken
-     * const sessionToken = await prisma.sessionToken.findUnique({
+     * // Get one EmailVerificationCode
+     * const emailVerificationCode = await prisma.emailVerificationCode.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends SessionTokenFindUniqueArgs>(args: SelectSubset<T, SessionTokenFindUniqueArgs<ExtArgs>>): Prisma__SessionTokenClient<$Result.GetResult<Prisma.$SessionTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends EmailVerificationCodeFindUniqueArgs>(args: SelectSubset<T, EmailVerificationCodeFindUniqueArgs<ExtArgs>>): Prisma__EmailVerificationCodeClient<$Result.GetResult<Prisma.$EmailVerificationCodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one SessionToken that matches the filter or throw an error with `error.code='P2025'`
+     * Find one EmailVerificationCode that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {SessionTokenFindUniqueOrThrowArgs} args - Arguments to find a SessionToken
+     * @param {EmailVerificationCodeFindUniqueOrThrowArgs} args - Arguments to find a EmailVerificationCode
      * @example
-     * // Get one SessionToken
-     * const sessionToken = await prisma.sessionToken.findUniqueOrThrow({
+     * // Get one EmailVerificationCode
+     * const emailVerificationCode = await prisma.emailVerificationCode.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends SessionTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, SessionTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SessionTokenClient<$Result.GetResult<Prisma.$SessionTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends EmailVerificationCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, EmailVerificationCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EmailVerificationCodeClient<$Result.GetResult<Prisma.$EmailVerificationCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first SessionToken that matches the filter.
+     * Find the first EmailVerificationCode that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionTokenFindFirstArgs} args - Arguments to find a SessionToken
+     * @param {EmailVerificationCodeFindFirstArgs} args - Arguments to find a EmailVerificationCode
      * @example
-     * // Get one SessionToken
-     * const sessionToken = await prisma.sessionToken.findFirst({
+     * // Get one EmailVerificationCode
+     * const emailVerificationCode = await prisma.emailVerificationCode.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends SessionTokenFindFirstArgs>(args?: SelectSubset<T, SessionTokenFindFirstArgs<ExtArgs>>): Prisma__SessionTokenClient<$Result.GetResult<Prisma.$SessionTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends EmailVerificationCodeFindFirstArgs>(args?: SelectSubset<T, EmailVerificationCodeFindFirstArgs<ExtArgs>>): Prisma__EmailVerificationCodeClient<$Result.GetResult<Prisma.$EmailVerificationCodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first SessionToken that matches the filter or
+     * Find the first EmailVerificationCode that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionTokenFindFirstOrThrowArgs} args - Arguments to find a SessionToken
+     * @param {EmailVerificationCodeFindFirstOrThrowArgs} args - Arguments to find a EmailVerificationCode
      * @example
-     * // Get one SessionToken
-     * const sessionToken = await prisma.sessionToken.findFirstOrThrow({
+     * // Get one EmailVerificationCode
+     * const emailVerificationCode = await prisma.emailVerificationCode.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends SessionTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, SessionTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__SessionTokenClient<$Result.GetResult<Prisma.$SessionTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends EmailVerificationCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, EmailVerificationCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__EmailVerificationCodeClient<$Result.GetResult<Prisma.$EmailVerificationCodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more SessionTokens that matches the filter.
+     * Find zero or more EmailVerificationCodes that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {EmailVerificationCodeFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all SessionTokens
-     * const sessionTokens = await prisma.sessionToken.findMany()
+     * // Get all EmailVerificationCodes
+     * const emailVerificationCodes = await prisma.emailVerificationCode.findMany()
      * 
-     * // Get first 10 SessionTokens
-     * const sessionTokens = await prisma.sessionToken.findMany({ take: 10 })
+     * // Get first 10 EmailVerificationCodes
+     * const emailVerificationCodes = await prisma.emailVerificationCode.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const sessionTokenWithIdOnly = await prisma.sessionToken.findMany({ select: { id: true } })
+     * const emailVerificationCodeWithIdOnly = await prisma.emailVerificationCode.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends SessionTokenFindManyArgs>(args?: SelectSubset<T, SessionTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends EmailVerificationCodeFindManyArgs>(args?: SelectSubset<T, EmailVerificationCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailVerificationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a SessionToken.
-     * @param {SessionTokenCreateArgs} args - Arguments to create a SessionToken.
+     * Create a EmailVerificationCode.
+     * @param {EmailVerificationCodeCreateArgs} args - Arguments to create a EmailVerificationCode.
      * @example
-     * // Create one SessionToken
-     * const SessionToken = await prisma.sessionToken.create({
+     * // Create one EmailVerificationCode
+     * const EmailVerificationCode = await prisma.emailVerificationCode.create({
      *   data: {
-     *     // ... data to create a SessionToken
+     *     // ... data to create a EmailVerificationCode
      *   }
      * })
      * 
      */
-    create<T extends SessionTokenCreateArgs>(args: SelectSubset<T, SessionTokenCreateArgs<ExtArgs>>): Prisma__SessionTokenClient<$Result.GetResult<Prisma.$SessionTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends EmailVerificationCodeCreateArgs>(args: SelectSubset<T, EmailVerificationCodeCreateArgs<ExtArgs>>): Prisma__EmailVerificationCodeClient<$Result.GetResult<Prisma.$EmailVerificationCodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many SessionTokens.
-     * @param {SessionTokenCreateManyArgs} args - Arguments to create many SessionTokens.
+     * Create many EmailVerificationCodes.
+     * @param {EmailVerificationCodeCreateManyArgs} args - Arguments to create many EmailVerificationCodes.
      * @example
-     * // Create many SessionTokens
-     * const sessionToken = await prisma.sessionToken.createMany({
+     * // Create many EmailVerificationCodes
+     * const emailVerificationCode = await prisma.emailVerificationCode.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends SessionTokenCreateManyArgs>(args?: SelectSubset<T, SessionTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends EmailVerificationCodeCreateManyArgs>(args?: SelectSubset<T, EmailVerificationCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many SessionTokens and returns the data saved in the database.
-     * @param {SessionTokenCreateManyAndReturnArgs} args - Arguments to create many SessionTokens.
+     * Create many EmailVerificationCodes and returns the data saved in the database.
+     * @param {EmailVerificationCodeCreateManyAndReturnArgs} args - Arguments to create many EmailVerificationCodes.
      * @example
-     * // Create many SessionTokens
-     * const sessionToken = await prisma.sessionToken.createManyAndReturn({
+     * // Create many EmailVerificationCodes
+     * const emailVerificationCode = await prisma.emailVerificationCode.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many SessionTokens and only return the `id`
-     * const sessionTokenWithIdOnly = await prisma.sessionToken.createManyAndReturn({
+     * // Create many EmailVerificationCodes and only return the `id`
+     * const emailVerificationCodeWithIdOnly = await prisma.emailVerificationCode.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -3705,28 +3652,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends SessionTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, SessionTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends EmailVerificationCodeCreateManyAndReturnArgs>(args?: SelectSubset<T, EmailVerificationCodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailVerificationCodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a SessionToken.
-     * @param {SessionTokenDeleteArgs} args - Arguments to delete one SessionToken.
+     * Delete a EmailVerificationCode.
+     * @param {EmailVerificationCodeDeleteArgs} args - Arguments to delete one EmailVerificationCode.
      * @example
-     * // Delete one SessionToken
-     * const SessionToken = await prisma.sessionToken.delete({
+     * // Delete one EmailVerificationCode
+     * const EmailVerificationCode = await prisma.emailVerificationCode.delete({
      *   where: {
-     *     // ... filter to delete one SessionToken
+     *     // ... filter to delete one EmailVerificationCode
      *   }
      * })
      * 
      */
-    delete<T extends SessionTokenDeleteArgs>(args: SelectSubset<T, SessionTokenDeleteArgs<ExtArgs>>): Prisma__SessionTokenClient<$Result.GetResult<Prisma.$SessionTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends EmailVerificationCodeDeleteArgs>(args: SelectSubset<T, EmailVerificationCodeDeleteArgs<ExtArgs>>): Prisma__EmailVerificationCodeClient<$Result.GetResult<Prisma.$EmailVerificationCodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one SessionToken.
-     * @param {SessionTokenUpdateArgs} args - Arguments to update one SessionToken.
+     * Update one EmailVerificationCode.
+     * @param {EmailVerificationCodeUpdateArgs} args - Arguments to update one EmailVerificationCode.
      * @example
-     * // Update one SessionToken
-     * const sessionToken = await prisma.sessionToken.update({
+     * // Update one EmailVerificationCode
+     * const emailVerificationCode = await prisma.emailVerificationCode.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3736,30 +3683,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends SessionTokenUpdateArgs>(args: SelectSubset<T, SessionTokenUpdateArgs<ExtArgs>>): Prisma__SessionTokenClient<$Result.GetResult<Prisma.$SessionTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends EmailVerificationCodeUpdateArgs>(args: SelectSubset<T, EmailVerificationCodeUpdateArgs<ExtArgs>>): Prisma__EmailVerificationCodeClient<$Result.GetResult<Prisma.$EmailVerificationCodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more SessionTokens.
-     * @param {SessionTokenDeleteManyArgs} args - Arguments to filter SessionTokens to delete.
+     * Delete zero or more EmailVerificationCodes.
+     * @param {EmailVerificationCodeDeleteManyArgs} args - Arguments to filter EmailVerificationCodes to delete.
      * @example
-     * // Delete a few SessionTokens
-     * const { count } = await prisma.sessionToken.deleteMany({
+     * // Delete a few EmailVerificationCodes
+     * const { count } = await prisma.emailVerificationCode.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends SessionTokenDeleteManyArgs>(args?: SelectSubset<T, SessionTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends EmailVerificationCodeDeleteManyArgs>(args?: SelectSubset<T, EmailVerificationCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more SessionTokens.
+     * Update zero or more EmailVerificationCodes.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {EmailVerificationCodeUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many SessionTokens
-     * const sessionToken = await prisma.sessionToken.updateMany({
+     * // Update many EmailVerificationCodes
+     * const emailVerificationCode = await prisma.emailVerificationCode.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3769,14 +3716,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends SessionTokenUpdateManyArgs>(args: SelectSubset<T, SessionTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends EmailVerificationCodeUpdateManyArgs>(args: SelectSubset<T, EmailVerificationCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more SessionTokens and returns the data updated in the database.
-     * @param {SessionTokenUpdateManyAndReturnArgs} args - Arguments to update many SessionTokens.
+     * Update zero or more EmailVerificationCodes and returns the data updated in the database.
+     * @param {EmailVerificationCodeUpdateManyAndReturnArgs} args - Arguments to update many EmailVerificationCodes.
      * @example
-     * // Update many SessionTokens
-     * const sessionToken = await prisma.sessionToken.updateManyAndReturn({
+     * // Update many EmailVerificationCodes
+     * const emailVerificationCode = await prisma.emailVerificationCode.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3785,8 +3732,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more SessionTokens and only return the `id`
-     * const sessionTokenWithIdOnly = await prisma.sessionToken.updateManyAndReturn({
+     * // Update zero or more EmailVerificationCodes and only return the `id`
+     * const emailVerificationCodeWithIdOnly = await prisma.emailVerificationCode.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -3799,56 +3746,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends SessionTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, SessionTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends EmailVerificationCodeUpdateManyAndReturnArgs>(args: SelectSubset<T, EmailVerificationCodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmailVerificationCodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one SessionToken.
-     * @param {SessionTokenUpsertArgs} args - Arguments to update or create a SessionToken.
+     * Create or update one EmailVerificationCode.
+     * @param {EmailVerificationCodeUpsertArgs} args - Arguments to update or create a EmailVerificationCode.
      * @example
-     * // Update or create a SessionToken
-     * const sessionToken = await prisma.sessionToken.upsert({
+     * // Update or create a EmailVerificationCode
+     * const emailVerificationCode = await prisma.emailVerificationCode.upsert({
      *   create: {
-     *     // ... data to create a SessionToken
+     *     // ... data to create a EmailVerificationCode
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the SessionToken we want to update
+     *     // ... the filter for the EmailVerificationCode we want to update
      *   }
      * })
      */
-    upsert<T extends SessionTokenUpsertArgs>(args: SelectSubset<T, SessionTokenUpsertArgs<ExtArgs>>): Prisma__SessionTokenClient<$Result.GetResult<Prisma.$SessionTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends EmailVerificationCodeUpsertArgs>(args: SelectSubset<T, EmailVerificationCodeUpsertArgs<ExtArgs>>): Prisma__EmailVerificationCodeClient<$Result.GetResult<Prisma.$EmailVerificationCodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of SessionTokens.
+     * Count the number of EmailVerificationCodes.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionTokenCountArgs} args - Arguments to filter SessionTokens to count.
+     * @param {EmailVerificationCodeCountArgs} args - Arguments to filter EmailVerificationCodes to count.
      * @example
-     * // Count the number of SessionTokens
-     * const count = await prisma.sessionToken.count({
+     * // Count the number of EmailVerificationCodes
+     * const count = await prisma.emailVerificationCode.count({
      *   where: {
-     *     // ... the filter for the SessionTokens we want to count
+     *     // ... the filter for the EmailVerificationCodes we want to count
      *   }
      * })
     **/
-    count<T extends SessionTokenCountArgs>(
-      args?: Subset<T, SessionTokenCountArgs>,
+    count<T extends EmailVerificationCodeCountArgs>(
+      args?: Subset<T, EmailVerificationCodeCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], SessionTokenCountAggregateOutputType>
+          : GetScalarType<T['select'], EmailVerificationCodeCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a SessionToken.
+     * Allows you to perform aggregations operations on a EmailVerificationCode.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {EmailVerificationCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -3868,13 +3815,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends SessionTokenAggregateArgs>(args: Subset<T, SessionTokenAggregateArgs>): Prisma.PrismaPromise<GetSessionTokenAggregateType<T>>
+    aggregate<T extends EmailVerificationCodeAggregateArgs>(args: Subset<T, EmailVerificationCodeAggregateArgs>): Prisma.PrismaPromise<GetEmailVerificationCodeAggregateType<T>>
 
     /**
-     * Group by SessionToken.
+     * Group by EmailVerificationCode.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionTokenGroupByArgs} args - Group by arguments.
+     * @param {EmailVerificationCodeGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -3889,14 +3836,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends SessionTokenGroupByArgs,
+      T extends EmailVerificationCodeGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SessionTokenGroupByArgs['orderBy'] }
-        : { orderBy?: SessionTokenGroupByArgs['orderBy'] },
+        ? { orderBy: EmailVerificationCodeGroupByArgs['orderBy'] }
+        : { orderBy?: EmailVerificationCodeGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -3945,23 +3892,21 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, SessionTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSessionTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, EmailVerificationCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEmailVerificationCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the SessionToken model
+   * Fields of the EmailVerificationCode model
    */
-  readonly fields: SessionTokenFieldRefs;
+  readonly fields: EmailVerificationCodeFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for SessionToken.
+   * The delegate class that acts as a "Promise-like" for EmailVerificationCode.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__SessionTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__EmailVerificationCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    userByToken<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3988,423 +3933,377 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the SessionToken model
+   * Fields of the EmailVerificationCode model
    */
-  interface SessionTokenFieldRefs {
-    readonly id: FieldRef<"SessionToken", 'String'>
-    readonly userId: FieldRef<"SessionToken", 'String'>
-    readonly token: FieldRef<"SessionToken", 'String'>
+  interface EmailVerificationCodeFieldRefs {
+    readonly id: FieldRef<"EmailVerificationCode", 'String'>
+    readonly email: FieldRef<"EmailVerificationCode", 'String'>
+    readonly code: FieldRef<"EmailVerificationCode", 'String'>
+    readonly expiresAt: FieldRef<"EmailVerificationCode", 'DateTime'>
+    readonly createdAt: FieldRef<"EmailVerificationCode", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * SessionToken findUnique
+   * EmailVerificationCode findUnique
    */
-  export type SessionTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmailVerificationCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SessionToken
+     * Select specific fields to fetch from the EmailVerificationCode
      */
-    select?: SessionTokenSelect<ExtArgs> | null
+    select?: EmailVerificationCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SessionToken
+     * Omit specific fields from the EmailVerificationCode
      */
-    omit?: SessionTokenOmit<ExtArgs> | null
+    omit?: EmailVerificationCodeOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which EmailVerificationCode to fetch.
      */
-    include?: SessionTokenInclude<ExtArgs> | null
-    /**
-     * Filter, which SessionToken to fetch.
-     */
-    where: SessionTokenWhereUniqueInput
+    where: EmailVerificationCodeWhereUniqueInput
   }
 
   /**
-   * SessionToken findUniqueOrThrow
+   * EmailVerificationCode findUniqueOrThrow
    */
-  export type SessionTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmailVerificationCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SessionToken
+     * Select specific fields to fetch from the EmailVerificationCode
      */
-    select?: SessionTokenSelect<ExtArgs> | null
+    select?: EmailVerificationCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SessionToken
+     * Omit specific fields from the EmailVerificationCode
      */
-    omit?: SessionTokenOmit<ExtArgs> | null
+    omit?: EmailVerificationCodeOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which EmailVerificationCode to fetch.
      */
-    include?: SessionTokenInclude<ExtArgs> | null
-    /**
-     * Filter, which SessionToken to fetch.
-     */
-    where: SessionTokenWhereUniqueInput
+    where: EmailVerificationCodeWhereUniqueInput
   }
 
   /**
-   * SessionToken findFirst
+   * EmailVerificationCode findFirst
    */
-  export type SessionTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmailVerificationCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SessionToken
+     * Select specific fields to fetch from the EmailVerificationCode
      */
-    select?: SessionTokenSelect<ExtArgs> | null
+    select?: EmailVerificationCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SessionToken
+     * Omit specific fields from the EmailVerificationCode
      */
-    omit?: SessionTokenOmit<ExtArgs> | null
+    omit?: EmailVerificationCodeOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which EmailVerificationCode to fetch.
      */
-    include?: SessionTokenInclude<ExtArgs> | null
-    /**
-     * Filter, which SessionToken to fetch.
-     */
-    where?: SessionTokenWhereInput
+    where?: EmailVerificationCodeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of SessionTokens to fetch.
+     * Determine the order of EmailVerificationCodes to fetch.
      */
-    orderBy?: SessionTokenOrderByWithRelationInput | SessionTokenOrderByWithRelationInput[]
+    orderBy?: EmailVerificationCodeOrderByWithRelationInput | EmailVerificationCodeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for SessionTokens.
+     * Sets the position for searching for EmailVerificationCodes.
      */
-    cursor?: SessionTokenWhereUniqueInput
+    cursor?: EmailVerificationCodeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` SessionTokens from the position of the cursor.
+     * Take `±n` EmailVerificationCodes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` SessionTokens.
+     * Skip the first `n` EmailVerificationCodes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of SessionTokens.
+     * Filter by unique combinations of EmailVerificationCodes.
      */
-    distinct?: SessionTokenScalarFieldEnum | SessionTokenScalarFieldEnum[]
+    distinct?: EmailVerificationCodeScalarFieldEnum | EmailVerificationCodeScalarFieldEnum[]
   }
 
   /**
-   * SessionToken findFirstOrThrow
+   * EmailVerificationCode findFirstOrThrow
    */
-  export type SessionTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmailVerificationCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SessionToken
+     * Select specific fields to fetch from the EmailVerificationCode
      */
-    select?: SessionTokenSelect<ExtArgs> | null
+    select?: EmailVerificationCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SessionToken
+     * Omit specific fields from the EmailVerificationCode
      */
-    omit?: SessionTokenOmit<ExtArgs> | null
+    omit?: EmailVerificationCodeOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which EmailVerificationCode to fetch.
      */
-    include?: SessionTokenInclude<ExtArgs> | null
-    /**
-     * Filter, which SessionToken to fetch.
-     */
-    where?: SessionTokenWhereInput
+    where?: EmailVerificationCodeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of SessionTokens to fetch.
+     * Determine the order of EmailVerificationCodes to fetch.
      */
-    orderBy?: SessionTokenOrderByWithRelationInput | SessionTokenOrderByWithRelationInput[]
+    orderBy?: EmailVerificationCodeOrderByWithRelationInput | EmailVerificationCodeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for SessionTokens.
+     * Sets the position for searching for EmailVerificationCodes.
      */
-    cursor?: SessionTokenWhereUniqueInput
+    cursor?: EmailVerificationCodeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` SessionTokens from the position of the cursor.
+     * Take `±n` EmailVerificationCodes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` SessionTokens.
+     * Skip the first `n` EmailVerificationCodes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of SessionTokens.
+     * Filter by unique combinations of EmailVerificationCodes.
      */
-    distinct?: SessionTokenScalarFieldEnum | SessionTokenScalarFieldEnum[]
+    distinct?: EmailVerificationCodeScalarFieldEnum | EmailVerificationCodeScalarFieldEnum[]
   }
 
   /**
-   * SessionToken findMany
+   * EmailVerificationCode findMany
    */
-  export type SessionTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmailVerificationCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SessionToken
+     * Select specific fields to fetch from the EmailVerificationCode
      */
-    select?: SessionTokenSelect<ExtArgs> | null
+    select?: EmailVerificationCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SessionToken
+     * Omit specific fields from the EmailVerificationCode
      */
-    omit?: SessionTokenOmit<ExtArgs> | null
+    omit?: EmailVerificationCodeOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * Filter, which EmailVerificationCodes to fetch.
      */
-    include?: SessionTokenInclude<ExtArgs> | null
-    /**
-     * Filter, which SessionTokens to fetch.
-     */
-    where?: SessionTokenWhereInput
+    where?: EmailVerificationCodeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of SessionTokens to fetch.
+     * Determine the order of EmailVerificationCodes to fetch.
      */
-    orderBy?: SessionTokenOrderByWithRelationInput | SessionTokenOrderByWithRelationInput[]
+    orderBy?: EmailVerificationCodeOrderByWithRelationInput | EmailVerificationCodeOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing SessionTokens.
+     * Sets the position for listing EmailVerificationCodes.
      */
-    cursor?: SessionTokenWhereUniqueInput
+    cursor?: EmailVerificationCodeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` SessionTokens from the position of the cursor.
+     * Take `±n` EmailVerificationCodes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` SessionTokens.
+     * Skip the first `n` EmailVerificationCodes.
      */
     skip?: number
-    distinct?: SessionTokenScalarFieldEnum | SessionTokenScalarFieldEnum[]
+    distinct?: EmailVerificationCodeScalarFieldEnum | EmailVerificationCodeScalarFieldEnum[]
   }
 
   /**
-   * SessionToken create
+   * EmailVerificationCode create
    */
-  export type SessionTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmailVerificationCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SessionToken
+     * Select specific fields to fetch from the EmailVerificationCode
      */
-    select?: SessionTokenSelect<ExtArgs> | null
+    select?: EmailVerificationCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SessionToken
+     * Omit specific fields from the EmailVerificationCode
      */
-    omit?: SessionTokenOmit<ExtArgs> | null
+    omit?: EmailVerificationCodeOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * The data needed to create a EmailVerificationCode.
      */
-    include?: SessionTokenInclude<ExtArgs> | null
-    /**
-     * The data needed to create a SessionToken.
-     */
-    data: XOR<SessionTokenCreateInput, SessionTokenUncheckedCreateInput>
+    data: XOR<EmailVerificationCodeCreateInput, EmailVerificationCodeUncheckedCreateInput>
   }
 
   /**
-   * SessionToken createMany
+   * EmailVerificationCode createMany
    */
-  export type SessionTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmailVerificationCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many SessionTokens.
+     * The data used to create many EmailVerificationCodes.
      */
-    data: SessionTokenCreateManyInput | SessionTokenCreateManyInput[]
+    data: EmailVerificationCodeCreateManyInput | EmailVerificationCodeCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * SessionToken createManyAndReturn
+   * EmailVerificationCode createManyAndReturn
    */
-  export type SessionTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmailVerificationCodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SessionToken
+     * Select specific fields to fetch from the EmailVerificationCode
      */
-    select?: SessionTokenSelectCreateManyAndReturn<ExtArgs> | null
+    select?: EmailVerificationCodeSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the SessionToken
+     * Omit specific fields from the EmailVerificationCode
      */
-    omit?: SessionTokenOmit<ExtArgs> | null
+    omit?: EmailVerificationCodeOmit<ExtArgs> | null
     /**
-     * The data used to create many SessionTokens.
+     * The data used to create many EmailVerificationCodes.
      */
-    data: SessionTokenCreateManyInput | SessionTokenCreateManyInput[]
+    data: EmailVerificationCodeCreateManyInput | EmailVerificationCodeCreateManyInput[]
     skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionTokenIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * SessionToken update
+   * EmailVerificationCode update
    */
-  export type SessionTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmailVerificationCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SessionToken
+     * Select specific fields to fetch from the EmailVerificationCode
      */
-    select?: SessionTokenSelect<ExtArgs> | null
+    select?: EmailVerificationCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SessionToken
+     * Omit specific fields from the EmailVerificationCode
      */
-    omit?: SessionTokenOmit<ExtArgs> | null
+    omit?: EmailVerificationCodeOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * The data needed to update a EmailVerificationCode.
      */
-    include?: SessionTokenInclude<ExtArgs> | null
+    data: XOR<EmailVerificationCodeUpdateInput, EmailVerificationCodeUncheckedUpdateInput>
     /**
-     * The data needed to update a SessionToken.
+     * Choose, which EmailVerificationCode to update.
      */
-    data: XOR<SessionTokenUpdateInput, SessionTokenUncheckedUpdateInput>
-    /**
-     * Choose, which SessionToken to update.
-     */
-    where: SessionTokenWhereUniqueInput
+    where: EmailVerificationCodeWhereUniqueInput
   }
 
   /**
-   * SessionToken updateMany
+   * EmailVerificationCode updateMany
    */
-  export type SessionTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmailVerificationCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update SessionTokens.
+     * The data used to update EmailVerificationCodes.
      */
-    data: XOR<SessionTokenUpdateManyMutationInput, SessionTokenUncheckedUpdateManyInput>
+    data: XOR<EmailVerificationCodeUpdateManyMutationInput, EmailVerificationCodeUncheckedUpdateManyInput>
     /**
-     * Filter which SessionTokens to update
+     * Filter which EmailVerificationCodes to update
      */
-    where?: SessionTokenWhereInput
+    where?: EmailVerificationCodeWhereInput
     /**
-     * Limit how many SessionTokens to update.
+     * Limit how many EmailVerificationCodes to update.
      */
     limit?: number
   }
 
   /**
-   * SessionToken updateManyAndReturn
+   * EmailVerificationCode updateManyAndReturn
    */
-  export type SessionTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmailVerificationCodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SessionToken
+     * Select specific fields to fetch from the EmailVerificationCode
      */
-    select?: SessionTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: EmailVerificationCodeSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the SessionToken
+     * Omit specific fields from the EmailVerificationCode
      */
-    omit?: SessionTokenOmit<ExtArgs> | null
+    omit?: EmailVerificationCodeOmit<ExtArgs> | null
     /**
-     * The data used to update SessionTokens.
+     * The data used to update EmailVerificationCodes.
      */
-    data: XOR<SessionTokenUpdateManyMutationInput, SessionTokenUncheckedUpdateManyInput>
+    data: XOR<EmailVerificationCodeUpdateManyMutationInput, EmailVerificationCodeUncheckedUpdateManyInput>
     /**
-     * Filter which SessionTokens to update
+     * Filter which EmailVerificationCodes to update
      */
-    where?: SessionTokenWhereInput
+    where?: EmailVerificationCodeWhereInput
     /**
-     * Limit how many SessionTokens to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionTokenIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * SessionToken upsert
-   */
-  export type SessionTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionToken
-     */
-    select?: SessionTokenSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionToken
-     */
-    omit?: SessionTokenOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionTokenInclude<ExtArgs> | null
-    /**
-     * The filter to search for the SessionToken to update in case it exists.
-     */
-    where: SessionTokenWhereUniqueInput
-    /**
-     * In case the SessionToken found by the `where` argument doesn't exist, create a new SessionToken with this data.
-     */
-    create: XOR<SessionTokenCreateInput, SessionTokenUncheckedCreateInput>
-    /**
-     * In case the SessionToken was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<SessionTokenUpdateInput, SessionTokenUncheckedUpdateInput>
-  }
-
-  /**
-   * SessionToken delete
-   */
-  export type SessionTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SessionToken
-     */
-    select?: SessionTokenSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SessionToken
-     */
-    omit?: SessionTokenOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SessionTokenInclude<ExtArgs> | null
-    /**
-     * Filter which SessionToken to delete.
-     */
-    where: SessionTokenWhereUniqueInput
-  }
-
-  /**
-   * SessionToken deleteMany
-   */
-  export type SessionTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which SessionTokens to delete
-     */
-    where?: SessionTokenWhereInput
-    /**
-     * Limit how many SessionTokens to delete.
+     * Limit how many EmailVerificationCodes to update.
      */
     limit?: number
   }
 
   /**
-   * SessionToken without action
+   * EmailVerificationCode upsert
    */
-  export type SessionTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EmailVerificationCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SessionToken
+     * Select specific fields to fetch from the EmailVerificationCode
      */
-    select?: SessionTokenSelect<ExtArgs> | null
+    select?: EmailVerificationCodeSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SessionToken
+     * Omit specific fields from the EmailVerificationCode
      */
-    omit?: SessionTokenOmit<ExtArgs> | null
+    omit?: EmailVerificationCodeOmit<ExtArgs> | null
     /**
-     * Choose, which related nodes to fetch as well
+     * The filter to search for the EmailVerificationCode to update in case it exists.
      */
-    include?: SessionTokenInclude<ExtArgs> | null
+    where: EmailVerificationCodeWhereUniqueInput
+    /**
+     * In case the EmailVerificationCode found by the `where` argument doesn't exist, create a new EmailVerificationCode with this data.
+     */
+    create: XOR<EmailVerificationCodeCreateInput, EmailVerificationCodeUncheckedCreateInput>
+    /**
+     * In case the EmailVerificationCode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EmailVerificationCodeUpdateInput, EmailVerificationCodeUncheckedUpdateInput>
+  }
+
+  /**
+   * EmailVerificationCode delete
+   */
+  export type EmailVerificationCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationCode
+     */
+    select?: EmailVerificationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationCode
+     */
+    omit?: EmailVerificationCodeOmit<ExtArgs> | null
+    /**
+     * Filter which EmailVerificationCode to delete.
+     */
+    where: EmailVerificationCodeWhereUniqueInput
+  }
+
+  /**
+   * EmailVerificationCode deleteMany
+   */
+  export type EmailVerificationCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EmailVerificationCodes to delete
+     */
+    where?: EmailVerificationCodeWhereInput
+    /**
+     * Limit how many EmailVerificationCodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EmailVerificationCode without action
+   */
+  export type EmailVerificationCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EmailVerificationCode
+     */
+    select?: EmailVerificationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EmailVerificationCode
+     */
+    omit?: EmailVerificationCodeOmit<ExtArgs> | null
   }
 
 
@@ -4449,19 +4348,25 @@ export namespace Prisma {
     cart: 'cart',
     token: 'token',
     createdAt: 'createdAt',
-    role: 'role'
+    role: 'role',
+    status: 'status',
+    isVerified: 'isVerified',
+    verificationAttempts: 'verificationAttempts',
+    canChangeEmail: 'canChangeEmail'
   };
 
   export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
 
 
-  export const SessionTokenScalarFieldEnum: {
+  export const EmailVerificationCodeScalarFieldEnum: {
     id: 'id',
-    userId: 'userId',
-    token: 'token'
+    email: 'email',
+    code: 'code',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt'
   };
 
-  export type SessionTokenScalarFieldEnum = (typeof SessionTokenScalarFieldEnum)[keyof typeof SessionTokenScalarFieldEnum]
+  export type EmailVerificationCodeScalarFieldEnum = (typeof EmailVerificationCodeScalarFieldEnum)[keyof typeof EmailVerificationCodeScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4695,8 +4600,10 @@ export namespace Prisma {
     token?: StringFilter<"Users"> | string
     createdAt?: DateTimeFilter<"Users"> | Date | string
     role?: StringFilter<"Users"> | string
-    sessionByUserId?: SessionTokenListRelationFilter
-    sessionByToken?: SessionTokenListRelationFilter
+    status?: StringFilter<"Users"> | string
+    isVerified?: BoolFilter<"Users"> | boolean
+    verificationAttempts?: IntFilter<"Users"> | number
+    canChangeEmail?: BoolFilter<"Users"> | boolean
   }
 
   export type UsersOrderByWithRelationInput = {
@@ -4708,8 +4615,10 @@ export namespace Prisma {
     token?: SortOrder
     createdAt?: SortOrder
     role?: SortOrder
-    sessionByUserId?: SessionTokenOrderByRelationAggregateInput
-    sessionByToken?: SessionTokenOrderByRelationAggregateInput
+    status?: SortOrder
+    isVerified?: SortOrder
+    verificationAttempts?: SortOrder
+    canChangeEmail?: SortOrder
   }
 
   export type UsersWhereUniqueInput = Prisma.AtLeast<{
@@ -4724,8 +4633,10 @@ export namespace Prisma {
     cart?: JsonFilter<"Users">
     createdAt?: DateTimeFilter<"Users"> | Date | string
     role?: StringFilter<"Users"> | string
-    sessionByUserId?: SessionTokenListRelationFilter
-    sessionByToken?: SessionTokenListRelationFilter
+    status?: StringFilter<"Users"> | string
+    isVerified?: BoolFilter<"Users"> | boolean
+    verificationAttempts?: IntFilter<"Users"> | number
+    canChangeEmail?: BoolFilter<"Users"> | boolean
   }, "id" | "email" | "token">
 
   export type UsersOrderByWithAggregationInput = {
@@ -4737,9 +4648,15 @@ export namespace Prisma {
     token?: SortOrder
     createdAt?: SortOrder
     role?: SortOrder
+    status?: SortOrder
+    isVerified?: SortOrder
+    verificationAttempts?: SortOrder
+    canChangeEmail?: SortOrder
     _count?: UsersCountOrderByAggregateInput
+    _avg?: UsersAvgOrderByAggregateInput
     _max?: UsersMaxOrderByAggregateInput
     _min?: UsersMinOrderByAggregateInput
+    _sum?: UsersSumOrderByAggregateInput
   }
 
   export type UsersScalarWhereWithAggregatesInput = {
@@ -4754,54 +4671,62 @@ export namespace Prisma {
     token?: StringWithAggregatesFilter<"Users"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Users"> | Date | string
     role?: StringWithAggregatesFilter<"Users"> | string
+    status?: StringWithAggregatesFilter<"Users"> | string
+    isVerified?: BoolWithAggregatesFilter<"Users"> | boolean
+    verificationAttempts?: IntWithAggregatesFilter<"Users"> | number
+    canChangeEmail?: BoolWithAggregatesFilter<"Users"> | boolean
   }
 
-  export type SessionTokenWhereInput = {
-    AND?: SessionTokenWhereInput | SessionTokenWhereInput[]
-    OR?: SessionTokenWhereInput[]
-    NOT?: SessionTokenWhereInput | SessionTokenWhereInput[]
-    id?: StringFilter<"SessionToken"> | string
-    userId?: StringFilter<"SessionToken"> | string
-    token?: StringFilter<"SessionToken"> | string
-    user?: XOR<UsersScalarRelationFilter, UsersWhereInput>
-    userByToken?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+  export type EmailVerificationCodeWhereInput = {
+    AND?: EmailVerificationCodeWhereInput | EmailVerificationCodeWhereInput[]
+    OR?: EmailVerificationCodeWhereInput[]
+    NOT?: EmailVerificationCodeWhereInput | EmailVerificationCodeWhereInput[]
+    id?: StringFilter<"EmailVerificationCode"> | string
+    email?: StringFilter<"EmailVerificationCode"> | string
+    code?: StringFilter<"EmailVerificationCode"> | string
+    expiresAt?: DateTimeFilter<"EmailVerificationCode"> | Date | string
+    createdAt?: DateTimeFilter<"EmailVerificationCode"> | Date | string
   }
 
-  export type SessionTokenOrderByWithRelationInput = {
+  export type EmailVerificationCodeOrderByWithRelationInput = {
     id?: SortOrder
-    userId?: SortOrder
-    token?: SortOrder
-    user?: UsersOrderByWithRelationInput
-    userByToken?: UsersOrderByWithRelationInput
+    email?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
   }
 
-  export type SessionTokenWhereUniqueInput = Prisma.AtLeast<{
+  export type EmailVerificationCodeWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: SessionTokenWhereInput | SessionTokenWhereInput[]
-    OR?: SessionTokenWhereInput[]
-    NOT?: SessionTokenWhereInput | SessionTokenWhereInput[]
-    userId?: StringFilter<"SessionToken"> | string
-    token?: StringFilter<"SessionToken"> | string
-    user?: XOR<UsersScalarRelationFilter, UsersWhereInput>
-    userByToken?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+    AND?: EmailVerificationCodeWhereInput | EmailVerificationCodeWhereInput[]
+    OR?: EmailVerificationCodeWhereInput[]
+    NOT?: EmailVerificationCodeWhereInput | EmailVerificationCodeWhereInput[]
+    email?: StringFilter<"EmailVerificationCode"> | string
+    code?: StringFilter<"EmailVerificationCode"> | string
+    expiresAt?: DateTimeFilter<"EmailVerificationCode"> | Date | string
+    createdAt?: DateTimeFilter<"EmailVerificationCode"> | Date | string
   }, "id">
 
-  export type SessionTokenOrderByWithAggregationInput = {
+  export type EmailVerificationCodeOrderByWithAggregationInput = {
     id?: SortOrder
-    userId?: SortOrder
-    token?: SortOrder
-    _count?: SessionTokenCountOrderByAggregateInput
-    _max?: SessionTokenMaxOrderByAggregateInput
-    _min?: SessionTokenMinOrderByAggregateInput
+    email?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: EmailVerificationCodeCountOrderByAggregateInput
+    _max?: EmailVerificationCodeMaxOrderByAggregateInput
+    _min?: EmailVerificationCodeMinOrderByAggregateInput
   }
 
-  export type SessionTokenScalarWhereWithAggregatesInput = {
-    AND?: SessionTokenScalarWhereWithAggregatesInput | SessionTokenScalarWhereWithAggregatesInput[]
-    OR?: SessionTokenScalarWhereWithAggregatesInput[]
-    NOT?: SessionTokenScalarWhereWithAggregatesInput | SessionTokenScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"SessionToken"> | string
-    userId?: StringWithAggregatesFilter<"SessionToken"> | string
-    token?: StringWithAggregatesFilter<"SessionToken"> | string
+  export type EmailVerificationCodeScalarWhereWithAggregatesInput = {
+    AND?: EmailVerificationCodeScalarWhereWithAggregatesInput | EmailVerificationCodeScalarWhereWithAggregatesInput[]
+    OR?: EmailVerificationCodeScalarWhereWithAggregatesInput[]
+    NOT?: EmailVerificationCodeScalarWhereWithAggregatesInput | EmailVerificationCodeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EmailVerificationCode"> | string
+    email?: StringWithAggregatesFilter<"EmailVerificationCode"> | string
+    code?: StringWithAggregatesFilter<"EmailVerificationCode"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"EmailVerificationCode"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"EmailVerificationCode"> | Date | string
   }
 
   export type ProductsCreateInput = {
@@ -4925,8 +4850,10 @@ export namespace Prisma {
     token?: string
     createdAt?: Date | string
     role?: string
-    sessionByUserId?: SessionTokenCreateNestedManyWithoutUserInput
-    sessionByToken?: SessionTokenCreateNestedManyWithoutUserByTokenInput
+    status?: string
+    isVerified?: boolean
+    verificationAttempts?: number
+    canChangeEmail?: boolean
   }
 
   export type UsersUncheckedCreateInput = {
@@ -4938,8 +4865,10 @@ export namespace Prisma {
     token?: string
     createdAt?: Date | string
     role?: string
-    sessionByUserId?: SessionTokenUncheckedCreateNestedManyWithoutUserInput
-    sessionByToken?: SessionTokenUncheckedCreateNestedManyWithoutUserByTokenInput
+    status?: string
+    isVerified?: boolean
+    verificationAttempts?: number
+    canChangeEmail?: boolean
   }
 
   export type UsersUpdateInput = {
@@ -4951,8 +4880,10 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: StringFieldUpdateOperationsInput | string
-    sessionByUserId?: SessionTokenUpdateManyWithoutUserNestedInput
-    sessionByToken?: SessionTokenUpdateManyWithoutUserByTokenNestedInput
+    status?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationAttempts?: IntFieldUpdateOperationsInput | number
+    canChangeEmail?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UsersUncheckedUpdateInput = {
@@ -4964,8 +4895,10 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: StringFieldUpdateOperationsInput | string
-    sessionByUserId?: SessionTokenUncheckedUpdateManyWithoutUserNestedInput
-    sessionByToken?: SessionTokenUncheckedUpdateManyWithoutUserByTokenNestedInput
+    status?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationAttempts?: IntFieldUpdateOperationsInput | number
+    canChangeEmail?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UsersCreateManyInput = {
@@ -4977,6 +4910,10 @@ export namespace Prisma {
     token?: string
     createdAt?: Date | string
     role?: string
+    status?: string
+    isVerified?: boolean
+    verificationAttempts?: number
+    canChangeEmail?: boolean
   }
 
   export type UsersUpdateManyMutationInput = {
@@ -4988,6 +4925,10 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationAttempts?: IntFieldUpdateOperationsInput | number
+    canChangeEmail?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UsersUncheckedUpdateManyInput = {
@@ -4999,46 +4940,66 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationAttempts?: IntFieldUpdateOperationsInput | number
+    canChangeEmail?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type SessionTokenCreateInput = {
+  export type EmailVerificationCodeCreateInput = {
     id?: string
-    user: UsersCreateNestedOneWithoutSessionByUserIdInput
-    userByToken: UsersCreateNestedOneWithoutSessionByTokenInput
+    email: string
+    code: string
+    expiresAt: Date | string
+    createdAt?: Date | string
   }
 
-  export type SessionTokenUncheckedCreateInput = {
+  export type EmailVerificationCodeUncheckedCreateInput = {
     id?: string
-    userId: string
-    token: string
+    email: string
+    code: string
+    expiresAt: Date | string
+    createdAt?: Date | string
   }
 
-  export type SessionTokenUpdateInput = {
+  export type EmailVerificationCodeUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    user?: UsersUpdateOneRequiredWithoutSessionByUserIdNestedInput
-    userByToken?: UsersUpdateOneRequiredWithoutSessionByTokenNestedInput
+    email?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SessionTokenUncheckedUpdateInput = {
+  export type EmailVerificationCodeUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SessionTokenCreateManyInput = {
+  export type EmailVerificationCodeCreateManyInput = {
     id?: string
-    userId: string
-    token: string
+    email: string
+    code: string
+    expiresAt: Date | string
+    createdAt?: Date | string
   }
 
-  export type SessionTokenUpdateManyMutationInput = {
+  export type EmailVerificationCodeUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SessionTokenUncheckedUpdateManyInput = {
+  export type EmailVerificationCodeUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -5256,16 +5217,6 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type SessionTokenListRelationFilter = {
-    every?: SessionTokenWhereInput
-    some?: SessionTokenWhereInput
-    none?: SessionTokenWhereInput
-  }
-
-  export type SessionTokenOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type UsersCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -5275,6 +5226,14 @@ export namespace Prisma {
     token?: SortOrder
     createdAt?: SortOrder
     role?: SortOrder
+    status?: SortOrder
+    isVerified?: SortOrder
+    verificationAttempts?: SortOrder
+    canChangeEmail?: SortOrder
+  }
+
+  export type UsersAvgOrderByAggregateInput = {
+    verificationAttempts?: SortOrder
   }
 
   export type UsersMaxOrderByAggregateInput = {
@@ -5285,6 +5244,10 @@ export namespace Prisma {
     token?: SortOrder
     createdAt?: SortOrder
     role?: SortOrder
+    status?: SortOrder
+    isVerified?: SortOrder
+    verificationAttempts?: SortOrder
+    canChangeEmail?: SortOrder
   }
 
   export type UsersMinOrderByAggregateInput = {
@@ -5295,6 +5258,14 @@ export namespace Prisma {
     token?: SortOrder
     createdAt?: SortOrder
     role?: SortOrder
+    status?: SortOrder
+    isVerified?: SortOrder
+    verificationAttempts?: SortOrder
+    canChangeEmail?: SortOrder
+  }
+
+  export type UsersSumOrderByAggregateInput = {
+    verificationAttempts?: SortOrder
   }
   export type JsonWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -5323,27 +5294,28 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
-  export type UsersScalarRelationFilter = {
-    is?: UsersWhereInput
-    isNot?: UsersWhereInput
+  export type EmailVerificationCodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
   }
 
-  export type SessionTokenCountOrderByAggregateInput = {
+  export type EmailVerificationCodeMaxOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
-    token?: SortOrder
+    email?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
   }
 
-  export type SessionTokenMaxOrderByAggregateInput = {
+  export type EmailVerificationCodeMinOrderByAggregateInput = {
     id?: SortOrder
-    userId?: SortOrder
-    token?: SortOrder
-  }
-
-  export type SessionTokenMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    token?: SortOrder
+    email?: SortOrder
+    code?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -5372,118 +5344,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type SessionTokenCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionTokenCreateWithoutUserInput, SessionTokenUncheckedCreateWithoutUserInput> | SessionTokenCreateWithoutUserInput[] | SessionTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionTokenCreateOrConnectWithoutUserInput | SessionTokenCreateOrConnectWithoutUserInput[]
-    createMany?: SessionTokenCreateManyUserInputEnvelope
-    connect?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-  }
-
-  export type SessionTokenCreateNestedManyWithoutUserByTokenInput = {
-    create?: XOR<SessionTokenCreateWithoutUserByTokenInput, SessionTokenUncheckedCreateWithoutUserByTokenInput> | SessionTokenCreateWithoutUserByTokenInput[] | SessionTokenUncheckedCreateWithoutUserByTokenInput[]
-    connectOrCreate?: SessionTokenCreateOrConnectWithoutUserByTokenInput | SessionTokenCreateOrConnectWithoutUserByTokenInput[]
-    createMany?: SessionTokenCreateManyUserByTokenInputEnvelope
-    connect?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-  }
-
-  export type SessionTokenUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<SessionTokenCreateWithoutUserInput, SessionTokenUncheckedCreateWithoutUserInput> | SessionTokenCreateWithoutUserInput[] | SessionTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionTokenCreateOrConnectWithoutUserInput | SessionTokenCreateOrConnectWithoutUserInput[]
-    createMany?: SessionTokenCreateManyUserInputEnvelope
-    connect?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-  }
-
-  export type SessionTokenUncheckedCreateNestedManyWithoutUserByTokenInput = {
-    create?: XOR<SessionTokenCreateWithoutUserByTokenInput, SessionTokenUncheckedCreateWithoutUserByTokenInput> | SessionTokenCreateWithoutUserByTokenInput[] | SessionTokenUncheckedCreateWithoutUserByTokenInput[]
-    connectOrCreate?: SessionTokenCreateOrConnectWithoutUserByTokenInput | SessionTokenCreateOrConnectWithoutUserByTokenInput[]
-    createMany?: SessionTokenCreateManyUserByTokenInputEnvelope
-    connect?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-  }
-
-  export type SessionTokenUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionTokenCreateWithoutUserInput, SessionTokenUncheckedCreateWithoutUserInput> | SessionTokenCreateWithoutUserInput[] | SessionTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionTokenCreateOrConnectWithoutUserInput | SessionTokenCreateOrConnectWithoutUserInput[]
-    upsert?: SessionTokenUpsertWithWhereUniqueWithoutUserInput | SessionTokenUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionTokenCreateManyUserInputEnvelope
-    set?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    disconnect?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    delete?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    connect?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    update?: SessionTokenUpdateWithWhereUniqueWithoutUserInput | SessionTokenUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionTokenUpdateManyWithWhereWithoutUserInput | SessionTokenUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionTokenScalarWhereInput | SessionTokenScalarWhereInput[]
-  }
-
-  export type SessionTokenUpdateManyWithoutUserByTokenNestedInput = {
-    create?: XOR<SessionTokenCreateWithoutUserByTokenInput, SessionTokenUncheckedCreateWithoutUserByTokenInput> | SessionTokenCreateWithoutUserByTokenInput[] | SessionTokenUncheckedCreateWithoutUserByTokenInput[]
-    connectOrCreate?: SessionTokenCreateOrConnectWithoutUserByTokenInput | SessionTokenCreateOrConnectWithoutUserByTokenInput[]
-    upsert?: SessionTokenUpsertWithWhereUniqueWithoutUserByTokenInput | SessionTokenUpsertWithWhereUniqueWithoutUserByTokenInput[]
-    createMany?: SessionTokenCreateManyUserByTokenInputEnvelope
-    set?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    disconnect?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    delete?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    connect?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    update?: SessionTokenUpdateWithWhereUniqueWithoutUserByTokenInput | SessionTokenUpdateWithWhereUniqueWithoutUserByTokenInput[]
-    updateMany?: SessionTokenUpdateManyWithWhereWithoutUserByTokenInput | SessionTokenUpdateManyWithWhereWithoutUserByTokenInput[]
-    deleteMany?: SessionTokenScalarWhereInput | SessionTokenScalarWhereInput[]
-  }
-
-  export type SessionTokenUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SessionTokenCreateWithoutUserInput, SessionTokenUncheckedCreateWithoutUserInput> | SessionTokenCreateWithoutUserInput[] | SessionTokenUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SessionTokenCreateOrConnectWithoutUserInput | SessionTokenCreateOrConnectWithoutUserInput[]
-    upsert?: SessionTokenUpsertWithWhereUniqueWithoutUserInput | SessionTokenUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SessionTokenCreateManyUserInputEnvelope
-    set?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    disconnect?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    delete?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    connect?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    update?: SessionTokenUpdateWithWhereUniqueWithoutUserInput | SessionTokenUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SessionTokenUpdateManyWithWhereWithoutUserInput | SessionTokenUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SessionTokenScalarWhereInput | SessionTokenScalarWhereInput[]
-  }
-
-  export type SessionTokenUncheckedUpdateManyWithoutUserByTokenNestedInput = {
-    create?: XOR<SessionTokenCreateWithoutUserByTokenInput, SessionTokenUncheckedCreateWithoutUserByTokenInput> | SessionTokenCreateWithoutUserByTokenInput[] | SessionTokenUncheckedCreateWithoutUserByTokenInput[]
-    connectOrCreate?: SessionTokenCreateOrConnectWithoutUserByTokenInput | SessionTokenCreateOrConnectWithoutUserByTokenInput[]
-    upsert?: SessionTokenUpsertWithWhereUniqueWithoutUserByTokenInput | SessionTokenUpsertWithWhereUniqueWithoutUserByTokenInput[]
-    createMany?: SessionTokenCreateManyUserByTokenInputEnvelope
-    set?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    disconnect?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    delete?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    connect?: SessionTokenWhereUniqueInput | SessionTokenWhereUniqueInput[]
-    update?: SessionTokenUpdateWithWhereUniqueWithoutUserByTokenInput | SessionTokenUpdateWithWhereUniqueWithoutUserByTokenInput[]
-    updateMany?: SessionTokenUpdateManyWithWhereWithoutUserByTokenInput | SessionTokenUpdateManyWithWhereWithoutUserByTokenInput[]
-    deleteMany?: SessionTokenScalarWhereInput | SessionTokenScalarWhereInput[]
-  }
-
-  export type UsersCreateNestedOneWithoutSessionByUserIdInput = {
-    create?: XOR<UsersCreateWithoutSessionByUserIdInput, UsersUncheckedCreateWithoutSessionByUserIdInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutSessionByUserIdInput
-    connect?: UsersWhereUniqueInput
-  }
-
-  export type UsersCreateNestedOneWithoutSessionByTokenInput = {
-    create?: XOR<UsersCreateWithoutSessionByTokenInput, UsersUncheckedCreateWithoutSessionByTokenInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutSessionByTokenInput
-    connect?: UsersWhereUniqueInput
-  }
-
-  export type UsersUpdateOneRequiredWithoutSessionByUserIdNestedInput = {
-    create?: XOR<UsersCreateWithoutSessionByUserIdInput, UsersUncheckedCreateWithoutSessionByUserIdInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutSessionByUserIdInput
-    upsert?: UsersUpsertWithoutSessionByUserIdInput
-    connect?: UsersWhereUniqueInput
-    update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutSessionByUserIdInput, UsersUpdateWithoutSessionByUserIdInput>, UsersUncheckedUpdateWithoutSessionByUserIdInput>
-  }
-
-  export type UsersUpdateOneRequiredWithoutSessionByTokenNestedInput = {
-    create?: XOR<UsersCreateWithoutSessionByTokenInput, UsersUncheckedCreateWithoutSessionByTokenInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutSessionByTokenInput
-    upsert?: UsersUpsertWithoutSessionByTokenInput
-    connect?: UsersWhereUniqueInput
-    update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutSessionByTokenInput, UsersUpdateWithoutSessionByTokenInput>, UsersUncheckedUpdateWithoutSessionByTokenInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5652,255 +5512,6 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-  }
-
-  export type SessionTokenCreateWithoutUserInput = {
-    id?: string
-    userByToken: UsersCreateNestedOneWithoutSessionByTokenInput
-  }
-
-  export type SessionTokenUncheckedCreateWithoutUserInput = {
-    id?: string
-    token: string
-  }
-
-  export type SessionTokenCreateOrConnectWithoutUserInput = {
-    where: SessionTokenWhereUniqueInput
-    create: XOR<SessionTokenCreateWithoutUserInput, SessionTokenUncheckedCreateWithoutUserInput>
-  }
-
-  export type SessionTokenCreateManyUserInputEnvelope = {
-    data: SessionTokenCreateManyUserInput | SessionTokenCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type SessionTokenCreateWithoutUserByTokenInput = {
-    id?: string
-    user: UsersCreateNestedOneWithoutSessionByUserIdInput
-  }
-
-  export type SessionTokenUncheckedCreateWithoutUserByTokenInput = {
-    id?: string
-    userId: string
-  }
-
-  export type SessionTokenCreateOrConnectWithoutUserByTokenInput = {
-    where: SessionTokenWhereUniqueInput
-    create: XOR<SessionTokenCreateWithoutUserByTokenInput, SessionTokenUncheckedCreateWithoutUserByTokenInput>
-  }
-
-  export type SessionTokenCreateManyUserByTokenInputEnvelope = {
-    data: SessionTokenCreateManyUserByTokenInput | SessionTokenCreateManyUserByTokenInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type SessionTokenUpsertWithWhereUniqueWithoutUserInput = {
-    where: SessionTokenWhereUniqueInput
-    update: XOR<SessionTokenUpdateWithoutUserInput, SessionTokenUncheckedUpdateWithoutUserInput>
-    create: XOR<SessionTokenCreateWithoutUserInput, SessionTokenUncheckedCreateWithoutUserInput>
-  }
-
-  export type SessionTokenUpdateWithWhereUniqueWithoutUserInput = {
-    where: SessionTokenWhereUniqueInput
-    data: XOR<SessionTokenUpdateWithoutUserInput, SessionTokenUncheckedUpdateWithoutUserInput>
-  }
-
-  export type SessionTokenUpdateManyWithWhereWithoutUserInput = {
-    where: SessionTokenScalarWhereInput
-    data: XOR<SessionTokenUpdateManyMutationInput, SessionTokenUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type SessionTokenScalarWhereInput = {
-    AND?: SessionTokenScalarWhereInput | SessionTokenScalarWhereInput[]
-    OR?: SessionTokenScalarWhereInput[]
-    NOT?: SessionTokenScalarWhereInput | SessionTokenScalarWhereInput[]
-    id?: StringFilter<"SessionToken"> | string
-    userId?: StringFilter<"SessionToken"> | string
-    token?: StringFilter<"SessionToken"> | string
-  }
-
-  export type SessionTokenUpsertWithWhereUniqueWithoutUserByTokenInput = {
-    where: SessionTokenWhereUniqueInput
-    update: XOR<SessionTokenUpdateWithoutUserByTokenInput, SessionTokenUncheckedUpdateWithoutUserByTokenInput>
-    create: XOR<SessionTokenCreateWithoutUserByTokenInput, SessionTokenUncheckedCreateWithoutUserByTokenInput>
-  }
-
-  export type SessionTokenUpdateWithWhereUniqueWithoutUserByTokenInput = {
-    where: SessionTokenWhereUniqueInput
-    data: XOR<SessionTokenUpdateWithoutUserByTokenInput, SessionTokenUncheckedUpdateWithoutUserByTokenInput>
-  }
-
-  export type SessionTokenUpdateManyWithWhereWithoutUserByTokenInput = {
-    where: SessionTokenScalarWhereInput
-    data: XOR<SessionTokenUpdateManyMutationInput, SessionTokenUncheckedUpdateManyWithoutUserByTokenInput>
-  }
-
-  export type UsersCreateWithoutSessionByUserIdInput = {
-    id?: string
-    name: string
-    email: string
-    password: string
-    cart: JsonNullValueInput | InputJsonValue
-    token?: string
-    createdAt?: Date | string
-    role?: string
-    sessionByToken?: SessionTokenCreateNestedManyWithoutUserByTokenInput
-  }
-
-  export type UsersUncheckedCreateWithoutSessionByUserIdInput = {
-    id?: string
-    name: string
-    email: string
-    password: string
-    cart: JsonNullValueInput | InputJsonValue
-    token?: string
-    createdAt?: Date | string
-    role?: string
-    sessionByToken?: SessionTokenUncheckedCreateNestedManyWithoutUserByTokenInput
-  }
-
-  export type UsersCreateOrConnectWithoutSessionByUserIdInput = {
-    where: UsersWhereUniqueInput
-    create: XOR<UsersCreateWithoutSessionByUserIdInput, UsersUncheckedCreateWithoutSessionByUserIdInput>
-  }
-
-  export type UsersCreateWithoutSessionByTokenInput = {
-    id?: string
-    name: string
-    email: string
-    password: string
-    cart: JsonNullValueInput | InputJsonValue
-    token?: string
-    createdAt?: Date | string
-    role?: string
-    sessionByUserId?: SessionTokenCreateNestedManyWithoutUserInput
-  }
-
-  export type UsersUncheckedCreateWithoutSessionByTokenInput = {
-    id?: string
-    name: string
-    email: string
-    password: string
-    cart: JsonNullValueInput | InputJsonValue
-    token?: string
-    createdAt?: Date | string
-    role?: string
-    sessionByUserId?: SessionTokenUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UsersCreateOrConnectWithoutSessionByTokenInput = {
-    where: UsersWhereUniqueInput
-    create: XOR<UsersCreateWithoutSessionByTokenInput, UsersUncheckedCreateWithoutSessionByTokenInput>
-  }
-
-  export type UsersUpsertWithoutSessionByUserIdInput = {
-    update: XOR<UsersUpdateWithoutSessionByUserIdInput, UsersUncheckedUpdateWithoutSessionByUserIdInput>
-    create: XOR<UsersCreateWithoutSessionByUserIdInput, UsersUncheckedCreateWithoutSessionByUserIdInput>
-    where?: UsersWhereInput
-  }
-
-  export type UsersUpdateToOneWithWhereWithoutSessionByUserIdInput = {
-    where?: UsersWhereInput
-    data: XOR<UsersUpdateWithoutSessionByUserIdInput, UsersUncheckedUpdateWithoutSessionByUserIdInput>
-  }
-
-  export type UsersUpdateWithoutSessionByUserIdInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    cart?: JsonNullValueInput | InputJsonValue
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
-    sessionByToken?: SessionTokenUpdateManyWithoutUserByTokenNestedInput
-  }
-
-  export type UsersUncheckedUpdateWithoutSessionByUserIdInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    cart?: JsonNullValueInput | InputJsonValue
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
-    sessionByToken?: SessionTokenUncheckedUpdateManyWithoutUserByTokenNestedInput
-  }
-
-  export type UsersUpsertWithoutSessionByTokenInput = {
-    update: XOR<UsersUpdateWithoutSessionByTokenInput, UsersUncheckedUpdateWithoutSessionByTokenInput>
-    create: XOR<UsersCreateWithoutSessionByTokenInput, UsersUncheckedCreateWithoutSessionByTokenInput>
-    where?: UsersWhereInput
-  }
-
-  export type UsersUpdateToOneWithWhereWithoutSessionByTokenInput = {
-    where?: UsersWhereInput
-    data: XOR<UsersUpdateWithoutSessionByTokenInput, UsersUncheckedUpdateWithoutSessionByTokenInput>
-  }
-
-  export type UsersUpdateWithoutSessionByTokenInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    cart?: JsonNullValueInput | InputJsonValue
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
-    sessionByUserId?: SessionTokenUpdateManyWithoutUserNestedInput
-  }
-
-  export type UsersUncheckedUpdateWithoutSessionByTokenInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    cart?: JsonNullValueInput | InputJsonValue
-    token?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    role?: StringFieldUpdateOperationsInput | string
-    sessionByUserId?: SessionTokenUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type SessionTokenCreateManyUserInput = {
-    id?: string
-    token: string
-  }
-
-  export type SessionTokenCreateManyUserByTokenInput = {
-    id?: string
-    userId: string
-  }
-
-  export type SessionTokenUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userByToken?: UsersUpdateOneRequiredWithoutSessionByTokenNestedInput
-  }
-
-  export type SessionTokenUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type SessionTokenUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    token?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type SessionTokenUpdateWithoutUserByTokenInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    user?: UsersUpdateOneRequiredWithoutSessionByUserIdNestedInput
-  }
-
-  export type SessionTokenUncheckedUpdateWithoutUserByTokenInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type SessionTokenUncheckedUpdateManyWithoutUserByTokenInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
   }
 
 

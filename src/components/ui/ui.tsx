@@ -70,6 +70,7 @@ type Cart = {
   isSale: boolean,
   isBestProducts: boolean,
   stock: number
+  qty: number
 }
 
 export function Cart(props: Cart) {
@@ -135,7 +136,7 @@ export function Cart(props: Cart) {
           <main> 
             {props.stock !== 0 ?
               <form>
-                <input type="number" min={1} max={props.stock} defaultValue={1} />
+                <input type="number" min={1} max={props.stock} defaultValue={props.qty} />
               </form> : <p className="red font-medium">out of stock</p>
             }
             <button type="button" onClick={() => redirect(`/products/${props.slug}`)}>

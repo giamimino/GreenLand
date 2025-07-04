@@ -3,15 +3,13 @@ import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
   const { cart } = await req.json();
+  const productIds = cart.map((item: {product_id: string; qty: number}) => item.product_id)
 
-  if (!cart || !Array.isArray(cart)) {
-    return NextResponse.json({ error: 'Cart must be an array of product IDs' }, { status: 400 });
-  }
 
   const products = await prisma.products.findMany({
     where: {
       id: {
-        in: cart,
+        in: productIds,
       },
     },
   });

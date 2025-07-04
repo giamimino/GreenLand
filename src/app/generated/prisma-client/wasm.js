@@ -144,13 +144,19 @@ exports.Prisma.UsersScalarFieldEnum = {
   cart: 'cart',
   token: 'token',
   createdAt: 'createdAt',
-  role: 'role'
+  role: 'role',
+  status: 'status',
+  isVerified: 'isVerified',
+  verificationAttempts: 'verificationAttempts',
+  canChangeEmail: 'canChangeEmail'
 };
 
-exports.Prisma.SessionTokenScalarFieldEnum = {
+exports.Prisma.EmailVerificationCodeScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
-  token: 'token'
+  email: 'email',
+  code: 'code',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -182,7 +188,7 @@ exports.Prisma.JsonNullValueFilter = {
 exports.Prisma.ModelName = {
   Products: 'Products',
   Users: 'Users',
-  SessionToken: 'SessionToken'
+  EmailVerificationCode: 'EmailVerificationCode'
 };
 
 /**

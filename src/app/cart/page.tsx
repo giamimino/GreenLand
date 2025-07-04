@@ -4,10 +4,15 @@ import { redirect } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import styles from './page.module.scss'
 
+type CartItem = {
+  product_id: string,
+  qty: number
+}
+
 type User = {
   name: string
   email: string
-  cart: string[]
+  cart: CartItem[]
 }
 
 type ProductType = {
@@ -23,6 +28,7 @@ type ProductType = {
   Description: string,
   view: number,
   stock: number
+  qty: number
 }
 
 export default function CartPage() {
@@ -61,7 +67,14 @@ export default function CartPage() {
       .then(res => res.json())
       .then(data => {
         if (data?.products) {
-          setProducts(data.products);
+          const productsWithQty = data.products.map((product: ProductType) => {
+          const cartItem = user.cart.find(item => item.product_id === product.id);
+          return {
+            ...product,
+            qty: cartItem?.qty || 1
+          };
+        });
+          setProducts(productsWithQty);
         }
       })
       .catch(err => {
@@ -98,6 +111,7 @@ export default function CartPage() {
                         isBestProducts={product.isBestSelling}
                         view={product.view}
                         stock={product.stock}
+                        qty={product.qty}
                       />
                     ))}
               </aside>

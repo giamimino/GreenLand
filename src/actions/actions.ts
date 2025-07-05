@@ -321,6 +321,47 @@ export async function editEmail(formData: FormData) {
   }
 }
 
+export async function increaseQTY(formData: FormData) {
+  try {
+    const token = formData.get("token") as string
+    const product_id = formData.get("product_id") as string
+    const qty = Number(formData.get("qty"))
+
+    const user = await prisma.users.findUnique({
+      where: { token},
+      select: { cart: true }
+    })
+
+    if(!user) return {success: false, message: "User not found"}
+
+    const currentCart = Array.isArray(user?.cart) ? (user.cart as CartItem[]) : []
+    
+    const updatedCart = currentCart.map((cartItem) => {
+      if (cartItem.product_id === product_id) {
+        return { ...cartItem, qty };
+      }
+      return cartItem;
+    });
+
+    await prisma.users.update({
+      where: { token },
+      data: {
+        cart: updatedCart
+      }
+    })
+
+    return {
+      success: true,
+    }
+  } catch(err) {
+    console.log(err);
+    return {
+      success: false,
+      message: "Error updating quantity",
+    }
+  }
+}
+
 export async function backupDatabase() {
   try {
     const result = await prisma.products.createMany({

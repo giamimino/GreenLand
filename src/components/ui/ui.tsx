@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { redirect } from "next/navigation";
-import { addView, deleteCart } from "@/actions/actions";
+import { addView, deleteCart, increaseQTY } from "@/actions/actions";
 import Link from "next/link";
 
 type FeatureCard = {
@@ -94,6 +94,17 @@ export function Cart(props: Cart) {
       }
     }
   }
+
+  async function handleIncrease(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    const formData = new FormData(e.currentTarget)
+    const result = await increaseQTY(formData)
+
+    if(!result?.success) {
+      console.log("somthing wrong");
+    }
+  }
   
   return ( isCart ?
     <div className={styles.cart}>
@@ -135,8 +146,13 @@ export function Cart(props: Cart) {
           </div>
           <main> 
             {props.stock !== 0 ?
-              <form>
-                <input type="number" min={1} max={props.stock} defaultValue={props.qty} />
+              <form onSubmit={handleIncrease}>
+                <input type="number" name="qty" min={1} max={props.stock} defaultValue={props.qty} />
+                <input type="text" name="token" defaultValue={props.token} hidden />
+                <input type="text" name="product_id" defaultValue={props.id} hidden />
+                <button type="submit">
+                  <Icon icon="stash:paperplane-solid" />
+                </button>
               </form> : <p className="red font-medium">out of stock</p>
             }
             <button type="button" onClick={() => redirect(`/products/${props.slug}`)}>

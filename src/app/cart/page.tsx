@@ -35,6 +35,7 @@ export default function CartPage() {
   const [user, setUser] = useState<User | null>(null)
   const [products, setProducts] = useState<ProductType[]>([])
   const [token, setToken] = useState<string | null>(null);
+  const [discount, setDiscount] = useState<number>(0)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -81,12 +82,18 @@ export default function CartPage() {
         console.error('Failed to fetch cart products:', err);
       });
   }, [user?.cart]);
+  useEffect(() => {
+    const total = products.reduce((acc, product) => (acc + (product.prevPrice? product.prevPrice : product.price)) * product.qty, 0)
+    const prevPriceTotal = products.reduce((acc, product) => (acc + product.price) * product.qty, 0)
+    
+    setDiscount(((total - prevPriceTotal) / total) * 100)
+  }, [products])
 
 
   
 
   return (
-    <div className='p-24'>
+    <div className={styles.cart}>
       <main>
         <h1>Hello <span className='font-medium'>{user?.name}</span> its your cart</h1>
           {products.length === 0
@@ -115,12 +122,17 @@ export default function CartPage() {
                       />
                     ))}
               </aside>
-              <p className='justify-self-end mr-7 mb-3'>subtotal: {products.reduce((acc, product) => acc + product.price, 0)}$</p>
+              <p className='justify-self-end mr-7'>
+                subtotal {`(${products.reduce((acc, product) => acc + product.qty, 0)} items)`}: {products.reduce((acc, product) => (acc + (!product.prevPrice ? product.price : product.prevPrice)) * product.qty, 0)}$ {discount >= 1 && <span className='text-red-600 font-bold'>-{Math.round(discount)}%</span>} 
+              </p>
+              {discount >= 1 && <p className='justify-self-end mt-0 mr-7'>
+                discount: <span className='text-[#fb7701]'>-{products.reduce((acc, product) => (acc + (!product.prevPrice ? product.price : product.prevPrice)) * product.qty, 0) - products.reduce((acc, product) => (acc + product.price) * product.qty, 0)}$</span>
+              </p>}
+              {discount >= 1 && <h1 className='justify-self-end mr-7 font-bold text-1xl'>
+                total: {products.reduce((acc, product) => (acc + product.price) * product.qty, 0)}$
+              </h1>}
             </>
             }
-      </main>
-      <main>
-
       </main>
     </div>
   )

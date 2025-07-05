@@ -1,3 +1,16 @@
+.cart {
+  display: flex;
+  padding: 96px;
+  gap: 48px;
+  & > :first-child {
+    flex: 2;
+  }
+
+  & > :last-child {
+    flex: 1;
+  }
+}
+
 .products {
   display: flex;
   flex-direction: column;

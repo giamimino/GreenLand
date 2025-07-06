@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import cuid from "cuid";
 import bcrypt from "bcrypt";
 import backUpProducts from "@/data/json/backup.json"
+import { sendVerificationCodeEmail } from "@/lib/sendVerificationCode";
 
 export async function createProduct(formData: FormData) {
   try {
@@ -362,6 +363,81 @@ export async function increaseQTY(formData: FormData) {
   }
 }
 
+export async function sendVerification(formData: FormData) {
+  try {
+    const email = formData.get('email') as string
+    if (!email) return {message: "Email is required"}
+
+    const code = await sendVerificationCodeEmail(email)
+
+    const existingCode = await prisma.emailVerificationCode.findFirst({
+      where: { email },
+    });
+
+    if (existingCode) {
+      return { success: false, message: "Code already sent" };
+    }
+
+    await prisma.emailVerificationCode.create({
+      data: {
+        email,
+        code,
+        expiresAt: new Date(Date.now() + 15 * 60 * 1000)
+      }
+    })
+
+
+    return {
+      success: true,
+    }
+  } catch(error) {
+    console.log(error);
+    return {
+      success: false,
+      message: error
+    }
+  }
+}
+
+export async function checkVerifivation(formData: FormData) {
+  try {
+    const email = formData.get('email') as string
+    const code = formData.get('code') as string
+
+    const emailverificationcode = await prisma.emailVerificationCode.findFirst({
+      where: {email, code}
+    })
+    if (!emailverificationcode || !emailverificationcode.expiresAt) {
+      return { success: false, message: "Verification code not found or expired." };
+    }
+    if (new Date(Date.now()) >= emailverificationcode.expiresAt) {
+      return { success: false, message: "Verification code has expired." };
+    }
+    if (code === emailverificationcode.code) {
+      await prisma.users.update({
+        where: {email},
+        data: {
+          isVerified: true
+        }
+      })
+
+      await prisma.emailVerificationCode.deleteMany({
+        where: { email }
+      })
+    } else {
+      return { success: false, message: "Verification code is incorect" }
+    }
+
+    return { success: true, message: "your veryfied successfully"}
+  } catch(error) {
+    console.log("verification check error:", error);
+    return {
+      success: false,
+      message: "unknown error"
+    }
+  }
+}
+
 export async function backupDatabase() {
   try {
     const result = await prisma.products.createMany({
@@ -370,9 +446,11 @@ export async function backupDatabase() {
     });
 
     console.log(`✅ Backup done: ${result.count} products inserted.`);
-  } catch (error) {
-    console.error("❌ Backup failed:", error);
-  } finally {
-    await prisma.$disconnect();
+  }  catch(error) {
+    console.error("Verification error:", error);
+    return {
+      success: false,
+      message: "Unknown error"
+    };
   }
 }

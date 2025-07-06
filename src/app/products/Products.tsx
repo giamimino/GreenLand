@@ -46,8 +46,8 @@ const categoryTechs = [
 
 const sortTechs = [
   { key: "date", label: "by date" },
-  { key: "price_to_low", label: "price to low" },
-  { key: "price_to_hight", label: "price to hight" },
+  { key: "price_to_low", label: "price hight to low" },
+  { key: "price_to_hight", label: "price low to hight" },
   { key: "popularity", label: "by popularity" },
 ]
 

@@ -96,6 +96,7 @@ export default function ClientComponent({ product }: { product: ProductType }) {
             <form onSubmit={handleSubmit}>
               <input type="text" hidden defaultValue={product?.id} name='id' />
               <input type="text" hidden defaultValue={token} name='token'/>
+              <input type='number' min={1} max={product?.stock} defaultValue={1} name='qty'/>
               <button type='submit'>Add to Cart</button>
             </form>
             {error && <p className='text-[#ff6347]'>{error}</p>}

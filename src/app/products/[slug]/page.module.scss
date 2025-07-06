@@ -13,6 +13,25 @@
     gap: 24px;
     color: #1e1e1e;
 
+    form {
+      input[type="number"] {
+        padding: 8px 12px;
+        border: 1px solid #000;
+        width: 48px;
+        border-radius: 8px;
+        margin-right: 12px;
+        text-align: center;
+        appearance: textfild;
+        -moz-appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+
     img {
       border-radius: 12px;
     }

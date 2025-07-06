@@ -1,13 +1,20 @@
 .cart {
-  display: flex;
   padding: 96px;
-  gap: 48px;
-  & > :first-child {
-    flex: 2;
-  }
 
-  & > :last-child {
-    flex: 1;
+  .chechout {
+    padding: 6px 16px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 8px;
+    margin-top: 8px;
+    border: 1px solid #000;
+    transition: all .4s ease;
+    margin-right: 24px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #1f1f1f;
+    }
   }
 }
 

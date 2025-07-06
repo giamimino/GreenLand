@@ -3,6 +3,7 @@ import { Cart } from '@/components/ui/ui'
 import { redirect } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import styles from './page.module.scss'
+import Link from 'next/link'
 
 type CartItem = {
   product_id: string,
@@ -131,6 +132,11 @@ export default function CartPage() {
               {discount >= 1 && <h1 className='justify-self-end mr-7 font-bold text-1xl'>
                 total: {products.reduce((acc, product) => (acc + product.price) * product.qty, 0)}$
               </h1>}
+              <div className='justify-self-end'>
+                <Link href={`/checkout`}>
+                  <button type='button' className={styles.chechout}>Proceed to checkout</button>
+                </Link>
+              </div>
             </>
             }
       </main>

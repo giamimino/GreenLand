@@ -4,12 +4,19 @@ import { redirect, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import styles from './style.module.scss'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { editEmail, editName, LogOut } from '@/actions/actions'
+import { editEmail, editLocation, editName, LogOut } from '@/actions/actions'
 
 type User = {
   id: string
   name: string
   email: string
+  location: string
+  address: string
+  postalCode: number
+  isVerified: boolean
+  token: string
+  state: string
+  city: string
 }
 
 export default function Profile() {
@@ -18,8 +25,14 @@ export default function Profile() {
   const [success, setSuccess] = useState("")
   const [isEditName, setIsEditName] = useState(false)
   const [isEditEmail, setIsEditEmail] = useState(false)
+  const [isEditLocation, setIsEditLocation] = useState(false)
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [location, setLocation] = useState("")
+  const [address, setAddress] = useState("")
+  const [postalCode, setPostalCode] = useState("")
+  const [city, setCity] = useState("")
+  const [state, setState] = useState("")
   const router = useRouter()
 
   useEffect(() => {
@@ -110,7 +123,23 @@ export default function Profile() {
       if(result.success) {
         setSuccess("successfully changed email");
         setIsEditEmail(false)
-        setUser(prev => prev? {...prev, name} : prev)
+        setUser(prev => prev? {...prev, email} : prev)
+      }
+    }
+  }
+
+  async function handleEditLocation(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    const formData = new FormData(e.currentTarget)
+    const result = await editLocation(formData)
+
+    if(!result.success) {
+      setError(result.error ?? "")
+    } else {
+      if(result.success) {
+        setIsEditLocation(false)
+        setUser(prev => prev? {...prev, location, address, postalCode: Number(postalCode), state, city} : prev)
       }
     }
   }
@@ -149,13 +178,69 @@ export default function Profile() {
             </form>
             }
           </div>
-          <form onSubmit={handleLogOut}>
-            <input type="text" name='id' defaultValue={user?.id} hidden/>
-            <button type='submit'>Log out</button>
-          </form>
+          <aside>
+            <div>
+              <h2>country:</h2>
+              <p>{user.location}</p>
+            </div>
+            <div>
+              <h2>state:</h2>
+              <p>{user.state}</p>
+            </div>
+            <div>
+              <h2>city:</h2>
+              <p>{user.city}</p>
+            </div>
+            <div>
+              <h2>address:</h2>
+              <p>{user.address}</p>
+            </div>
+            <div>
+              <h2>postal code:</h2>
+              <p>{user.postalCode ? user.postalCode : "unknown"}</p>
+            </div>
+            <button type='button' onClick={() => setIsEditLocation(prev => !prev)} >Edit Location</button>
+          </aside>
+          <div>
+            <form onSubmit={handleLogOut}>
+              <input type="text" name='id' defaultValue={user?.id} hidden/>
+              <button type='submit' className='bg-[tomato]'>Log out</button>
+            </form>
+            <form>
+              <input type="text" name='id' defaultValue={user?.id} hidden/>
+              <button type='submit' className='bg-[red]'>Delete</button>
+            </form>
+          </div>
+          {user.isVerified && <p className='font-medium'>your account email is verified</p>}
         </main>
         {error && <div role="alert" className={styles.error}>{error}</div>}
         {success && <div role="alert" className={styles.success}>{success}</div>}
+        {isEditLocation && 
+        <form className={styles.locationForm} onSubmit={handleEditLocation}>
+          <input type="text" hidden name='token' defaultValue={user.token} />
+          <div>
+            <label htmlFor="country">Country: </label>
+            <input type='text' id='country' name='country' value={location} onChange={(e) => setLocation(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor="state">State: </label>
+            <input type='text' id='state' name='state' value={state} onChange={(e) => setState(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor="city">City: </label>
+            <input type='text' id='city' name='city' value={city} onChange={(e) => setCity(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor="address">Address: </label>
+            <input type='text' id='address' name='address' value={address} onChange={(e) => setAddress(e.target.value)} />
+          </div>
+          <div>
+            <label htmlFor="postalCode">postal code: </label>
+            <input type='text' id='postalCode' name='postalCode' value={postalCode} onChange={(e) => setPostalCode(e.target.value)}/>
+          </div>
+          {error && <p className='text-[tomato]'>{error}</p>}
+          <button type='submit'>update</button>
+        </form>}
     </div>
   )
 }

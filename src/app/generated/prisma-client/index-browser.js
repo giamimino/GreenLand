@@ -148,7 +148,12 @@ exports.Prisma.UsersScalarFieldEnum = {
   status: 'status',
   isVerified: 'isVerified',
   verificationAttempts: 'verificationAttempts',
-  canChangeEmail: 'canChangeEmail'
+  canChangeEmail: 'canChangeEmail',
+  location: 'location',
+  address: 'address',
+  city: 'city',
+  state: 'state',
+  postalCode: 'postalCode'
 };
 
 exports.Prisma.EmailVerificationCodeScalarFieldEnum = {

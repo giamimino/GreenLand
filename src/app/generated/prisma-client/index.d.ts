@@ -2210,10 +2210,12 @@ export namespace Prisma {
 
   export type UsersAvgAggregateOutputType = {
     verificationAttempts: number | null
+    postalCode: number | null
   }
 
   export type UsersSumAggregateOutputType = {
     verificationAttempts: number | null
+    postalCode: number | null
   }
 
   export type UsersMinAggregateOutputType = {
@@ -2228,6 +2230,11 @@ export namespace Prisma {
     isVerified: boolean | null
     verificationAttempts: number | null
     canChangeEmail: boolean | null
+    location: string | null
+    address: string | null
+    city: string | null
+    state: string | null
+    postalCode: number | null
   }
 
   export type UsersMaxAggregateOutputType = {
@@ -2242,6 +2249,11 @@ export namespace Prisma {
     isVerified: boolean | null
     verificationAttempts: number | null
     canChangeEmail: boolean | null
+    location: string | null
+    address: string | null
+    city: string | null
+    state: string | null
+    postalCode: number | null
   }
 
   export type UsersCountAggregateOutputType = {
@@ -2257,16 +2269,23 @@ export namespace Prisma {
     isVerified: number
     verificationAttempts: number
     canChangeEmail: number
+    location: number
+    address: number
+    city: number
+    state: number
+    postalCode: number
     _all: number
   }
 
 
   export type UsersAvgAggregateInputType = {
     verificationAttempts?: true
+    postalCode?: true
   }
 
   export type UsersSumAggregateInputType = {
     verificationAttempts?: true
+    postalCode?: true
   }
 
   export type UsersMinAggregateInputType = {
@@ -2281,6 +2300,11 @@ export namespace Prisma {
     isVerified?: true
     verificationAttempts?: true
     canChangeEmail?: true
+    location?: true
+    address?: true
+    city?: true
+    state?: true
+    postalCode?: true
   }
 
   export type UsersMaxAggregateInputType = {
@@ -2295,6 +2319,11 @@ export namespace Prisma {
     isVerified?: true
     verificationAttempts?: true
     canChangeEmail?: true
+    location?: true
+    address?: true
+    city?: true
+    state?: true
+    postalCode?: true
   }
 
   export type UsersCountAggregateInputType = {
@@ -2310,6 +2339,11 @@ export namespace Prisma {
     isVerified?: true
     verificationAttempts?: true
     canChangeEmail?: true
+    location?: true
+    address?: true
+    city?: true
+    state?: true
+    postalCode?: true
     _all?: true
   }
 
@@ -2412,6 +2446,11 @@ export namespace Prisma {
     isVerified: boolean
     verificationAttempts: number
     canChangeEmail: boolean
+    location: string
+    address: string
+    city: string
+    state: string
+    postalCode: number | null
     _count: UsersCountAggregateOutputType | null
     _avg: UsersAvgAggregateOutputType | null
     _sum: UsersSumAggregateOutputType | null
@@ -2446,6 +2485,11 @@ export namespace Prisma {
     isVerified?: boolean
     verificationAttempts?: boolean
     canChangeEmail?: boolean
+    location?: boolean
+    address?: boolean
+    city?: boolean
+    state?: boolean
+    postalCode?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type UsersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2461,6 +2505,11 @@ export namespace Prisma {
     isVerified?: boolean
     verificationAttempts?: boolean
     canChangeEmail?: boolean
+    location?: boolean
+    address?: boolean
+    city?: boolean
+    state?: boolean
+    postalCode?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type UsersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2476,6 +2525,11 @@ export namespace Prisma {
     isVerified?: boolean
     verificationAttempts?: boolean
     canChangeEmail?: boolean
+    location?: boolean
+    address?: boolean
+    city?: boolean
+    state?: boolean
+    postalCode?: boolean
   }, ExtArgs["result"]["users"]>
 
   export type UsersSelectScalar = {
@@ -2491,9 +2545,14 @@ export namespace Prisma {
     isVerified?: boolean
     verificationAttempts?: boolean
     canChangeEmail?: boolean
+    location?: boolean
+    address?: boolean
+    city?: boolean
+    state?: boolean
+    postalCode?: boolean
   }
 
-  export type UsersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "cart" | "token" | "createdAt" | "role" | "status" | "isVerified" | "verificationAttempts" | "canChangeEmail", ExtArgs["result"]["users"]>
+  export type UsersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "cart" | "token" | "createdAt" | "role" | "status" | "isVerified" | "verificationAttempts" | "canChangeEmail" | "location" | "address" | "city" | "state" | "postalCode", ExtArgs["result"]["users"]>
 
   export type $UsersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Users"
@@ -2511,6 +2570,11 @@ export namespace Prisma {
       isVerified: boolean
       verificationAttempts: number
       canChangeEmail: boolean
+      location: string
+      address: string
+      city: string
+      state: string
+      postalCode: number | null
     }, ExtArgs["result"]["users"]>
     composites: {}
   }
@@ -2946,6 +3010,11 @@ export namespace Prisma {
     readonly isVerified: FieldRef<"Users", 'Boolean'>
     readonly verificationAttempts: FieldRef<"Users", 'Int'>
     readonly canChangeEmail: FieldRef<"Users", 'Boolean'>
+    readonly location: FieldRef<"Users", 'String'>
+    readonly address: FieldRef<"Users", 'String'>
+    readonly city: FieldRef<"Users", 'String'>
+    readonly state: FieldRef<"Users", 'String'>
+    readonly postalCode: FieldRef<"Users", 'Int'>
   }
     
 
@@ -4352,7 +4421,12 @@ export namespace Prisma {
     status: 'status',
     isVerified: 'isVerified',
     verificationAttempts: 'verificationAttempts',
-    canChangeEmail: 'canChangeEmail'
+    canChangeEmail: 'canChangeEmail',
+    location: 'location',
+    address: 'address',
+    city: 'city',
+    state: 'state',
+    postalCode: 'postalCode'
   };
 
   export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
@@ -4604,6 +4678,11 @@ export namespace Prisma {
     isVerified?: BoolFilter<"Users"> | boolean
     verificationAttempts?: IntFilter<"Users"> | number
     canChangeEmail?: BoolFilter<"Users"> | boolean
+    location?: StringFilter<"Users"> | string
+    address?: StringFilter<"Users"> | string
+    city?: StringFilter<"Users"> | string
+    state?: StringFilter<"Users"> | string
+    postalCode?: IntNullableFilter<"Users"> | number | null
   }
 
   export type UsersOrderByWithRelationInput = {
@@ -4619,6 +4698,11 @@ export namespace Prisma {
     isVerified?: SortOrder
     verificationAttempts?: SortOrder
     canChangeEmail?: SortOrder
+    location?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    state?: SortOrder
+    postalCode?: SortOrderInput | SortOrder
   }
 
   export type UsersWhereUniqueInput = Prisma.AtLeast<{
@@ -4637,6 +4721,11 @@ export namespace Prisma {
     isVerified?: BoolFilter<"Users"> | boolean
     verificationAttempts?: IntFilter<"Users"> | number
     canChangeEmail?: BoolFilter<"Users"> | boolean
+    location?: StringFilter<"Users"> | string
+    address?: StringFilter<"Users"> | string
+    city?: StringFilter<"Users"> | string
+    state?: StringFilter<"Users"> | string
+    postalCode?: IntNullableFilter<"Users"> | number | null
   }, "id" | "email" | "token">
 
   export type UsersOrderByWithAggregationInput = {
@@ -4652,6 +4741,11 @@ export namespace Prisma {
     isVerified?: SortOrder
     verificationAttempts?: SortOrder
     canChangeEmail?: SortOrder
+    location?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    state?: SortOrder
+    postalCode?: SortOrderInput | SortOrder
     _count?: UsersCountOrderByAggregateInput
     _avg?: UsersAvgOrderByAggregateInput
     _max?: UsersMaxOrderByAggregateInput
@@ -4675,6 +4769,11 @@ export namespace Prisma {
     isVerified?: BoolWithAggregatesFilter<"Users"> | boolean
     verificationAttempts?: IntWithAggregatesFilter<"Users"> | number
     canChangeEmail?: BoolWithAggregatesFilter<"Users"> | boolean
+    location?: StringWithAggregatesFilter<"Users"> | string
+    address?: StringWithAggregatesFilter<"Users"> | string
+    city?: StringWithAggregatesFilter<"Users"> | string
+    state?: StringWithAggregatesFilter<"Users"> | string
+    postalCode?: IntNullableWithAggregatesFilter<"Users"> | number | null
   }
 
   export type EmailVerificationCodeWhereInput = {
@@ -4854,6 +4953,11 @@ export namespace Prisma {
     isVerified?: boolean
     verificationAttempts?: number
     canChangeEmail?: boolean
+    location?: string
+    address?: string
+    city?: string
+    state?: string
+    postalCode?: number | null
   }
 
   export type UsersUncheckedCreateInput = {
@@ -4869,6 +4973,11 @@ export namespace Prisma {
     isVerified?: boolean
     verificationAttempts?: number
     canChangeEmail?: boolean
+    location?: string
+    address?: string
+    city?: string
+    state?: string
+    postalCode?: number | null
   }
 
   export type UsersUpdateInput = {
@@ -4884,6 +4993,11 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationAttempts?: IntFieldUpdateOperationsInput | number
     canChangeEmail?: BoolFieldUpdateOperationsInput | boolean
+    location?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    postalCode?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UsersUncheckedUpdateInput = {
@@ -4899,6 +5013,11 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationAttempts?: IntFieldUpdateOperationsInput | number
     canChangeEmail?: BoolFieldUpdateOperationsInput | boolean
+    location?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    postalCode?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UsersCreateManyInput = {
@@ -4914,6 +5033,11 @@ export namespace Prisma {
     isVerified?: boolean
     verificationAttempts?: number
     canChangeEmail?: boolean
+    location?: string
+    address?: string
+    city?: string
+    state?: string
+    postalCode?: number | null
   }
 
   export type UsersUpdateManyMutationInput = {
@@ -4929,6 +5053,11 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationAttempts?: IntFieldUpdateOperationsInput | number
     canChangeEmail?: BoolFieldUpdateOperationsInput | boolean
+    location?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    postalCode?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UsersUncheckedUpdateManyInput = {
@@ -4944,6 +5073,11 @@ export namespace Prisma {
     isVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationAttempts?: IntFieldUpdateOperationsInput | number
     canChangeEmail?: BoolFieldUpdateOperationsInput | boolean
+    location?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    postalCode?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type EmailVerificationCodeCreateInput = {
@@ -5230,10 +5364,16 @@ export namespace Prisma {
     isVerified?: SortOrder
     verificationAttempts?: SortOrder
     canChangeEmail?: SortOrder
+    location?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    state?: SortOrder
+    postalCode?: SortOrder
   }
 
   export type UsersAvgOrderByAggregateInput = {
     verificationAttempts?: SortOrder
+    postalCode?: SortOrder
   }
 
   export type UsersMaxOrderByAggregateInput = {
@@ -5248,6 +5388,11 @@ export namespace Prisma {
     isVerified?: SortOrder
     verificationAttempts?: SortOrder
     canChangeEmail?: SortOrder
+    location?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    state?: SortOrder
+    postalCode?: SortOrder
   }
 
   export type UsersMinOrderByAggregateInput = {
@@ -5262,10 +5407,16 @@ export namespace Prisma {
     isVerified?: SortOrder
     verificationAttempts?: SortOrder
     canChangeEmail?: SortOrder
+    location?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    state?: SortOrder
+    postalCode?: SortOrder
   }
 
   export type UsersSumOrderByAggregateInput = {
     verificationAttempts?: SortOrder
+    postalCode?: SortOrder
   }
   export type JsonWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<

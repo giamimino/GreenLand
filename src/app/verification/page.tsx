@@ -35,6 +35,12 @@ export default function Verification() {
       }
     })
   }, [router])
+  
+  useEffect(() => {
+    if(user?.isVerified) {
+      redirect("/products")
+    }
+  }, [user])
 
   async function handleSend(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()

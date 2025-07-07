@@ -39,6 +39,11 @@ model Users {
   isVerified           Boolean  @default(false)
   verificationAttempts Int      @default(0)
   canChangeEmail       Boolean  @default(true)
+  location             String   @default("unknown")
+  address              String   @default("unknown")
+  city                 String   @default("unknown")
+  state                String   @default("unknown")
+  postalCode           Int?
 }
 
 model EmailVerificationCode {

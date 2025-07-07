@@ -438,6 +438,38 @@ export async function checkVerifivation(formData: FormData) {
   }
 }
 
+export async function editLocation(formData: FormData) {
+  try {
+    const location = formData.get("country") as string
+    const state = formData.get("state") as string
+    const city = formData.get("city") as string
+    const address = formData.get("address") as string
+    const postalCode = Number(formData.get("postalCode"))
+    const token = formData.get("token") as string
+
+    if(!location || !address || !postalCode || !state || !city) return {success: false, error: "Some fields are missing. Please fill in all required information."}
+
+    await prisma.users.update({
+      where: { token },
+      data: {
+        location,
+        address,
+        postalCode,
+        state,
+        city
+      }
+    })
+
+    return { success: true }
+  } catch(error) {
+    console.log(error);
+    return {
+      success: false,
+      error: "somthing went wrong"
+    }
+  }
+}
+
 export async function backupDatabase() {
   try {
     const result = await prisma.products.createMany({

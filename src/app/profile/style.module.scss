@@ -8,18 +8,39 @@
   flex-direction: column;
   gap: 6px;
 
+  aside {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 6px;
+    align-items: start;
+
+    >div {
+      display: flex;
+      gap: 6px;
+    }
+
+    button {
+      font-weight: 500;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
   h1 {
     font-size: 24px;
     font-weight: 600;
   }
-
-  >form {
-    button {
-      padding: 8px 14px;
-      background-color: tomato;
-      color: #fff;
-      border-radius: 8px;
-      cursor: pointer;
+  >div {
+    form {
+      button {
+        padding: 8px 14px;
+        color: #fff;
+        border-radius: 8px;
+        cursor: pointer;
+      }
     }
   }
 
@@ -91,5 +112,44 @@
     filter: blur(10px);
     transform: translate(-200%) scale(0.5);
     opacity: 0;
+  }
+}
+
+.locationForm {
+  z-index: 99;
+  padding: 24px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: absolute;
+  align-items: start;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    input {
+      padding: 8px 4px;
+      border: 1px solid #000;
+      border-radius: 8px;
+    }
+
+  }
+  button {
+    padding: 8px 12px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 8px;
+    transition: .3s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #1a1a1a;
+    }
   }
 }

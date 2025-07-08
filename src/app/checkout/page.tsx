@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './page.module.scss'
 import { redirect, useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { Icon } from '@iconify/react/dist/iconify.js'
 
 type CartType = {
   product_id: string,
@@ -96,6 +97,18 @@ export default function CheckOut() {
           console.error('Failed to fetch cart products:', err);
         });
     }, [user?.cart]);
+
+  const createOrder = async () => {
+    const checkoutPrice = products.reduce((acc, product) => (acc + product.price) * product.qty, 0)
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+      body: JSON.stringify({ amount: checkoutPrice }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const data = await res.json();
+    window.location.href = `https://www.sandbox.paypal.com/checkoutnow?token=${data.id}`;
+  };
+
   return (
     <div className='p-24'>
       {message !== "" ? 
@@ -136,6 +149,12 @@ export default function CheckOut() {
           <h2>City: {user?.city}</h2>
           <h2>address: {user?.address}</h2>
           <h2>postalCode: {user?.postalCode}</h2>
+          <p className='text-[#353535]'>shipping takes 10-15 days</p>
+          <button onClick={createOrder}>Checkout <Icon icon="logos:paypal" /></button>
+          <p className='text-blue-400 cursor-pointer mt-1.5' style={{
+            textDecoration: "underline",
+            alignSelf: "center"
+          }}>Secure privacy</p>
         </div>
       </div>
       }

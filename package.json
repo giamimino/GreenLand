@@ -26,6 +26,7 @@
     "resend": "^4.6.0",
     "sass": "^1.89.2",
     "scss": "^0.2.4",
+    "stripe": "^18.3.0",
     "swiper": "^11.2.8"
   },
   "devDependencies": {

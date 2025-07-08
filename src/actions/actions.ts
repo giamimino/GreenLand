@@ -5,6 +5,7 @@ import cuid from "cuid";
 import bcrypt from "bcrypt";
 import backUpProducts from "@/data/json/backup.json"
 import { sendVerificationCodeEmail } from "@/lib/sendVerificationCode";
+import { sendContact } from "@/lib/sendContact";
 
 export async function createProduct(formData: FormData) {
   try {
@@ -469,6 +470,52 @@ export async function editLocation(formData: FormData) {
     }
   }
 }
+
+export async function sendMessage(formData: FormData) {
+  try {
+    const id = formData.get('id') as string;
+    const name = formData.get('contactName') as string;
+    const email = formData.get('contactEmail') as string;
+    const topic = formData.get('contactTopic') as string;
+
+    const job = formData.get('job')?.toString() || undefined;
+    const reviewText = formData.get('reviewText')?.toString() || undefined;
+    const page = formData.get('page')?.toString() || undefined;
+    const bugDiscribe = formData.get('bugDiscribe')?.toString() || undefined;
+    
+    const order_number = formData.get('order_number') ? Number(formData.get('order_number')) : undefined;
+    const date = formData.get('date')?.toString() || undefined;
+    const paid = formData.get('paid') ? Number(formData.get('paid')) : undefined;
+
+    const describe_cart = formData.get('describe_cart')?.toString() || undefined;
+    const issue_description = formData.get('issue_description')?.toString() || undefined;
+    const reason = formData.get('reason')?.toString() || undefined;
+    const item_condition = formData.get('item_condition')?.toString() || undefined;
+    const shipping_concern = formData.get('shipping_concern')?.toString() || undefined;
+    const product_name = formData.get('product_name')?.toString() || undefined;
+    const product_question = formData.get('product_question')?.toString() || undefined;
+    const company_name = formData.get('company_name')?.toString() || undefined;
+    const proposal = formData.get('proposal')?.toString() || undefined;
+
+    await sendContact({
+      id, name, email, topic,
+      job, reviewText, page, bugDiscribe,
+      order_number, date, paid, describe_cart,
+      issue_description, reason, item_condition,
+      shipping_concern, product_name, product_question,
+      company_name, proposal,
+    });
+
+    return {success: true}
+  } catch (error) {
+    console.error("Failed to send contact:", error);
+    return {
+      success: false,
+      error: "somthing went wrong"
+    }
+  }
+}
+
 
 export async function backupDatabase() {
   try {

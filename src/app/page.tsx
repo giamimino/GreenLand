@@ -46,6 +46,8 @@ const CATEGORIES_DATA = [
 export default function Home() {
   const [products, setProducts] = useState<ProductsType[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
+  const [totalProducts, setTotalProducts] = useState(0)
+  const [maxViews, setMaxViews] = useState(0)
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter()
@@ -61,7 +63,10 @@ export default function Home() {
       }
       
       const data = await response.json();
-      setProducts(data);
+      setProducts(data.bestSellingProducts);
+      setTotalProducts(data.totalProducts);
+      setMaxViews(data.maxViews)
+
     } catch (err) {
       console.error("Error fetching products:", err);
       setError(err instanceof Error ? err.message : 'Failed to load products');
@@ -71,8 +76,8 @@ export default function Home() {
   }, []);
   
   const STATS_DATA = useMemo(() => [
-    { number: products.length, label: "Plant Species", hasRightBorder: true },
-    { number: products.length > 0 ? products.reduce((acc, product: ProductsType) => acc.view < product.view ? product : acc, products[0]).view : 0, label: "Customers", hasRightBorder: false }
+    { number: totalProducts, label: "Plant Species", hasRightBorder: true },
+    { number: maxViews, label: "Customers", hasRightBorder: false }
   ], [products]);
 
   

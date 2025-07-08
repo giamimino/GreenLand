@@ -2,8 +2,10 @@
 import React, { useEffect, useState } from 'react'
 import styles from './page.module.scss'
 import { useRouter } from 'next/navigation'
+import { sendMessage } from '@/actions/actions'
 
 type User = {
+  id: string,
   token: string,
   name: string,
   email: string,
@@ -32,107 +34,11 @@ const topicMessages: Record<string, string> = {
 };
 
 
-const topicForms: Record<string, JSX.Element> = {
-  review: (
-    <form>
-      <div>
-        <label htmlFor="job">Job:</label>
-        <input type="text" id='job' name='job' />
-      </div>
-      <div>
-        <label htmlFor="reviewText">Your Review:</label>
-        <textarea id="reviewText" name="reviewText" rows={4} />
-      </div>
-      <button type='submit'>Send</button>
-    </form>
-  ),
-
-  bugreport: (
-    <form>
-      <div>
-        <label htmlFor="page">Page:</label>
-        <input type='text' id="page" name="page" />
-      </div>
-      <div>
-        <label htmlFor="bugDiscribe">Describe bug:</label>
-        <textarea id="bugDiscribe" name="bugDiscribe" rows={4} />
-      </div>
-      <button type='submit'>Send</button>
-    </form>
-  ),
-  order_issue: (
-    <form>
-      <div>
-        <label htmlFor="order_number">Order ID:</label>
-        <input type="text" id="order_number" name="order_number" required/>
-      </div>
-      <div>
-        <label htmlFor="date">Order Date:</label>
-        <input type="text" id="date" name="date" required/>
-      </div>
-      <div>
-        <label htmlFor="paid">Amount Paid:</label>
-        <input type="number" id="paid" name="paid" required/>
-      </div>
-      <div>
-        <label htmlFor="describe_cart">Describe Your Cart:</label>
-        <textarea id="describe_cart" name="describe_cart" rows={2} required/>
-      </div>
-      <div>
-        <label htmlFor="issue_description">Describe the Issue:</label>
-        <textarea id="issue_description" name="issue_description" rows={4}
-          placeholder="Explain what's wrong with your order..."
-          required
-        />
-      </div>
-      <button type="submit">Send</button>
-    </form>
-  ),
-  return: (
-    <form>
-      <div>
-        <label htmlFor=""></label>
-      </div>
-      <button type="submit">send</button>
-    </form>
-  ),
-  refund: (
-    <form>
-      <div>
-        <label htmlFor=""></label>
-      </div>
-      <button type="submit">send</button>
-    </form>
-  ),
-  shipping: (
-    <form>
-      <div>
-        <label htmlFor=""></label>
-      </div>
-      <button type="submit">send</button>
-    </form>
-  ),
-  product_question: (
-    <form>
-      <div>
-        <label htmlFor=""></label>
-      </div>
-      <button type="submit">send</button>
-    </form>
-  ),
-  business: (
-    <form>
-      <div>
-        <label htmlFor=""></label>
-      </div>
-      <button type="submit">send</button>
-    </form>
-  ),
-}
 
 
 export default function Contact() {
   const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
   const [user, setUser] = useState<User | null>(null)
   const [contactTopic, setContactTopic] = useState("")
   const router = useRouter()
@@ -155,6 +61,170 @@ export default function Contact() {
     })
 
   }, [router])
+
+  async function handleSend(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget)
+    const result = await sendMessage(formData)
+
+    if(!result.success) {
+      setError(result.error  || "")
+    } else {
+      if(result.success) {
+        setSuccess("successfully send report to us")
+      }
+    }
+  }
+
+  const DefaulInputs = (user: User | null, topic: string) => (
+    <>
+      <input type="text" name="id" defaultValue={user?.id || ""} hidden />
+      <input type="text" name="contactName" defaultValue={user?.name} hidden />
+      <input type="text" name="contactEmail" defaultValue={user?.email} hidden />
+      <input type="text" name="contactTopic" defaultValue={topic} hidden />
+    </>
+  )
+
+  const topicForms: Record<string, JSX.Element> = {
+    review: (
+      <form onSubmit={handleSend}>
+        {DefaulInputs(user, contactTopic)}
+        <div>
+          <label htmlFor="job">Job:</label>
+          <input type="text" id='job' name='job' />
+        </div>
+        <div>
+          <label htmlFor="reviewText">Your Review:</label>
+          <textarea id="reviewText" name="reviewText" rows={4} />
+        </div>
+        <button type='submit'>Send</button>
+      </form>
+    ),
+  
+    bugreport: (
+      <form onSubmit={handleSend}>
+        {DefaulInputs(user, contactTopic)}
+        <div>
+          <label htmlFor="page">Page:</label>
+          <input type='text' id="page" name="page" />
+        </div>
+        <div>
+          <label htmlFor="bugDiscribe">Describe bug:</label>
+          <textarea id="bugDiscribe" name="bugDiscribe" rows={4} />
+        </div>
+        <button type='submit'>Send</button>
+      </form>
+    ),
+    order_issue: (
+      <form onSubmit={handleSend}>
+        {DefaulInputs(user, contactTopic)}
+        <div>
+          <label htmlFor="order_number">Order ID:</label>
+          <input type="text" id="order_number" name="order_number" required/>
+        </div>
+        <div>
+          <label htmlFor="date">Order Date:</label>
+          <input type="text" id="date" name="date" required/>
+        </div>
+        <div>
+          <label htmlFor="paid">Amount Paid:</label>
+          <input type="number" id="paid" name="paid" required/>
+        </div>
+        <div>
+          <label htmlFor="describe_cart">Describe Your Cart:</label>
+          <textarea id="describe_cart" name="describe_cart" rows={2} required/>
+        </div>
+        <div>
+          <label htmlFor="issue_description">Describe the Issue:</label>
+          <textarea id="issue_description" name="issue_description" rows={4}
+            placeholder="Explain what's wrong with your order..."
+            required
+          />
+        </div>
+        <button type="submit">Send</button>
+      </form>
+    ),
+    return: (
+      <form onSubmit={handleSend}>
+        {DefaulInputs(user, contactTopic)}
+        <div>
+          <label htmlFor="order_id">Order ID:</label>
+          <input type="text" id="order_id" name="order_id" required />
+        </div>
+        <div>
+          <label htmlFor="reason">Reason for Return:</label>
+          <textarea id="reason" name="reason" rows={4} required />
+        </div>
+        <div>
+          <label htmlFor="item_condition">Item Condition:</label>
+          <input type="text" id="item_condition" name="item_condition" required />
+        </div>
+        <button type="submit">Send</button>
+      </form>
+    ),
+  
+    refund: (
+      <form onSubmit={handleSend}>
+        {DefaulInputs(user, contactTopic)}
+        <div>
+          <label htmlFor="order_id">Order ID:</label>
+          <input type="text" id="order_id" name="order_id" required />
+        </div>
+        <div>
+          <label htmlFor="reason">Reason for Refund:</label>
+          <textarea id="reason" name="reason" rows={4} required />
+        </div>
+        <button type="submit">Send</button>
+      </form>
+    ),
+  
+    shipping: (
+      <form onSubmit={handleSend}>
+        {DefaulInputs(user, contactTopic)}
+        <div>
+          <label htmlFor="order_id">Order ID:</label>
+          <input type="text" id="order_id" name="order_id" required />
+        </div>
+        <div>
+          <label htmlFor="shipping_concern">Shipping Concern:</label>
+          <textarea id="shipping_concern" name="shipping_concern" rows={4} required />
+        </div>
+        <button type="submit">Send</button>
+      </form>
+    ),
+  
+    product_question: (
+      <form onSubmit={handleSend}>
+        {DefaulInputs(user, contactTopic)}
+        <div>
+          <label htmlFor="product_name">Product Name:</label>
+          <input type="text" id="product_name" name="product_name" required />
+        </div>
+        <div>
+          <label htmlFor="product_question">Your Question:</label>
+          <textarea id="product_question" name="product_question" rows={4} required />
+        </div>
+        <button type="submit">Send</button>
+      </form>
+    ),
+  
+    business: (
+      <form onSubmit={handleSend}>
+        {DefaulInputs(user, contactTopic)}
+        <div>
+          <label htmlFor="company_name">Company Name:</label>
+          <input type="text" id="company_name" name="company_name" required />
+        </div>
+        <div>
+          <label htmlFor="proposal">Business Proposal:</label>
+          <textarea id="proposal" name="proposal" rows={6} required />
+        </div>
+        <button type="submit">Send</button>
+      </form>
+    ),
+  }
+
   return (
     <div className='p-24'>
       {error ? 
@@ -177,6 +247,8 @@ export default function Contact() {
             </div>
             <p>{topicMessages[contactTopic]}</p>
             {topicForms[contactTopic]}
+            {error && <p className='text-[tomato]'>{error}</p>}
+            {success && <p className='text-[lime]'>{success}</p>}
           </div>
         </div>
       }

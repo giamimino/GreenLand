@@ -99,9 +99,9 @@ export default function ClientComponent({ product }: { product: ProductType }) {
               <input type='number' min={1} max={product?.stock} defaultValue={1} name='qty'/>
               <button type='submit'>Add to Cart</button>
             </form>
-            {error && <p className='text-[#ff6347]'>{error}</p>}
-            {success && <p className='text-[#00ff00]'>{success}</p>}
           </div>
+            {error && <p className='text-[#ff6347]'>{error}</p>}
+            {success && <p className='text-[#00bd00]'>{success}</p>}
         </div>
       </main>
     </div>

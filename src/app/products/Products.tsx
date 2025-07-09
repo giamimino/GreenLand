@@ -169,7 +169,7 @@ export default function ProductsPage({products}: Props) {
           />
         </button>
         {ShowSortCategory && (
-          <ul>
+          <ul className={styes.sort}>
             {props.object.map((cat) => (
               <div key={cat.key}>
                 <input 

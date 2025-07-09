@@ -202,7 +202,7 @@ export async function addCart(formData: FormData) {
       select: { cart: true }
     });
 
-    let currentCart = Array.isArray(user?.cart) ? (user.cart as CartItem[]) : [];
+    const currentCart = Array.isArray(user?.cart) ? (user.cart as CartItem[]) : [];
 
     const existingIndex = currentCart.findIndex(item => item.product_id === productId);
 

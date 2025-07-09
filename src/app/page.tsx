@@ -78,7 +78,7 @@ export default function Home() {
   const STATS_DATA = useMemo(() => [
     { number: totalProducts, label: "Plant Species", hasRightBorder: true },
     { number: maxViews, label: "Customers", hasRightBorder: false }
-  ], [products]);
+  ], [maxViews, totalProducts, products]);
 
   
   useEffect(() => {

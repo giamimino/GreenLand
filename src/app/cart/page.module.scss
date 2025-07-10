@@ -1,6 +1,18 @@
 .cart {
   padding: 96px;
 
+  @media (width <= 968px) {
+    padding: 96px 64px;
+  }
+
+  @media (width <= 768px) {
+    padding: 96px 48px;
+  }
+
+  @media (width <= 620px) {
+    padding: 96px 24px;
+  }
+
   .chechout {
     padding: 6px 16px;
     background-color: #000;

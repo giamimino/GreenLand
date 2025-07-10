@@ -78,7 +78,7 @@ export default function Home() {
   const STATS_DATA = useMemo(() => [
     { number: totalProducts, label: "Plant Species", hasRightBorder: true },
     { number: maxViews, label: "Customers", hasRightBorder: false }
-  ], [maxViews, totalProducts, products]);
+  ], [maxViews, totalProducts]);
 
   
   useEffect(() => {
@@ -133,7 +133,7 @@ export default function Home() {
   ), []);
 
   return (
-    <div className="p-24 flex flex-col gap-24">
+    <div className={styles.app}>
       <section className={styles.heroWelcome}>
         <aside>
           <h1 className='font-extrabold text-6xl w-[400px]'>Buy your dream plants</h1>
@@ -201,7 +201,7 @@ export default function Home() {
         </main>
       </section>
 
-      <section className='flex flex-col gap-12 mt-24'>
+      <section className={`flex flex-col gap-12 mt-24 ${styles.aboutUS}`}>
         <Title
           title='About us'
           content='Order now and appreciate the beauty of nature'

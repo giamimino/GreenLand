@@ -46,8 +46,12 @@
     gap: 48px;
     align-items: center;
 
+    @media (width <= 450px) {
+      gap: 24px;
+    }
+
     li {
-      @media (width <= 450px) {
+      @media (width <= 520px) {
         display: none;
       }
     }
@@ -109,7 +113,7 @@
 
 .menu {
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: #fff;

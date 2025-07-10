@@ -110,16 +110,15 @@ export default function CheckOut() {
   };
 
   return (
-    <div className='p-24'>
+    <div className={styles.app}>
       {message !== "" ? 
       <div className={styles.alert}>
         <div>
           <p>
-            {message}
-          </p>
-          <Link href="/verification">
+            {message}  <Link href="/verification">
             Click here
           </Link>
+          </p>
         </div>
       </div>
       :

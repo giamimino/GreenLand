@@ -226,7 +226,7 @@ export default function Contact() {
   }
 
   return (
-    <div className='p-24'>
+    <div className='p-24 pl-2 pr-2'>
       {error ? 
         <div className={styles.alert}>
           <div>

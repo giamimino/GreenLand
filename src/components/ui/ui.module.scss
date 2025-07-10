@@ -58,6 +58,7 @@ $hint: "hint";
       font-size: 18px;
       color: #000;
       font-weight: 700;
+      text-align: center;
     }
 
     p {
@@ -204,6 +205,11 @@ $hint: "hint";
   gap: 48px;
   padding: 28px;
 
+  @media (width <= 425px) {
+    padding: 14px;
+    gap: 12px;
+  }
+
   h1 {
     font-size: 24px;
     font-weight: 700;
@@ -215,6 +221,15 @@ $hint: "hint";
 
   >div {
     display: flex;
+
+    @media (width <= 768px) {
+      flex-direction: column;
+      img {
+        width: 100%;
+        object-fit: cover;
+        height: 300px;
+      }
+    }
 
     img {
       border-radius: 8px;
@@ -232,6 +247,7 @@ $hint: "hint";
 
       >div {
         display: flex;
+        flex-wrap: wrap;
         gap: 12px;
         
         

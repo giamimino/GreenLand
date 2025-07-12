@@ -1,6 +1,6 @@
 .app {
   padding: 96px;
-  @media (width <= 490px) {
+  @media (max-width: 490px) {
     padding: 96px 12px;
   }
 }

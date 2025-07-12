@@ -3,11 +3,11 @@
   display: flex;
   justify-content: center;
 
-  @media (width <= 800px) {
+  @media (max-width: 800px) {
     padding: 92px 64px 64px 64px;
   }
 
-  @media (width <= 725px) {
+  @media (max-width: 725px) {
     padding: 92px 48px 48px 48px;
     flex-direction: column;
 
@@ -22,11 +22,11 @@
     }
   }
 
-  @media (width <= 425px) {
+  @media (max-width: 425px) {
     padding: 92px 24px;
   }
 
-  @media (width <= 375px) {
+  @media (max-width: 375px) {
     padding: 92px 12px;
   }
 

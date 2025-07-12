@@ -205,7 +205,7 @@ $hint: "hint";
   gap: 48px;
   padding: 28px;
 
-  @media (width <= 425px) {
+  @media (max-width: 425px) {
     padding: 14px;
     gap: 12px;
   }
@@ -222,7 +222,7 @@ $hint: "hint";
   >div {
     display: flex;
 
-    @media (width <= 768px) {
+    @media (max-width: 768px) {
       flex-direction: column;
       img {
         width: 100%;

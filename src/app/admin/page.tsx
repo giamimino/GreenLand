@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './page.module.scss'
 import { Button } from '@/components/ui/ui'
-import { createProduct } from '@/actions/actions'
+import { backupDatabase, createProduct } from '@/actions/actions'
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -172,6 +172,12 @@ export default function Admin() {
           <p style={{ color: "red" }} key={index}>{error}</p>
         ))}
         {success && <p style={{ color: "green" }}>{success}</p>}
+        <form onSubmit={async (e) => {
+          e.preventDefault();
+          const result = await backupDatabase();
+        }}>
+          <button type='submit'>BackUp</button>
+        </form>
       </div> :
       <div className={styles.login}>
         <Link href="/">

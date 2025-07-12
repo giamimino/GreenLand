@@ -43,16 +43,7 @@ export default function Profile() {
   }, [user])
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (!token) {
-      redirect('/auth/signUp')
-    }
-
-    fetch('/api/getUser', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token })
-    })
+    fetch('/api/getUser')
       .then(res => res.json())
       .then(data => {
         if (data.user) {

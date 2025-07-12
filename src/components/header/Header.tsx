@@ -12,16 +12,9 @@ type User = {
 export default function Header() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isLogin, setIsLogin] = useState<boolean>(false);
   const [user, setUser] = useState<User | null>(null)
   const [menu, setMenu] = useState(false)
   const router = useRouter()
-
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    setIsLogin(!token);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,7 +83,7 @@ export default function Header() {
               <Icon icon="bi:cart" width={24} height={24} />
             </li>
           </Link>
-          <Link href={isLogin? '/auth/signUp' : '/profile'}>
+          <Link href={user? '/auth/signUp' : '/profile'}>
             <li>
               <Icon icon="cuida:user-outline" width={24} height={24} />
             </li>

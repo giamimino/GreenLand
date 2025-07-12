@@ -39,7 +39,16 @@ export default function CartPage() {
   const [discount, setDiscount] = useState<number>(0)
 
   useEffect(() => {
-    fetch('/api/getUser')
+    const token = localStorage.getItem('token');
+    if (!token) {
+      redirect('/login');
+    }
+    setToken(token);
+    fetch('/api/getUser', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token })
+    })
       .then(res => res.json())
       .then(data => {
         if(data.user) {

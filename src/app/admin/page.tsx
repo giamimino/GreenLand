@@ -175,6 +175,11 @@ export default function Admin() {
         <form onSubmit={async (e) => {
           e.preventDefault();
           const result = await backupDatabase();
+          if (result.success) {
+            alert("Database backup successful!");
+          } else {
+            alert("Failed to backup database.");
+          }
         }}>
           <button type='submit'>BackUp</button>
         </form>

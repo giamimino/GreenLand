@@ -40,6 +40,8 @@
     "dotenv-cli": "^8.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
+    "postcss": "^8.5.6",
+    "postcss-media-minmax": "^5.0.0",
     "prisma": "^6.10.1",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",

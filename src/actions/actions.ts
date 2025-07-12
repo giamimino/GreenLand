@@ -524,7 +524,9 @@ export async function backupDatabase() {
       skipDuplicates: true,
     });
 
-    console.log(`✅ Backup done: ${result.count} products inserted.`);
+    return {
+      success: true,
+    }
   }  catch(error) {
     console.error("Verification error:", error);
     return {

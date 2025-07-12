@@ -1,5 +1,10 @@
+import mediaMinMax from 'postcss-media-minmax'
+
 const config = {
-  plugins: ["@tailwindcss/postcss"],
+  plugins: [
+    mediaMinMax,
+    '@tailwindcss/postcss',
+  ],
 };
 
 export default config;

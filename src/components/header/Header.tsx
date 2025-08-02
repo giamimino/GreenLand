@@ -14,7 +14,6 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [user, setUser] = useState<User | null>(null)
   const [menu, setMenu] = useState(false)
-  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,23 +30,6 @@ export default function Header() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
-
-  useEffect(() => {
-    const token = localStorage.getItem('token') || null;
-    if(!token) return
-
-    fetch('/api/getUser', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if(data.user) {
-        setUser(data.user)
-      }
-    })
-  }, [router])
 
   const navLinks = [
     {name: "Home", href:"/"},
@@ -83,7 +65,7 @@ export default function Header() {
               <Icon icon="bi:cart" width={24} height={24} />
             </li>
           </Link>
-          <Link href={user? '/auth/signUp' : '/profile'}>
+          <Link href={'/profile'}>
             <li>
               <Icon icon="cuida:user-outline" width={24} height={24} />
             </li>

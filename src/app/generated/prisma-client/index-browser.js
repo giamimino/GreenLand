@@ -120,40 +120,46 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.ProductsScalarFieldEnum = {
+exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
   image: 'image',
   title: 'title',
-  Description: 'Description',
+  description: 'description',
   price: 'price',
   slug: 'slug',
   isSale: 'isSale',
   isBestSelling: 'isBestSelling',
   category: 'category',
-  createAt: 'createAt',
   view: 'view',
   prevPrice: 'prevPrice',
-  stock: 'stock'
+  stock: 'stock',
+  createdAt: 'createdAt'
 };
 
-exports.Prisma.UsersScalarFieldEnum = {
+exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
   password: 'password',
-  cart: 'cart',
   token: 'token',
   createdAt: 'createdAt',
   role: 'role',
-  status: 'status',
-  isVerified: 'isVerified',
-  verificationAttempts: 'verificationAttempts',
   canChangeEmail: 'canChangeEmail',
-  location: 'location',
+  isVerified: 'isVerified',
+  status: 'status',
+  verificationAttempts: 'verificationAttempts',
   address: 'address',
+  location: 'location',
+  postalCode: 'postalCode',
   city: 'city',
-  state: 'state',
-  postalCode: 'postalCode'
+  state: 'state'
+};
+
+exports.Prisma.CartItemScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  productId: 'productId',
+  quantity: 'quantity'
 };
 
 exports.Prisma.EmailVerificationCodeScalarFieldEnum = {
@@ -169,10 +175,6 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.JsonNullValueInput = {
-  JsonNull: Prisma.JsonNull
-};
-
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -183,16 +185,11 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
-exports.Prisma.JsonNullValueFilter = {
-  DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
-};
-
 
 exports.Prisma.ModelName = {
-  Products: 'Products',
-  Users: 'Users',
+  Product: 'Product',
+  User: 'User',
+  CartItem: 'CartItem',
   EmailVerificationCode: 'EmailVerificationCode'
 };
 

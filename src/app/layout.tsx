@@ -1,4 +1,3 @@
-// layout.tsx (SERVER COMPONENT, keep it default)
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
@@ -6,6 +5,7 @@ import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import ClientWrapper from "@/components/common/ClientWrapper";
 import Up from "@/components/up/Up";
+import { Analytics } from "@vercel/analytics/next"
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -32,6 +32,7 @@ export default function RootLayout({
           <Footer />
           <Up />
         </ClientWrapper>
+        <Analytics /> 
       </body>
     </html>
   );

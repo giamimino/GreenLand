@@ -7,7 +7,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { redirect } from "next/navigation";
-import { addView, deleteCart, increaseQTY } from "@/actions/actions";
+import { addView } from "@/actions/actions";
 import Link from "next/link";
 
 type FeatureCard = {

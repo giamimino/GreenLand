@@ -33,26 +33,14 @@ const topicMessages: Record<string, string> = {
   business: "Please share details about your business proposal.",
 };
 
-
-
-
 export default function Contact() {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const [user, setUser] = useState<User | null>(null)
   const [contactTopic, setContactTopic] = useState("")
-  const router = useRouter()
-  useEffect(() => {
-    const token = localStorage.getItem("token")
-    if(!token) {
-      setError("you have to login before contact us")
-    }
 
-    fetch("/api/getUser", {
-      method: "POST",
-      headers: {"content-type": "application/json"},
-      body: JSON.stringify({ token })
-    })
+  useEffect(() => {
+    fetch("/api/getUser")
     .then(res => res.json())
     .then(data => {
       if(data.user) {
@@ -60,7 +48,7 @@ export default function Contact() {
       }
     })
 
-  }, [router])
+  }, [])
 
   async function handleSend(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -227,31 +215,24 @@ export default function Contact() {
 
   return (
     <div className='p-24 pl-2 pr-2'>
-      {error ? 
-        <div className={styles.alert}>
-          <div>
-            <p>{error}</p>
+      <div className={styles.contact}>
+        <div>
+          <h1>Contact Us</h1>
+          <div className={styles.contacTypes}>
+            <h2 className='text-[#2c2c2c]'>contact Topic:</h2>
+            {contactTypes.map((item) => (
+              <div key={item.value}>
+                <input type='checkbox' hidden id={item.value} checked={contactTopic === item.value ? true : false} onChange={() => setContactTopic(item.value)} />
+                <label htmlFor={item.value}>{item.label}</label>
+              </div>
+            ))}
           </div>
-        </div> :
-        <div className={styles.contact}>
-          <div>
-            <h1>Contact Us</h1>
-            <div className={styles.contacTypes}>
-              <h2 className='text-[#2c2c2c]'>contact Topic:</h2>
-              {contactTypes.map((item) => (
-                <div key={item.value}>
-                  <input type='checkbox' hidden id={item.value} checked={contactTopic === item.value ? true : false} onChange={() => setContactTopic(item.value)} />
-                  <label htmlFor={item.value}>{item.label}</label>
-                </div>
-              ))}
-            </div>
-            <p>{topicMessages[contactTopic]}</p>
-            {topicForms[contactTopic]}
-            {error && <p className='text-[tomato]'>{error}</p>}
-            {success && <p className='text-[lime]'>{success}</p>}
-          </div>
+          <p>{topicMessages[contactTopic]}</p>
+          {topicForms[contactTopic]}
+          {error && <p className='text-[tomato]'>{error}</p>}
+          {success && <p className='text-[lime]'>{success}</p>}
         </div>
-      }
+      </div>
     </div>
   )
 }

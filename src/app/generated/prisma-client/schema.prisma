@@ -1,49 +1,65 @@
-// Define database connection via the `DATABASE_URL` env var
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-// Define custom output path for generated Prisma Client
 generator client {
   provider = "prisma-client-js"
   output   = "../src/app/generated/prisma-client"
 }
 
-model Products {
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
   id            String   @id @default(cuid())
   image         String
   title         String
-  Description   String
+  description   String
   price         Int
   slug          String   @unique
   isSale        Boolean  @default(false)
   isBestSelling Boolean  @default(false)
   category      String
-  createAt      DateTime @default(now())
   view          Int      @default(0)
   prevPrice     Int?
   stock         Int      @default(1)
+  createdAt     DateTime @default(now())
+
+  cartItems CartItem[]
+
+  @@index([category])
+  @@index([createdAt])
+  @@index([view])
+  @@index([isSale])
+  @@index([isBestSelling])
 }
 
-model Users {
+model User {
   id                   String   @id @default(cuid())
   name                 String
   email                String   @unique
   password             String
-  cart                 Json
   token                String   @unique @default(cuid())
   createdAt            DateTime @default(now())
   role                 String   @default("user")
-  status               String   @default("green")
-  isVerified           Boolean  @default(false)
-  verificationAttempts Int      @default(0)
   canChangeEmail       Boolean  @default(true)
-  location             String   @default("unknown")
+  isVerified           Boolean  @default(false)
+  status               String   @default("green")
+  verificationAttempts Int      @default(0)
   address              String   @default("unknown")
+  location             String   @default("unknown")
+  postalCode           Int?
   city                 String   @default("unknown")
   state                String   @default("unknown")
-  postalCode           Int?
+
+  cart CartItem[]
+}
+
+model CartItem {
+  id        String  @id @default(cuid())
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
 }
 
 model EmailVerificationCode {

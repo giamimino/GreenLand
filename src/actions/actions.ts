@@ -6,6 +6,8 @@ import bcrypt from "bcrypt";
 import backUpProducts from "@/data/json/backup.json"
 import { sendVerificationCodeEmail } from "@/lib/sendVerificationCode";
 import { sendContact } from "@/lib/sendContact";
+import { redis } from "@/lib/redis";
+import { cookies } from "next/headers";
 
 export async function createProduct(formData: FormData) {
   try {
@@ -48,11 +50,11 @@ export async function createProduct(formData: FormData) {
       return { success: false, errors };
     }
 
-    await prisma.products.create({
+    await prisma.product.create({
       data: {
         title,
         slug: title.replace(/\s+/g, "-").toLowerCase(),
-        Description: description,
+        description: description,
         image: title.replace(/\s+/g, "-").toLowerCase(),
         price,
         category,
@@ -75,7 +77,7 @@ export async function createProduct(formData: FormData) {
 }
 
 export async function deleteProduct(formData: FormData) {
-  await prisma.products.delete({
+  await prisma.product.delete({
     where: {
       id: formData.get("id") as string,
     }
@@ -87,7 +89,7 @@ export async function addView(formData: FormData) {
   try {
     const id = formData.get("id") as string;
 
-    await prisma.products.update({
+    await prisma.product.update({
       where: { id },
       data: {
         view: {
@@ -116,38 +118,56 @@ export async function signUp(formData: FormData) {
     const password = formData.get('password') as string;
 
     if (!name || !email || !password) {
-      return { success: false, error: "All fields are required" };
+      return { success: false, message: "All fields are required" };
     }
 
-    const existingUser = await prisma.users.findUnique({
+    const existingUser = await prisma.user.findUnique({
       where: { email },
     });
 
     if (existingUser) {
-      return { success: false, error: "Email already in use" };
+      return { success: false, message: "Email already in use" };
     }
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    const user = await prisma.users.create({
+    const user = await prisma.user.create({
       data: {
         name,
         email,
         password: hashedPassword,
-        cart: [],
       },
+      select: {
+        id: true
+      }
     });
+
+    if(!user) {
+      return {
+        success: false,
+        message: "SomeThing went wrong."
+      }
+    }
+    const cookieStore = await cookies()
+    cookieStore.set("sessionId", cuid(), {
+      httpOnly: true,
+      secure: true,
+      maxAge: 60 * 60 * 24 * 3
+    })
+    const sessionId = cookieStore.get("sessionId")
+    const userSessionRedisKey = `session:${sessionId?.value}`
+    await redis.set(userSessionRedisKey, user.id, { ex: 60 * 60 * 24 * 3 })
 
     return {
       success: true,
-      token: user.token,
+      message: "Successfully created user"
     };
 
   } catch (error) {
     console.error("sign up error:", error);
     return {
       success: false,
-      error: "Something went wrong",
+      message: "Something went wrong",
     };
   }
 }
@@ -157,128 +177,44 @@ export async function signIn(formData: FormData) {
     const email = formData.get('email') as string
     const password = formData.get('password') as string
 
-    const user = await prisma.users.findUnique({
-      where: { email }
+    const user = await prisma.user.findUnique({
+      where: { email },
+      select: {
+        id: true,
+        password: true
+      }
     })
     
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return {
         success: false,
-        error: "Invalid email or password"
+        message: "Invalid email or password"
       }
     }
 
+    const cookieStore = await cookies()
+    cookieStore.set("sessionId", cuid(), {
+      httpOnly: true,
+      secure: true,
+      maxAge: 60 * 60 * 24 * 3
+    })
+
+    const sessionId = cookieStore.get("sessionId")
+    const userSessionRedisKey = `session:${sessionId?.value}`
+    await redis.set(userSessionRedisKey, user.id, { ex: 60 * 60 * 24 * 3 })
+
     return {
       success: true,
-      token: user.token
+      message: "Successfully created user"
     }
   } catch(error) {
     console.error("sign in error:", error);
     return {
       success: false,
-      error: "Something went wrong",
+      message: "Something went wrong",
     };
   }
 
-}
-
-type CartItem = {
-  product_id: string;
-  qty: number;
-}
-
-export async function addCart(formData: FormData) {
-  try {
-    const productId = formData.get('id') as string;
-    const product_qty = Number(formData.get("qty")) || 1;
-    const token = formData.get('token') as string;
-
-    if (!productId || !token) {
-      throw new Error("Missing productId or token");
-    }
-
-    const user = await prisma.users.findUnique({
-      where: { token },
-      select: { cart: true }
-    });
-
-    const currentCart = Array.isArray(user?.cart) ? (user.cart as CartItem[]) : [];
-
-    const existingIndex = currentCart.findIndex(item => item.product_id === productId);
-
-    if (existingIndex >= 0) {
-      currentCart[existingIndex].qty += product_qty;
-    } else {
-      currentCart.push({ product_id: productId, qty: product_qty });
-    }
-
-    await prisma.users.update({
-      where: { token },
-      data: { cart: currentCart }
-    });
-
-    return { success: true };
-  } catch(error) {
-    console.log("error cant add product", error);
-    return { success: false };
-  }
-}
-
-
-export async function LogOut(formData: FormData) {
-  try {
-    const id = formData.get("id") as string
-
-    await prisma.users.update({
-      where: {id},
-      data: {
-        token: cuid()
-      }
-    })
-
-    return {success: true}
-  } catch(err) {
-    console.log("error cant logout:", err);
-    return {
-      success: false
-    }
-  }
-}
-
-export async function deleteCart(formData: FormData) {
-  const product_id = formData.get("id") as string;
-  const token = formData.get("token") as string;
-  try {
-
-    if (!product_id || !token) {
-      return { success: false, error: "Missing id or token" };
-    }
-
-    const user = await prisma.users.findUnique({
-      where: { token },
-      select: { cart: true }
-    });
-
-    if (!user) {
-      return { success: false, error: "User not found" };
-    }
-
-    const currentCart: string[] = Array.isArray(user?.cart)
-      ? (user.cart as unknown[]).filter((id): id is string => typeof id === "string")
-      : [];
-
-    const updatedCart = currentCart.filter(id => id !== product_id);
-
-    await prisma.users.update({
-      where: { token },
-      data: { cart: updatedCart }
-    });
-
-    return { success: true };
-  } catch (error) {
-    console.error("Something went wrong deleting from cart:", error);
-    return { success: false, error, resurces: [product_id, token] };
-  }
 }
 
 export async function editName(formData: FormData) {
@@ -286,7 +222,7 @@ export async function editName(formData: FormData) {
     const name = formData.get("name") as string
     const id = formData.get("id") as string
 
-    await prisma.users.update({
+    await prisma.user.update({
       where: { id },
       data: {
         name
@@ -307,7 +243,7 @@ export async function editEmail(formData: FormData) {
     const email = formData.get("email") as string
     const id = formData.get("id") as string
 
-    await prisma.users.update({
+    await prisma.user.update({
       where: { id },
       data: {
         email
@@ -319,47 +255,6 @@ export async function editEmail(formData: FormData) {
     console.log("somthing went wrong edit email:", err);
     return {
       success: false
-    }
-  }
-}
-
-export async function increaseQTY(formData: FormData) {
-  try {
-    const token = formData.get("token") as string
-    const product_id = formData.get("product_id") as string
-    const qty = Number(formData.get("qty"))
-
-    const user = await prisma.users.findUnique({
-      where: { token},
-      select: { cart: true }
-    })
-
-    if(!user) return {success: false, message: "User not found"}
-
-    const currentCart = Array.isArray(user?.cart) ? (user.cart as CartItem[]) : []
-    
-    const updatedCart = currentCart.map((cartItem) => {
-      if (cartItem.product_id === product_id) {
-        return { ...cartItem, qty };
-      }
-      return cartItem;
-    });
-
-    await prisma.users.update({
-      where: { token },
-      data: {
-        cart: updatedCart
-      }
-    })
-
-    return {
-      success: true,
-    }
-  } catch(err) {
-    console.log(err);
-    return {
-      success: false,
-      message: "Error updating quantity",
     }
   }
 }
@@ -415,7 +310,7 @@ export async function checkVerifivation(formData: FormData) {
       return { success: false, message: "Verification code has expired." };
     }
     if (code === emailverificationcode.code) {
-      await prisma.users.update({
+      await prisma.user.update({
         where: {email},
         data: {
           isVerified: true
@@ -450,7 +345,7 @@ export async function editLocation(formData: FormData) {
 
     if(!location || !address || !postalCode || !state || !city) return {success: false, error: "Some fields are missing. Please fill in all required information."}
 
-    await prisma.users.update({
+    await prisma.user.update({
       where: { token },
       data: {
         location,
@@ -519,10 +414,16 @@ export async function sendMessage(formData: FormData) {
 
 export async function backupDatabase() {
   try {
-    const result = await prisma.products.createMany({
+    const result = await prisma.product.createMany({
       data: backUpProducts,
       skipDuplicates: true,
     });
+
+    if(!result) {
+      return {
+        success: false
+      }
+    }
 
     return {
       success: true,

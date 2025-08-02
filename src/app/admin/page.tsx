@@ -21,25 +21,17 @@ export default function Admin() {
   const [checked, setChecked] = useState(false)
   const [category, setCategory] = useState("")
   const [user, setUser] = useState<User | null>(null)
-  const router = useRouter()
 
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    if(!token) return
-
-    fetch('/api/getUser', {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token })
-    })
+    fetch('/api/getUser')
     .then(res => res.json())
     .then(data => {
       if(data.user) {
         setUser(data.user)
       }
     })
-  }, [router])
+  }, [])
 
   useEffect(() => {
     if(user?.role === "admin") {

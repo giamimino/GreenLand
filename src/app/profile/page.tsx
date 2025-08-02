@@ -1,10 +1,9 @@
 'use client'
 
-import { redirect, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import styles from './style.module.scss'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { editEmail, editLocation, editName, LogOut } from '@/actions/actions'
+import { editEmail, editLocation, editName } from '@/actions/actions'
 
 type User = {
   id: string
@@ -33,7 +32,6 @@ export default function Profile() {
   const [postalCode, setPostalCode] = useState("")
   const [city, setCity] = useState("")
   const [state, setState] = useState("")
-  const router = useRouter()
 
   useEffect(() => {
     if(user) {
@@ -48,19 +46,16 @@ export default function Profile() {
       .then(data => {
         if (data.user) {
           setUser(data.user)
-        } else {
-          localStorage.removeItem('token')
-          router.push('/')
         }
       })
-  }, [router])
+  }, [])
 
   useEffect(() => {
     if (error || success) {
       const timer = setTimeout(() => {
         setError("");
         setSuccess("");
-      }, 4500);
+      }, 2500);
       return () => clearTimeout(timer);
     }
   }, [error, success])
@@ -69,21 +64,21 @@ export default function Profile() {
     return <div>loading...</div>
   }
 
-  async function handleLogOut(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+  // async function handleLogOut(e: React.FormEvent<HTMLFormElement>) {
+  //   e.preventDefault()
 
-    const formData = new FormData(e.currentTarget)
-    const result = await LogOut(formData)
+  //   const formData = new FormData(e.currentTarget)
+  //   const result = await LogOut(formData)
 
-    if(!result.success) {
-      setError("somthing went wrong can't logout")
-    } else {
-      if(result.success) {
-        localStorage.removeItem('token')
-        redirect('/')
-      }
-    }
-  }
+  //   if(!result.success) {
+  //     setError("somthing went wrong can't logout")
+  //   } else {
+  //     if(result.success) {
+  //       localStorage.removeItem('token')
+  //       redirect('/')
+  //     }
+  //   }
+  // }
 
   async function handleNameEdit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -146,7 +141,6 @@ export default function Profile() {
               <button type='button' onClick={() => setIsEditName(prev => !prev)}><Icon icon="lucide:edit" /></button>
             </> :
             <form onSubmit={handleNameEdit}>
-              <input type="text" name='id' defaultValue={user?.id} hidden/>
               <p>Name:</p>
               <input type="text" name='name' value={name}
               onChange={(e) => setName(e.target.value)} />
@@ -161,7 +155,6 @@ export default function Profile() {
               <button type='button' onClick={() => setIsEditEmail(prev => !prev)}><Icon icon="lucide:edit" /></button>
             </> :
             <form onSubmit={handleEmailEdit} >
-              <input type="text" name='id' defaultValue={user?.id} hidden/>
               <p>Email:</p>
               <input type="email" name='email' value={email}
               onChange={(e) => setEmail(e.target.value)} />
@@ -193,12 +186,10 @@ export default function Profile() {
             <button type='button' onClick={() => setIsEditLocation(prev => !prev)} >Edit Location</button>
           </aside>
           <div>
-            <form onSubmit={handleLogOut}>
-              <input type="text" name='id' defaultValue={user?.id} hidden/>
+            <form>
               <button type='submit' className='bg-[tomato]'>Log out</button>
             </form>
             <form>
-              <input type="text" name='id' defaultValue={user?.id} hidden/>
               <button type='submit' className='bg-[red]'>Delete</button>
             </form>
           </div>
@@ -208,7 +199,6 @@ export default function Profile() {
         {success && <div role="alert" className={styles.success}>{success}</div>}
         {isEditLocation && 
         <form className={styles.locationForm} onSubmit={handleEditLocation}>
-          <input type="text" hidden name='token' defaultValue={user.token} />
           <div>
             <label htmlFor="country">Country: </label>
             <input type='text' id='country' name='country' value={location} onChange={(e) => setLocation(e.target.value)} />

@@ -5,7 +5,7 @@ export async function sendVerificationCodeEmail(to: string) {
   const code = Math.floor(100000 + Math.random() * 900000).toString();
 
   const { error } = await resend.emails.send({
-    from: 'onboarding@resend.dev',
+    from: 'noreply@greenmindmail.shop',
     to,
     subject: 'GreenMind verify',
     html: `<h1>Code: ${code}</h1><p>Expires in 15 minutes</p>`,

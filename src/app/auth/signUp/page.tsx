@@ -16,12 +16,9 @@ export default function SignUp() {
     const result = await signUp(formData);
 
     if (!result.success) {
-      console.log("error broher", result.error);
-      setError(result.error ?? "");
+      console.log("error broher", result.message);
+      setError(result.message ?? "");
     } else {
-      if (result.token) {
-        localStorage.setItem('token', result.token);
-      }
       redirect('/profile')
     }
   }

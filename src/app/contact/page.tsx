@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import styles from './page.module.scss'
-import { useRouter } from 'next/navigation'
 import { sendMessage } from '@/actions/actions'
 
 type User = {

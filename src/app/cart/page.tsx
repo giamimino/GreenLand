@@ -1,6 +1,5 @@
 "use client"
 import { Cart } from '@/components/ui/ui'
-import { redirect } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import styles from './page.module.scss'
 import Link from 'next/link'
@@ -16,7 +15,7 @@ type User = {
   cart: CartItem[]
 }
 
-type ProductType = {
+type ProductProps = {
   id: string,
   title: string,
   image: string,
@@ -26,74 +25,37 @@ type ProductType = {
   category: string,
   isSale: boolean,
   isBestSelling: boolean,
-  Description: string,
+  description: string,
   view: number,
   stock: number
-  qty: number
+}
+
+type ProductType = {
+  quantity: number
+  product: ProductProps
 }
 
 export default function CartPage() {
   const [user, setUser] = useState<User | null>(null)
   const [products, setProducts] = useState<ProductType[]>([])
-  const [token, setToken] = useState<string | null>(null);
   const [discount, setDiscount] = useState<number>(0)
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      redirect('/login');
-    }
-    setToken(token);
-    fetch('/api/getUser', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token })
+    fetch('/api/cart/get').then(res => res.json())
+    .then(data => {
+      if(data.success) {
+        console.log(data.cart);
+        setProducts(data.cart.cart)
+        setUser(null)
+      }
     })
-      .then(res => res.json())
-      .then(data => {
-        if(data.user) {
-          setUser(data.user)
-        }
-      })
-      .catch(err => {
-        console.error("Failed to fetch user:", err.message);
-      });
   }, [])
-
   useEffect(() => {
-    if (!user?.cart) return;
-
-    fetch('/api/getCart', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cart: user.cart })
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data?.products) {
-          const productsWithQty = data.products.map((product: ProductType) => {
-          const cartItem = user.cart.find(item => item.product_id === product.id);
-          return {
-            ...product,
-            qty: cartItem?.qty || 1
-          };
-        });
-          setProducts(productsWithQty);
-        }
-      })
-      .catch(err => {
-        console.error('Failed to fetch cart products:', err);
-      });
-  }, [user?.cart]);
-  useEffect(() => {
-    const total = products.reduce((acc, product) => (acc + (product.prevPrice? product.prevPrice : product.price)) * product.qty, 0)
-    const prevPriceTotal = products.reduce((acc, product) => (acc + product.price) * product.qty, 0)
+    const total = products.reduce((acc, p) => (acc + (p.product.prevPrice? p.product.prevPrice : p.product.price)) * p.quantity, 0)
+    const prevPriceTotal = products.reduce((acc, p) => (acc + p.product.price) * p.quantity, 0)
     
     setDiscount(((total - prevPriceTotal) / total) * 100)
   }, [products])
-
-
-  
 
   return (
     <div className={styles.cart}>
@@ -104,35 +66,34 @@ export default function CartPage() {
             <>
               <p className='justify-self-end mr-7 mb-3'>price</p>
               <aside className={styles.products}>
-                  {products.map((product, index) => (
+                  {products.map((p, index) => (
                       <Cart
-                        key={product.slug}
-                        id={product.id ?? ''}
-                        title={product.title}
-                        price={product.price}
-                        image={product.image}
-                        token={token ?? ''}
-                        description={product.Description}
-                        prevPrice={product.prevPrice === null ? undefined : product.prevPrice}
+                        key={p.product.slug}
+                        id={p.product.id ?? ''}
+                        title={p.product.title}
+                        price={p.product.price}
+                        image={p.product.image}
+                        description={p.product.description}
+                        prevPrice={p.product.prevPrice === null ? undefined : p.product.prevPrice}
                         delay={index * 100}
-                        slug={product.title.replace(/\s+/g, "-").toLowerCase()}
-                        category={product.category.replace("_", " ").toLowerCase()}
-                        isSale={product.isSale}
-                        isBestProducts={product.isBestSelling}
-                        view={product.view}
-                        stock={product.stock}
-                        qty={product.qty}
+                        slug={p.product.title.replace(/\s+/g, "-").toLowerCase()}
+                        category={p.product.category.replace("_", " ").toLowerCase()}
+                        isSale={p.product.isSale}
+                        isBestProducts={p.product.isBestSelling}
+                        view={p.product.view}
+                        stock={p.product.stock}
+                        qty={p.quantity}
                       />
                     ))}
               </aside>
               <p className='justify-self-end mr-7'>
-                subtotal {`(${products.reduce((acc, product) => acc + product.qty, 0)} items)`}: {products.reduce((acc, product) => (acc + (!product.prevPrice ? product.price : product.prevPrice)) * product.qty, 0)}$ {discount >= 1 && <span className='text-red-600 font-bold'>-{Math.round(discount)}%</span>} 
+                subtotal {`(${products.reduce((acc, p) => acc + p.quantity, 0)} items)`}: {products.reduce((acc, p) => (acc + (!p.product.prevPrice ? p.product.price : p.product.prevPrice)) * p.quantity, 0)}$ {discount >= 1 && <span className='text-red-600 font-bold'>-{Math.round(discount)}%</span>} 
               </p>
               {discount >= 1 && <p className='justify-self-end mt-0 mr-7'>
-                discount: <span className='text-[#fb7701]'>-{products.reduce((acc, product) => (acc + (!product.prevPrice ? product.price : product.prevPrice)) * product.qty, 0) - products.reduce((acc, product) => (acc + product.price) * product.qty, 0)}$</span>
+                discount: <span className='text-[#fb7701]'>-{products.reduce((acc, p) => (acc + (!p.product.prevPrice ? p.product.price : p.product.prevPrice)) * p.quantity, 0) - products.reduce((acc, p) => (acc + p.product.price) * p.quantity, 0)}$</span>
               </p>}
               {discount >= 1 && <h1 className='justify-self-end mr-7 font-bold text-1xl'>
-                total: {products.reduce((acc, product) => (acc + product.price) * product.qty, 0)}$
+                total: {products.reduce((acc, p) => (acc + p.product.price) * p.quantity, 0)}$
               </h1>}
               <div className='justify-self-end'>
                 <Link href={`/checkout`}>

@@ -7,7 +7,6 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { redirect } from "next/navigation";
-import { addView } from "@/actions/actions";
 import Link from "next/link";
 
 type FeatureCard = {
@@ -41,6 +40,7 @@ type Product = {
   id?: string,
   delay?: number,
   prevPrice?: number,
+  slug: string,
 }
 
 type CommentObject = {
@@ -63,7 +63,6 @@ type Cart = {
   price: number,
   slug: string,
   prevPrice?: number,
-  token: string,
   description: string,
   category: string,
   view: number,
@@ -76,35 +75,7 @@ type Cart = {
 export function Cart(props: Cart) {
   const [error, setError] = useState("")
   const [isCart, setIsCart] = useState(true)
-
-
-  async function handleDelete(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget)
-    const result = await deleteCart(formData)
-
-    if(!result.success) {
-      setError("somthing went wrong")
-      console.log(result.error, result.resurces);
-      
-    } else {
-      if(result.success) {
-        setIsCart(false)
-      }
-    }
-  }
-
-  async function handleIncrease(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-
-    const formData = new FormData(e.currentTarget)
-    const result = await increaseQTY(formData)
-
-    if(!result?.success) {
-      console.log("somthing wrong");
-    }
-  }
+  setError("")
   
   return ( isCart ?
     <div className={styles.cart}>
@@ -146,10 +117,8 @@ export function Cart(props: Cart) {
           </div>
           <main> 
             {props.stock !== 0 ?
-              <form onSubmit={handleIncrease}>
+              <form>
                 <input type="number" name="qty" min={1} max={props.stock} defaultValue={props.qty} />
-                <input type="text" name="token" defaultValue={props.token} hidden />
-                <input type="text" name="product_id" defaultValue={props.id} hidden />
                 <button type="submit">
                   <Icon icon="stash:paperplane-solid" />
                 </button>
@@ -158,10 +127,9 @@ export function Cart(props: Cart) {
             <button type="button" onClick={() => redirect(`/products/${props.slug}`)}>
               <Icon icon='gravity-ui:eyes-look-right' />
             </button>
-            <form onSubmit={handleDelete}>
-              <input type="text" name="id" defaultValue={props.id} hidden />
-              <input type="text" name="token" defaultValue={props.token} hidden />
-              <button type="submit" >
+            <form>
+
+              <button type="submit" onClick={() => setIsCart(prev => !prev)}>
                 <Icon icon="material-symbols:delete-rounded" />
               </button>
             </form>
@@ -230,20 +198,6 @@ export function Product(props: Product) {
     };
   }, [])
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const result = await addView(formData);
-    
-    if (!result.success) {
-      console.log("error brother", JSON.stringify(result.errors), result.id);
-    } else {
-      const slug = props.title.replace(/\s+/g, "-").toLowerCase();
-      redirect(`/products/${slug}`);
-    }
-  }
-
   return (
     <div ref={productRef}
     className={`${styles.product} ${inView? styles.fadeDown : ""}`}
@@ -265,10 +219,7 @@ export function Product(props: Product) {
             {props.prevPrice && <span>{props.prevPrice ? `${props.prevPrice}$`  : ''}</span>} {props.price}$
           </p>
         </div>
-        <form onSubmit={handleSubmit}>
-          <input type="text" name="id" defaultValue={props.id} hidden  />
-          <button type="submit"><Icon icon="mdi:cart" /></button>
-        </form>
+        <button type="button" onClick={() => redirect(`/products/${props.slug}`)}><Icon icon="mdi:cart" /></button>
       </main>
     </div>
   )

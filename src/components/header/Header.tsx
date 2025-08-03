@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { Icon } from "@iconify/react";
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import styles from './style.module.scss'
 import Link from 'next/link';
 
@@ -30,6 +30,15 @@ export default function Header() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  useEffect(() => {
+    fetch('/api/getUser').then(res => res.json())
+    .then(data => {
+      if(data.success) {
+        setUser(data.user)
+      }
+    })
+  })
 
   const navLinks = [
     {name: "Home", href:"/"},

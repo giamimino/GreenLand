@@ -84,33 +84,6 @@ export async function deleteProduct(formData: FormData) {
   })
 }
 
-export async function addView(formData: FormData) {
-  
-  try {
-    const id = formData.get("id") as string;
-
-    await prisma.product.update({
-      where: { id },
-      data: {
-        view: {
-          increment: 1,
-        },
-      },
-    });
-
-    return {success: true}
-  } catch (error) {
-    const id = formData.get("id") as string;
-    console.log("enter to product failed:", error);
-    return {
-      success: false,
-      errors: ["Something went wrong. Please try again."],
-      id: id
-    };
-  }
-
-}
-
 export async function signUp(formData: FormData) {
   try {
     const name = formData.get('name') as string;
@@ -410,7 +383,6 @@ export async function sendMessage(formData: FormData) {
     }
   }
 }
-
 
 export async function backupDatabase() {
   try {

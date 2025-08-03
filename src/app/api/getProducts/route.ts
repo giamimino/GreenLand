@@ -1,21 +1,33 @@
-import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { redis } from "@/lib/redis"; // optional caching
+import { NextResponse } from "next/server";
 
+type ProductsType = {
+  slug: string
+  title: string
+  image: string
+  price: number
+  prevPrice: number | null
+  category: string
+  createdAt: Date
+  isSale: boolean
+  view: number
+}
+
+let cache: ProductsType[] = [];
+let lastFetched = 0;
+const CACHE_DURATION = 30 * 60 * 1000;
 export async function GET() {
+  const now = Date.now();
+
+  if (cache && now - lastFetched < CACHE_DURATION) {
+    return NextResponse.json({
+      success: true,
+      products: cache,
+      cached: true,
+    });
+  }
+
   try {
-    const cacheKey = "products:all";
-    const cached = await redis.get(cacheKey);
-
-    if (cached) {
-      return NextResponse.json({
-        success: true,
-        products: cached,
-      });
-    }
-
-    const start = Date.now();
-
     const products = await prisma.product.findMany({
       select: {
         slug: true,
@@ -28,21 +40,18 @@ export async function GET() {
         isSale: true,
         view: true,
       },
-      take: 50,
     });
 
-    const duration = Date.now() - start;
-    console.log("DB fetch duration:", duration, "ms");
-
-    await redis.set(cacheKey, products, {ex: 60 * 5});
+    cache = products || [];
+    lastFetched = now;
 
     return NextResponse.json({
       success: true,
-      duration,
       products,
+      cached: false,
     });
   } catch (error) {
     console.error("Error fetching products:", error);
-    return NextResponse.json({ success: false, error }, { status: 500 });
+    return NextResponse.json({ success: false, error: "Server Error" }, { status: 500 });
   }
 }

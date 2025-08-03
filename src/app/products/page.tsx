@@ -62,8 +62,6 @@ export default function Products() {
     .then(data => {
       if(data.success) {
         setProducts(data.products)
-        console.log(data.duration);
-        
       }
     })
   }, [])
@@ -240,6 +238,7 @@ export default function Products() {
                   title={product.title}
                   price={product.price}
                   image={product.image}
+                  slug={product.slug}
                   prevPrice={product.prevPrice ?? undefined}
                   delay={index * 100}
                 />
@@ -258,6 +257,7 @@ export default function Products() {
             title={product.title}
             price={product.price}
             image={product.image}
+            slug={product.slug}
             delay={index * 100}
           />
         ))}

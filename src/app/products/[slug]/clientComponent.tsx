@@ -1,9 +1,8 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './page.module.scss'
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
-import { addCart } from '@/actions/actions';
 
 type ProductType = {
   id?: string,
@@ -11,46 +10,39 @@ type ProductType = {
   image: string,
   price: number,
   prevPrice?: number,
-  slug: string,
   category: string,
   isSale: boolean,
   isBestSelling: boolean,
-  Description: string,
+  description: string,
   view: number,
   stock: number,
 }
 
 export default function ClientComponent({ product }: { product: ProductType }) {
-  const [token, setToken] = useState("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
+  const [qty, setQty] = useState(1)
 
-  useEffect(() => {
-    const storedToken = localStorage.getItem('token')
-    if(storedToken) {
-      setToken(storedToken ?? "")
-    }
-  }, [])
-  
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-
-    if(token !== "") {
-      const formData = new FormData(e.currentTarget)
-      const result = await addCart(formData)
-
-      if(!result.success) {
-        setError("somthing went wrong")
+  async function handleAddCartItem() {
+    fetch("/api/cart/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ productId: product.id, qty })
+    }).then(res => res.json())
+    .then(data => {
+      if(data.success) {
+        setSuccess(data.message)
+        setError("")
+        redirect("/cart")
       } else {
-        if(result.success) {
-          setSuccess("successfuly added product to your cart")
+        if(!data.success) {
+          setError(data.message)
+          setSuccess("")
         }
       }
-    } else {
-      setError("you have to login before add to cart")
-    }
+    })
   }
+
   return (
     <div className={styles.product}>
       <main>
@@ -89,16 +81,18 @@ export default function ClientComponent({ product }: { product: ProductType }) {
               {product?.view}
             </div>
           </div>
-          <p>{product?.Description}</p>
+          <p>{product?.description}</p>
           <h2>{product?.prevPrice && <span>{product.prevPrice ? `${product.prevPrice}$`  : ''}</span>} {product?.price}$</h2>
-          <div className='mt-auto'>
-            <button type='button' onClick={() => redirect('/products')}>Back</button>
-            <form onSubmit={handleSubmit}>
-              <input type="text" hidden defaultValue={product?.id} name='id' />
-              <input type="text" hidden defaultValue={token} name='token'/>
-              <input type='number' min={1} max={product?.stock} defaultValue={1} name='qty'/>
-              <button type='submit'>Add to Cart</button>
-            </form>
+          <div className='mt-auto flex flex-col w-[fit-content]'>
+            <div className={styles.addCart}>
+              <button onClick={() => setQty(prev => prev < 2 ? prev : prev - 1)}>-</button>
+              <button onClick={() => setQty(prev => prev > (product?.stock - 1) ? prev : prev + 1)}>+</button>
+              <input type='number' min={1} max={product?.stock} value={qty} onChange={(e) => setQty(Number(e.target.value))}/>
+            </div>
+            <aside className='flex gap-[12px]'>
+              <button type='button' onClick={() => redirect('/products')}>Back</button>
+              <button type='submit' onClick={handleAddCartItem}>Add to Cart</button>
+            </aside>
           </div>
             {error && <p className='text-[#ff6347]'>{error}</p>}
             {success && <p className='text-[#00bd00]'>{success}</p>}

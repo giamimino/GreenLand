@@ -4,7 +4,6 @@ import styles from './page.module.scss'
 import { Button } from '@/components/ui/ui'
 import { backupDatabase, createProduct } from '@/actions/actions'
 import clsx from 'clsx'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 type User = {

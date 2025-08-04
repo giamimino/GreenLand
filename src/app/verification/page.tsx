@@ -18,16 +18,7 @@ export default function Verification() {
   const router = useRouter()
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if(!token) {
-      redirect('/')
-    }
-
-    fetch("/api/getUser", {
-      method: "POST",
-      headers: {"content-type": "application/json"},
-      body: JSON.stringify({ token })
-    })
+    fetch("/api/getUser")
     .then(res => res.json())
     .then(data => {
       if(data.user) {

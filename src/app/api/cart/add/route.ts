@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
-import prisma from '@/lib/prisma';
-import { redis } from '@/lib/redis';
-import { cookies } from 'next/headers';
+import prisma from "@/lib/prisma"
+import { redis } from "@/lib/redis"
+import { cookies } from "next/headers"
+import { NextResponse } from "next/server"
 
 function errorResponse(message: string) {
   return NextResponse.json({
@@ -12,29 +12,35 @@ function errorResponse(message: string) {
 
 export async function POST(req: Request) {
   try {
-    const { productId, qty } = await req.json();
+    const { productId, qty } = await req.json() as { productId: string, qty: number}
+    const sessionId = (await cookies()).get("sessionId")?.value
+    const sessionRedisKey = `session:${sessionId}`
+    const userId = await redis.get(sessionRedisKey) as string
 
-    const sessionId = (await cookies()).get('sessionId')?.value;
-    if (!sessionId) {
-      return errorResponse("Not authenticated.")
+    if(!userId) {
+      (await cookies()).delete("sessionId")
+      return errorResponse("user can't be found.")
     }
 
-    const userId = await redis.get(`session:${sessionId}`) as string;
-    if (!userId) {
-      return errorResponse("You must sign up before you can add products to your cart.")
+    const cart = await prisma.cartItem.create({
+      data: {
+        productId,
+        userId,
+        quantity: qty
+      }
+    })
+
+    if(!cart) {
+      return errorResponse("Failed to add product to your cart")
     }
 
-    if (!productId || !qty || qty <= 0) {
-      return errorResponse("Invalid product or quantity")
-    }
+    return NextResponse.json({
+      success: true,
+      message: "Successfully added product to cart"
+    })
 
-    await prisma.cartItem.create({
-      data: { productId, userId, quantity: qty }
-    });
-
-    return NextResponse.json({ success: true, message: 'Successfully added product to your cart.' });
-  } catch (error) {
-    console.error(error);
-    return errorResponse("Something went")
+  }catch(err) {
+    console.log(err);
+    return errorResponse("Something went wrong")
   }
 }

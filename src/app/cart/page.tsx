@@ -1,24 +1,15 @@
 "use client"
-import { Cart } from '@/components/ui/ui'
 import React, { useEffect, useState } from 'react'
 import styles from './page.module.scss'
 import Link from 'next/link'
-
-type CartItem = {
-  product_id: string,
-  qty: number
-}
-
-type User = {
-  name: string
-  email: string
-  cart: CartItem[]
-}
+import { deleteCart, editCart } from '@/actions/actions'
+import { Icon } from '@iconify/react/dist/iconify.js'
+import { redirect } from 'next/navigation'
+import Image from 'next/image'
 
 type ProductProps = {
   id: string,
   title: string,
-  image: string,
   price: number,
   prevPrice?: number,
   slug: string,
@@ -31,78 +22,225 @@ type ProductProps = {
 }
 
 type ProductType = {
+  id: string
   quantity: number
   product: ProductProps
 }
 
 export default function CartPage() {
-  const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(true)
   const [products, setProducts] = useState<ProductType[]>([])
-  const [discount, setDiscount] = useState<number>(0)
 
   useEffect(() => {
-    fetch('/api/cart/get').then(res => res.json())
-    .then(data => {
-      if(data.success) {
-        console.log(data.cart);
+    const fetchCart = async () => {
+      const res = await fetch('/api/cart/get')
+      const data = await res.json()
+      if (data.success && Array.isArray(data.cart.cart)) {
         setProducts(data.cart.cart)
-        setUser(null)
+        console.log(data.cart.cart);
+        
       }
-    })
+      setLoading(false)
+    }
+    fetchCart()
   }, [])
-  useEffect(() => {
-    const total = products.reduce((acc, p) => (acc + (p.product.prevPrice? p.product.prevPrice : p.product.price)) * p.quantity, 0)
-    const prevPriceTotal = products.reduce((acc, p) => (acc + p.product.price) * p.quantity, 0)
-    
-    setDiscount(((total - prevPriceTotal) / total) * 100)
-  }, [products])
+
+  const itemCount = products.reduce((acc, p) => acc + p.quantity, 0)
+
+  const subtotal = products.reduce(
+    (acc, p) => acc + ((p.product.prevPrice ?? p.product.price) * p.quantity),
+    0
+  )
+
+  const total = products.reduce(
+    (acc, p) => acc + (p.product.price * p.quantity),
+    0
+  )
+
+  const discountAmount = subtotal - total
+  const discountPercent = subtotal > 0 ? (discountAmount / subtotal) * 100 : 0
 
   return (
-    <div className={styles.cart}>
+    <div className={styles.cartContainer}>
       <main>
-        <h1>Hello <span className='font-medium'>{user?.name}</span> its your cart</h1>
-          {products.length === 0
-            ? !user?<p>loading...</p> : <p>no products</p> :
-            <>
-              <p className='justify-self-end mr-7 mb-3'>price</p>
-              <aside className={styles.products}>
-                  {products.map((p, index) => (
-                      <Cart
-                        key={p.product.slug}
-                        id={p.product.id ?? ''}
-                        title={p.product.title}
-                        price={p.product.price}
-                        image={p.product.image}
-                        description={p.product.description}
-                        prevPrice={p.product.prevPrice === null ? undefined : p.product.prevPrice}
-                        delay={index * 100}
-                        slug={p.product.title.replace(/\s+/g, "-").toLowerCase()}
-                        category={p.product.category.replace("_", " ").toLowerCase()}
-                        isSale={p.product.isSale}
-                        isBestProducts={p.product.isBestSelling}
-                        view={p.product.view}
-                        stock={p.product.stock}
-                        qty={p.quantity}
-                      />
-                    ))}
-              </aside>
-              <p className='justify-self-end mr-7'>
-                subtotal {`(${products.reduce((acc, p) => acc + p.quantity, 0)} items)`}: {products.reduce((acc, p) => (acc + (!p.product.prevPrice ? p.product.price : p.product.prevPrice)) * p.quantity, 0)}$ {discount >= 1 && <span className='text-red-600 font-bold'>-{Math.round(discount)}%</span>} 
+        <h1>Hello, it's your cart</h1>
+
+        {loading ? (
+          <p>Loading...</p>
+        ) : products.length > 0 ? (
+          <>
+            <p className="justify-self-end mr-7 mb-3">price</p>
+
+            <aside className={styles.products}>
+              {products.map((p, index) => (
+                <Cart
+                  key={p.product.slug}
+                  id={p.id}
+                  title={p.product.title}
+                  price={p.product.price}
+                  description={p.product.description}
+                  prevPrice={p.product.prevPrice ?? undefined}
+                  delay={index * 100}
+                  slug={p.product.slug}
+                  category={p.product.category.replace("_", " ").toLowerCase()}
+                  isSale={p.product.isSale}
+                  isBestProducts={p.product.isBestSelling}
+                  view={p.product.view}
+                  stock={p.product.stock}
+                  qty={p.quantity}
+                />
+              ))}
+            </aside>
+
+            <p className="justify-self-end mr-7">
+              Subtotal ({itemCount} items): {subtotal.toFixed(2)}$
+              {discountPercent >= 1 && (
+                <span className="text-red-600 font-bold">
+                  &nbsp;-{Math.round(discountPercent)}%
+                </span>
+              )}
+            </p>
+
+            {discountPercent >= 1 && (
+              <p className="justify-self-end mt-0 mr-7">
+                Discount:&nbsp;
+                <span className="text-[#fb7701]">
+                  -{discountAmount.toFixed(2)}$
+                </span>
               </p>
-              {discount >= 1 && <p className='justify-self-end mt-0 mr-7'>
-                discount: <span className='text-[#fb7701]'>-{products.reduce((acc, p) => (acc + (!p.product.prevPrice ? p.product.price : p.product.prevPrice)) * p.quantity, 0) - products.reduce((acc, p) => (acc + p.product.price) * p.quantity, 0)}$</span>
-              </p>}
-              {discount >= 1 && <h1 className='justify-self-end mr-7 font-bold text-1xl'>
-                total: {products.reduce((acc, p) => (acc + p.product.price) * p.quantity, 0)}$
-              </h1>}
-              <div className='justify-self-end'>
-                <Link href={`/checkout`}>
-                  <button type='button' className={styles.chechout}>Proceed to checkout</button>
-                </Link>
-              </div>
-            </>
-            }
+            )}
+
+            <h1 className="justify-self-end mr-7 font-bold text-1xl">
+              Total: {total.toFixed(2)}$
+            </h1>
+
+            <div className="justify-self-end">
+              <Link href="/checkout">
+                <button type="button" className={styles.chechout}>
+                  Proceed to checkout
+                </button>
+              </Link>
+            </div>
+          </>
+        ) : (
+          <p>Your cart is empty</p>
+        )}
       </main>
     </div>
   )
 }
+
+
+type Cart = {
+  id: string,
+  title: string,
+  delay: number,
+  price: number,
+  slug: string,
+  prevPrice?: number,
+  description: string,
+  category: string,
+  view: number,
+  isSale: boolean,
+  isBestProducts: boolean,
+  stock: number
+  qty: number
+}
+
+function Cart(props: Cart) {
+  const [error, setError] = useState("")
+  const [isCart, setIsCart] = useState(true)
+
+  async function handleDelete(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    
+    const formData = new FormData(e.currentTarget)
+    const result = await deleteCart(formData, props.id)
+
+    if(!result.success) {
+      setError(result.message)
+      setIsCart(prev => !prev)
+    } else {
+      setIsCart(prev => !prev)
+    }
+  }
+
+  async function handleEditCart(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    const formData = new FormData(e.currentTarget)
+    const result = await editCart(formData, props.id)
+
+    if(!result.success) {
+      setError(result.message || "")
+    }
+  }
+  
+  return ( isCart ?
+    <div className={styles.cart}>
+      <div>
+        <Image
+          src={`https://raw.githubusercontent.com/giamimino/images/refs/heads/main/greenland/products/${props.slug}.webp`}
+          alt={props.slug}
+          width={150}
+          height={205}
+        />
+        <div>
+          <p>{props.description}</p>
+          <div>
+            <div style={{
+                "--hint": '"category"',
+              } as React.CSSProperties}>
+              {props?.category}
+            </div>
+            <div style={{
+                "--hint": '"stock"',
+              } as React.CSSProperties}>
+              {props.stock}
+            </div>
+            {props?.isSale &&
+            <div>
+              {props?.isSale ? "Sale" : ''}
+            </div>
+            }
+            {props?.isBestProducts &&
+            <div>
+              {props?.isBestProducts ? "BestSelling" : ''}
+            </div>
+            }
+            <div style={{
+                "--hint": '"views"',
+              } as React.CSSProperties}>
+              {props?.view}
+            </div>
+          </div>
+          <main> 
+            {props.stock !== 0 ?
+              <form onSubmit={handleEditCart}>
+                <input type="number" name="qty" min={1} max={props.stock} defaultValue={props.qty} />
+                <button type="submit">
+                  <Icon icon="stash:paperplane-solid" />
+                </button>
+              </form> : <p className="red font-medium">out of stock</p>
+            }
+            <button type="button" onClick={() => redirect(`/products/${props.slug}`)}>
+              <Icon icon='gravity-ui:eyes-look-right' />
+            </button>
+
+            <form onSubmit={handleDelete}>
+              <button type="submit">
+                <Icon icon="material-symbols:delete-rounded" />
+              </button>
+            </form>
+          </main>
+        </div>
+      </div>
+      <h1><span className='line-through'>{props.prevPrice ? `${props.prevPrice}$`  : ''}</span> {props.price}$</h1>
+    </div> :
+    <div>
+      {error && <div role="alert" className={styles.error}>{error}</div>}
+      <p><Link className='text-blue-500 cursor-pointer'
+      style={{textDecoration: "underline"}} href={`/products/${props.slug}`}>{props.title}</Link> product was removed</p> 
+    </div>
+  )
+} 

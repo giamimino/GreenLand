@@ -190,13 +190,93 @@ export async function signIn(formData: FormData) {
 
 }
 
+export async function logout(formData: FormData) {
+  try {
+    const cookieStore = await cookies()
+    const sessionId = cookieStore.get("sessionId")?.value
+    const sessionRedisKey = `session:${sessionId}`
+    await redis.del(sessionRedisKey)
+    await redis.del(`cachedUser${sessionRedisKey}`)
+    cookieStore.delete("sessionId")
+    return {
+      success: true,
+    }
+  } catch(err) {
+    console.log(err);
+    return {
+      success: false
+    }
+  }
+}
+
+export async function editCart(formData: FormData, cartId: string) {
+  try {
+    const qty = Number(formData.get("qty"))
+    const cart = await prisma.cartItem.update({
+      where: { id: cartId },
+      data: {
+        quantity: qty
+      }
+    })
+    if(!cart) {
+      return {
+        success: false,
+        message: "Something went wrong."
+      }
+    }
+    return {
+      success: true,
+      qty
+    }
+  }catch(err) {
+    console.log(err);
+    return {
+      success: false,
+      message: "Something went wrong."
+    }
+  }
+}
+
+export async function deleteCart(formData: FormData, cartId: string) {
+  try {
+    const cart = await prisma.cartItem.delete({
+      where: { id: cartId }
+    })
+    if(!cart) {
+      return {
+        success: false,
+        message: "Something went wrong."
+      }
+    }
+
+
+    return {
+      success: true,
+      message: "Successfully deleted prouct"
+    }
+  }catch(err) {
+    console.log(err);
+    return {
+      success: false,
+      message: "Something went wrong."
+    }
+  }
+}
+
 export async function editName(formData: FormData) {
   try {
     const name = formData.get("name") as string
-    const id = formData.get("id") as string
-
+    if(!name) {
+      return {
+        success: false,
+        message: "Name field requred."
+      }
+    }
+    const sessionId = (await cookies()).get("sessionId")?.value
+    const sessionRedisKey = `session:${sessionId}`
+    const userId = await redis.get(sessionRedisKey) as string
     await prisma.user.update({
-      where: { id },
+      where: { id: userId },
       data: {
         name
       }

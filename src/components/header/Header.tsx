@@ -38,7 +38,7 @@ export default function Header() {
         setUser(data.user)
       }
     })
-  })
+  }, [])
 
   const navLinks = [
     {name: "Home", href:"/"},

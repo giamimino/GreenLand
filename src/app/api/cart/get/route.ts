@@ -28,6 +28,7 @@ type ProductProps = {
 type ProductType = {
   quantity: number
   product: ProductProps
+  id: string
 }
 
 let cache: ProductType[] = [];
@@ -54,6 +55,7 @@ export async function GET() {
       select: {
         cart: {
           select: {
+            id: true,
             quantity: true,
             product: {
               select: {

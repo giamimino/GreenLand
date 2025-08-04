@@ -39,16 +39,7 @@ export default function CheckOut() {
   const [products, setProducts] = useState<ProductType[]>([])
   
   useEffect(() => {
-    const token = localStorage.getItem('token') || undefined;
-    if(!token) {
-      redirect('/')
-    }
-
-    fetch('/api/getUser', {
-      method: 'POST',
-      headers: {"content-type": "application/json"},
-      body: JSON.stringify({ token })
-    })
+    fetch('/api/getUser')
     .then(res => res.json())
     .then(data => {
       if(data.user) {
@@ -56,47 +47,7 @@ export default function CheckOut() {
       }
     })
   }, [router])
-  useEffect(() => {
-    if(user) {
-      if(user.isVerified === false) {
-        setMessage("You have to verify email before checkout")
-      }
-      else if (user.cart.length === 0) {
-        setMessage("Your cart is empty")
-      }
-      else if (user.address === "unknown" || user.location === "unknown" || isNaN(user.postalCode)) {
-        setMessage("you have to share your location before checkout")
-      }
-      else {
-        setMessage("")
-      }
-    }
-  }, [user])
-  useEffect(() => {
-      if (!user?.cart) return;
-  
-      fetch('/api/getCart', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cart: user.cart })
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data?.products) {
-            const productsWithQty = data.products.map((product: ProductType) => {
-            const cartItem = user.cart.find(item => item.product_id === product.id);
-            return {
-              ...product,
-              qty: cartItem?.qty || 1
-            };
-          });
-            setProducts(productsWithQty);
-          }
-        })
-        .catch(err => {
-          console.error('Failed to fetch cart products:', err);
-        });
-    }, [user?.cart]);
+
 
   const createOrder = async () => {
     const checkoutPrice = products.reduce((acc, product) => (acc + product.price) * product.qty, 0)

@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import styles from './style.module.scss'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { editEmail, editLocation, editName } from '@/actions/actions'
+import { editEmail, editLocation, editName, logout } from '@/actions/actions'
+import { useRouter } from 'next/navigation'
 
 type User = {
   id: string
@@ -32,6 +33,7 @@ export default function Profile() {
   const [postalCode, setPostalCode] = useState("")
   const [city, setCity] = useState("")
   const [state, setState] = useState("")
+  const router = useRouter()
 
   useEffect(() => {
     if(user) {
@@ -64,21 +66,20 @@ export default function Profile() {
     return <div>loading...</div>
   }
 
-  // async function handleLogOut(e: React.FormEvent<HTMLFormElement>) {
-  //   e.preventDefault()
+  async function handleLogOut(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
 
-  //   const formData = new FormData(e.currentTarget)
-  //   const result = await LogOut(formData)
+    const formData = new FormData(e.currentTarget)
+    const result = await logout(formData)
 
-  //   if(!result.success) {
-  //     setError("somthing went wrong can't logout")
-  //   } else {
-  //     if(result.success) {
-  //       localStorage.removeItem('token')
-  //       redirect('/')
-  //     }
-  //   }
-  // }
+    if(!result.success) {
+      setError("somthing went wrong can't logout")
+    } else {
+      if(result.success) {
+        router.refresh()
+      }
+    }
+  }
 
   async function handleNameEdit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -186,7 +187,7 @@ export default function Profile() {
             <button type='button' onClick={() => setIsEditLocation(prev => !prev)} >Edit Location</button>
           </aside>
           <div>
-            <form>
+            <form onSubmit={handleLogOut}>
               <button type='submit' className='bg-[tomato]'>Log out</button>
             </form>
             <form>

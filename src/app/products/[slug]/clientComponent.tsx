@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import styles from './page.module.scss'
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 type ProductType = {
   id?: string,
@@ -22,6 +22,7 @@ export default function ClientComponent({ product }: { product: ProductType }) {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
   const [qty, setQty] = useState(1)
+  const router = useRouter()
 
   async function handleAddCartItem() {
     fetch("/api/cart/add", {
@@ -33,7 +34,7 @@ export default function ClientComponent({ product }: { product: ProductType }) {
       if(data.success) {
         setSuccess(data.message)
         setError("")
-        redirect("/cart")
+        router.push("/cart")
       } else {
         if(!data.success) {
           setError(data.message)
@@ -90,7 +91,7 @@ export default function ClientComponent({ product }: { product: ProductType }) {
               <input type='number' min={1} max={product?.stock} value={qty} onChange={(e) => setQty(Number(e.target.value))}/>
             </div>
             <aside className='flex gap-[12px]'>
-              <button type='button' onClick={() => redirect('/products')}>Back</button>
+              <button type='button' onClick={() => router.push('/products')}>Back</button>
               <button type='submit' onClick={handleAddCartItem}>Add to Cart</button>
             </aside>
           </div>

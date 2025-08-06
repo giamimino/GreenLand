@@ -16,6 +16,7 @@ type ProductsType = {
 let cache: ProductsType[] = [];
 let lastFetched = 0;
 const CACHE_DURATION = 30 * 60 * 1000;
+
 export async function GET() {
   const now = Date.now();
 
@@ -29,6 +30,7 @@ export async function GET() {
 
   try {
     const products = await prisma.product.findMany({
+      orderBy: { createdAt: 'desc' },
       select: {
         slug: true,
         title: true,

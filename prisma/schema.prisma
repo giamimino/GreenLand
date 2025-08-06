@@ -1,6 +1,6 @@
 generator client {
-  provider        = "prisma-client-js"
-  output          = "../src/app/generated/prisma-client"
+  provider = "prisma-client-js"
+  output   = "../src/app/generated/prisma-client"
 }
 
 datasource db {
@@ -9,21 +9,20 @@ datasource db {
 }
 
 model Product {
-  id            String   @id @default(cuid())
+  id            String     @id @default(cuid())
   image         String
   title         String
   description   String
   price         Int
-  slug          String   @unique
-  isSale        Boolean  @default(false)
-  isBestSelling Boolean  @default(false)
+  slug          String     @unique
+  isSale        Boolean    @default(false)
+  isBestSelling Boolean    @default(false)
   category      String
-  view          Int      @default(0)
+  view          Int        @default(0)
   prevPrice     Int?
-  stock         Int      @default(1)
-  createdAt      DateTime @default(now())
-
-  cartItems CartItem[]
+  stock         Int        @default(1)
+  createdAt     DateTime   @default(now())
+  cartItems     CartItem[]
 
   @@index([category])
   @@index([createdAt])
@@ -33,33 +32,32 @@ model Product {
 }
 
 model User {
-  id                   String   @id @default(cuid())
+  id                   String    @id @default(cuid())
   name                 String
-  email                String   @unique
+  email                String    @unique
   password             String
-  token                String   @unique @default(cuid())
-  createdAt            DateTime @default(now())
-  role                 String   @default("user")
-  canChangeEmail       Boolean  @default(true)
-  isVerified           Boolean  @default(false)
-  status               String   @default("green")
-  verificationAttempts Int      @default(0)
-  address              String   @default("unknown")
-  location             String   @default("unknown")
+  token                String    @unique @default(cuid())
+  createdAt            DateTime  @default(now())
+  role                 String    @default("user")
+  canChangeEmail       Boolean   @default(true)
+  isVerified           Boolean   @default(false)
+  status               String    @default("green")
+  verificationAttempts Int       @default(0)
+  address              String    @default("unknown")
+  location             String    @default("unknown")
   postalCode           Int?
-  city                 String   @default("unknown")
-  state                String   @default("unknown")
-
-  cart CartItem[]
+  city                 String    @default("unknown")
+  state                String    @default("unknown")
+  cart                 CartItem?
 }
 
 model CartItem {
-  id String @id @default(cuid())
-  user User @relation(fields: [userId], references: [id])
-  userId String
-  product Product @relation(fields: [productId], references: [id])
+  id        String  @id @default(cuid())
+  userId    String  @unique
   productId String
-  quantity Int
+  quantity  Int
+  product   Product @relation(fields: [productId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
 }
 
 model EmailVerificationCode {

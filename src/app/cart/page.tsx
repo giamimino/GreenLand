@@ -4,7 +4,7 @@ import styles from './page.module.scss'
 import Link from 'next/link'
 import { deleteCart, editCart } from '@/actions/actions'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
 type ProductProps = {
@@ -32,17 +32,15 @@ export default function CartPage() {
   const [products, setProducts] = useState<ProductType[]>([])
 
   useEffect(() => {
-    const fetchCart = async () => {
-      const res = await fetch('/api/cart/get')
-      const data = await res.json()
-      if (data.success && Array.isArray(data.cart.cart)) {
-        setProducts(data.cart.cart)
-        console.log(data.cart.cart);
-        
-      }
-      setLoading(false)
-    }
-    fetchCart()
+    fetch('/api/cart/get').then(res => res.json())
+      .then(data => {
+        if (data.success && Array.isArray(data.cart)) {
+          setProducts(data.cart)
+        } else {
+          console.log("Error or invalid format:", data.message)
+        }
+        setLoading(false)
+      })
   }, [])
 
   const itemCount = products.reduce((acc, p) => acc + p.quantity, 0)
@@ -60,10 +58,19 @@ export default function CartPage() {
   const discountAmount = subtotal - total
   const discountPercent = subtotal > 0 ? (discountAmount / subtotal) * 100 : 0
 
+  function handleDelete(id: string) {
+    setProducts(prev => prev.filter(product => product.id !== id))
+  }
+
+  function handleEditCart(id: string, qty: number){
+    setProducts(prev => prev.map(product => product.id === id ? {...product, quantity: qty} : product))
+  }
+  
+
   return (
     <div className={styles.cartContainer}>
       <main>
-        <h1>Hello, it's your cart</h1>
+        <h1>Hello, {`it's`} your cart</h1>
 
         {loading ? (
           <p>Loading...</p>
@@ -88,6 +95,8 @@ export default function CartPage() {
                   view={p.product.view}
                   stock={p.product.stock}
                   qty={p.quantity}
+                  onDelete={() => handleDelete(p.id)}
+                  onEdit={(qty) => handleEditCart(p.id, qty)}
                 />
               ))}
             </aside>
@@ -143,13 +152,16 @@ type Cart = {
   view: number,
   isSale: boolean,
   isBestProducts: boolean,
-  stock: number
-  qty: number
+  stock: number,
+  qty: number,
+  onDelete: () => void,
+  onEdit: (qty: number) => void
 }
 
 function Cart(props: Cart) {
   const [error, setError] = useState("")
   const [isCart, setIsCart] = useState(true)
+  const router = useRouter()
 
   async function handleDelete(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -162,6 +174,7 @@ function Cart(props: Cart) {
       setIsCart(prev => !prev)
     } else {
       setIsCart(prev => !prev)
+      props.onDelete()
     }
   }
 
@@ -173,6 +186,8 @@ function Cart(props: Cart) {
 
     if(!result.success) {
       setError(result.message || "")
+    } else {
+      props.onEdit(Number(result.qty))
     }
   }
   
@@ -223,7 +238,7 @@ function Cart(props: Cart) {
                 </button>
               </form> : <p className="red font-medium">out of stock</p>
             }
-            <button type="button" onClick={() => redirect(`/products/${props.slug}`)}>
+            <button type="button" onClick={() => router.push(`/products/${props.slug}`)}>
               <Icon icon='gravity-ui:eyes-look-right' />
             </button>
 

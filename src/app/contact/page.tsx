@@ -53,7 +53,7 @@ export default function Contact() {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget)
-    const result = await sendMessage(formData)
+    const result = await sendMessage(formData, contactTopic)
 
     if(!result.success) {
       setError(result.error  || "")
@@ -64,19 +64,17 @@ export default function Contact() {
     }
   }
 
-  const DefaulInputs = (user: User | null, topic: string) => (
+  const DefaulInputs = (user: User | null) => (
     <>
-      <input type="text" name="id" defaultValue={user?.id || ""} hidden />
       <input type="text" name="contactName" defaultValue={user?.name} hidden />
       <input type="text" name="contactEmail" defaultValue={user?.email} hidden />
-      <input type="text" name="contactTopic" defaultValue={topic} hidden />
     </>
   )
 
   const topicForms: Record<string, JSX.Element> = {
     review: (
       <form onSubmit={handleSend}>
-        {DefaulInputs(user, contactTopic)}
+        {DefaulInputs(user)}
         <div>
           <label htmlFor="job">Job:</label>
           <input type="text" id='job' name='job' />
@@ -91,7 +89,7 @@ export default function Contact() {
   
     bugreport: (
       <form onSubmit={handleSend}>
-        {DefaulInputs(user, contactTopic)}
+        {DefaulInputs(user)}
         <div>
           <label htmlFor="page">Page:</label>
           <input type='text' id="page" name="page" />
@@ -105,7 +103,7 @@ export default function Contact() {
     ),
     order_issue: (
       <form onSubmit={handleSend}>
-        {DefaulInputs(user, contactTopic)}
+        {DefaulInputs(user)}
         <div>
           <label htmlFor="order_number">Order ID:</label>
           <input type="text" id="order_number" name="order_number" required/>
@@ -134,7 +132,7 @@ export default function Contact() {
     ),
     return: (
       <form onSubmit={handleSend}>
-        {DefaulInputs(user, contactTopic)}
+        {DefaulInputs(user)}
         <div>
           <label htmlFor="order_id">Order ID:</label>
           <input type="text" id="order_id" name="order_id" required />
@@ -153,7 +151,7 @@ export default function Contact() {
   
     refund: (
       <form onSubmit={handleSend}>
-        {DefaulInputs(user, contactTopic)}
+        {DefaulInputs(user)}
         <div>
           <label htmlFor="order_id">Order ID:</label>
           <input type="text" id="order_id" name="order_id" required />
@@ -168,7 +166,7 @@ export default function Contact() {
   
     shipping: (
       <form onSubmit={handleSend}>
-        {DefaulInputs(user, contactTopic)}
+        {DefaulInputs(user)}
         <div>
           <label htmlFor="order_id">Order ID:</label>
           <input type="text" id="order_id" name="order_id" required />
@@ -183,7 +181,7 @@ export default function Contact() {
   
     product_question: (
       <form onSubmit={handleSend}>
-        {DefaulInputs(user, contactTopic)}
+        {DefaulInputs(user)}
         <div>
           <label htmlFor="product_name">Product Name:</label>
           <input type="text" id="product_name" name="product_name" required />
@@ -198,7 +196,7 @@ export default function Contact() {
   
     business: (
       <form onSubmit={handleSend}>
-        {DefaulInputs(user, contactTopic)}
+        {DefaulInputs(user)}
         <div>
           <label htmlFor="company_name">Company Name:</label>
           <input type="text" id="company_name" name="company_name" required />

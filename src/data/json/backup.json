@@ -9,10 +9,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "indoor_plants",
-    "createdAt": "2025-06-24T16:01:20.671Z",
     "view": 0,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-24T16:01:20.671Z"
   },
   {
     "id": "cmcaqaz350002j7kbe50e07pc",
@@ -24,10 +24,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "indoor_plants",
-    "createdAt": "2025-06-24T16:17:21.954Z",
     "view": 0,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-24T16:17:21.954Z"
   },
   {
     "id": "cmcaqbhtf0003j7kb5yqsvi1y",
@@ -39,10 +39,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "indoor_plants",
-    "createdAt": "2025-06-24T16:17:46.227Z",
     "view": 1,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-24T16:17:46.227Z"
   },
   {
     "id": "cmcaqci5p0005j7kb05qvwo12",
@@ -54,10 +54,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "indoor_plants",
-    "createdAt": "2025-06-24T16:18:33.325Z",
     "view": 1,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-24T16:18:33.325Z"
   },
   {
     "id": "cmcaqd6fj0009j7kb9fqv61ju",
@@ -69,10 +69,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "indoor_plants",
-    "createdAt": "2025-06-24T16:19:04.783Z",
     "view": 1,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-24T16:19:04.783Z"
   },
   {
     "id": "cmcdgvne10002j7s0cxnv8g0u",
@@ -84,10 +84,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "outdoor_plants",
-    "createdAt": "2025-06-26T14:16:48.938Z",
     "view": 1,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-26T14:16:48.938Z"
   },
   {
     "id": "cmcdgwiu70005j7s0jnwk7nhd",
@@ -99,10 +99,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "outdoor_plants",
-    "createdAt": "2025-06-26T14:17:29.695Z",
     "view": 0,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-26T14:17:29.695Z"
   },
   {
     "id": "cmcdgxtsc0008j7s0gdj6hagt",
@@ -114,10 +114,10 @@
     "isSale": true,
     "isBestSelling": false,
     "category": "outdoor_plants",
-    "createdAt": "2025-06-26T14:18:30.540Z",
     "view": 0,
     "prevPrice": 20,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-26T14:18:30.540Z"
   },
   {
     "id": "cmcdgy6gx0009j7s0old5wonu",
@@ -129,10 +129,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "outdoor_plants",
-    "createdAt": "2025-06-26T14:18:46.977Z",
     "view": 0,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-26T14:18:46.977Z"
   },
   {
     "id": "cmcdgz0rg000bj7s0n0y9dq4h",
@@ -144,10 +144,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "outdoor_plants",
-    "createdAt": "2025-06-26T14:19:26.236Z",
     "view": 0,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-26T14:19:26.236Z"
   },
   {
     "id": "cmcm19j2g0004z90xls9inamc",
@@ -159,10 +159,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "succulents_cacti",
-    "createdAt": "2025-07-02T14:09:38.179Z",
     "view": 0,
     "prevPrice": null,
-    "stock": 44
+    "stock": 44,
+    "createdAt": "2025-07-02T14:09:38.179Z"
   },
   {
     "id": "cmcm1ae4j0005z90xkf8ep00k",
@@ -174,10 +174,10 @@
     "isSale": true,
     "isBestSelling": false,
     "category": "succulents_cacti",
-    "createdAt": "2025-07-02T14:10:18.425Z",
     "view": 0,
     "prevPrice": 16,
-    "stock": 6
+    "stock": 6,
+    "createdAt": "2025-07-02T14:10:18.425Z"
   },
   {
     "id": "cmcm1atw40006z90xizgbcyfi",
@@ -189,25 +189,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "succulents_cacti",
-    "createdAt": "2025-07-02T14:10:38.828Z",
     "view": 0,
     "prevPrice": null,
-    "stock": 13
-  },
-  {
-    "id": "cmcm1bote0008z90x0kfglwi8",
-    "image": "zebra-cactus",
-    "title": "Zebra Cactus",
-    "description": "Looks like Haworthia, striped leaves, very hardy.",
-    "price": 6,
-    "slug": "zebra-cactus",
-    "isSale": true,
-    "isBestSelling": false,
-    "category": "succulents_cacti",
-    "createdAt": "2025-07-02T14:11:18.944Z",
-    "view": 0,
-    "prevPrice": 8,
-    "stock": 17
+    "stock": 13,
+    "createdAt": "2025-07-02T14:10:38.828Z"
   },
   {
     "id": "cmcm1cqmc000az90x93h5vhib",
@@ -219,10 +204,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "succulents_cacti",
-    "createdAt": "2025-07-02T14:12:07.934Z",
     "view": 0,
     "prevPrice": null,
-    "stock": 22
+    "stock": 22,
+    "createdAt": "2025-07-02T14:12:07.934Z"
   },
   {
     "id": "cmcm1d2ap000bz90xbrgcojhz",
@@ -234,10 +219,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "succulents_cacti",
-    "createdAt": "2025-07-02T14:12:23.066Z",
     "view": 0,
     "prevPrice": null,
-    "stock": 22
+    "stock": 22,
+    "createdAt": "2025-07-02T14:12:23.066Z"
   },
   {
     "id": "cmcm1dtor000dz90xyh0lnmhy",
@@ -249,10 +234,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "succulents_cacti",
-    "createdAt": "2025-07-02T14:12:58.562Z",
     "view": 0,
     "prevPrice": null,
-    "stock": 24
+    "stock": 24,
+    "createdAt": "2025-07-02T14:12:58.562Z"
   },
   {
     "id": "cmcaqduxw000bj7kbzr3y5ie2",
@@ -264,10 +249,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "indoor_plants",
-    "createdAt": "2025-06-24T16:19:36.548Z",
     "view": 1,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-24T16:19:36.548Z"
   },
   {
     "id": "cmcaqe65e000cj7kb2vjnelo2",
@@ -279,10 +264,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "indoor_plants",
-    "createdAt": "2025-06-24T16:19:51.074Z",
     "view": 1,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-24T16:19:51.074Z"
   },
   {
     "id": "cmcdgw6dt0004j7s0av60u6r5",
@@ -294,10 +279,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "outdoor_plants",
-    "createdAt": "2025-06-26T14:17:13.554Z",
     "view": 2,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-26T14:17:13.554Z"
   },
   {
     "id": "cmcm1bad40007z90x4ptw49kl",
@@ -309,25 +294,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "succulents_cacti",
-    "createdAt": "2025-07-02T14:11:00.213Z",
     "view": 1,
     "prevPrice": null,
-    "stock": 16
-  },
-  {
-    "id": "cmcaqbyx50004j7kbutazgwdq",
-    "image": "pothos",
-    "title": "Pothos",
-    "description": "Fast-growing vine, trailing or hanging, adaptable to many conditions.",
-    "price": 12,
-    "slug": "pothos",
-    "isSale": true,
-    "isBestSelling": true,
-    "category": "indoor_plants",
-    "createdAt": "2025-06-24T16:18:08.393Z",
-    "view": 5,
-    "prevPrice": null,
-    "stock": 12
+    "stock": 16,
+    "createdAt": "2025-07-02T14:11:00.213Z"
   },
   {
     "id": "cmcdgyosi000aj7s00fpf9h89",
@@ -339,10 +309,10 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "outdoor_plants",
-    "createdAt": "2025-06-26T14:19:10.723Z",
     "view": 1,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-26T14:19:10.723Z"
   },
   {
     "id": "cmcaqcvkg0008j7kbmt19lj8z",
@@ -354,10 +324,10 @@
     "isSale": true,
     "isBestSelling": true,
     "category": "indoor_plants",
-    "createdAt": "2025-06-24T16:18:50.704Z",
     "view": 8,
     "prevPrice": 24,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-24T16:18:50.704Z"
   },
   {
     "id": "cmcm1c90g0009z90xxbchm3iz",
@@ -369,10 +339,10 @@
     "isSale": true,
     "isBestSelling": false,
     "category": "succulents_cacti",
-    "createdAt": "2025-07-02T14:11:45.113Z",
     "view": 1,
     "prevPrice": 18,
-    "stock": 14
+    "stock": 14,
+    "createdAt": "2025-07-02T14:11:45.113Z"
   },
   {
     "id": "cmcdgwxyt0006j7s0sp7v3i1z",
@@ -384,40 +354,10 @@
     "isSale": true,
     "isBestSelling": true,
     "category": "outdoor_plants",
-    "createdAt": "2025-06-26T14:17:49.301Z",
     "view": 14,
     "prevPrice": 19,
-    "stock": 12
-  },
-  {
-    "id": "cmcdgv3s00001j7s03b1t2vph",
-    "image": "lavender",
-    "title": "Lavender",
-    "description": "Fragrant purple blooms, attracts bees, loves full sun.",
-    "price": 8,
-    "slug": "lavender",
-    "isSale": true,
-    "isBestSelling": true,
-    "category": "outdoor_plants",
-    "createdAt": "2025-06-26T14:16:23.521Z",
-    "view": 5,
-    "prevPrice": 10,
-    "stock": 12
-  },
-  {
-    "id": "cmcdgxi9p0007j7s0kmu1yos3",
-    "image": "geranium",
-    "title": "Geranium",
-    "description": "Colorful blooms, heat-tolerant, popular balcony plant.",
-    "price": 12,
-    "slug": "geranium",
-    "isSale": true,
-    "isBestSelling": true,
-    "category": "outdoor_plants",
-    "createdAt": "2025-06-26T14:18:15.613Z",
-    "view": 3,
-    "prevPrice": 10,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-26T14:17:49.301Z"
   },
   {
     "id": "cmcaqdghv000aj7kbesmuetxr",
@@ -429,10 +369,55 @@
     "isSale": false,
     "isBestSelling": false,
     "category": "indoor_plants",
-    "createdAt": "2025-06-24T16:19:17.827Z",
     "view": 2,
     "prevPrice": null,
-    "stock": 12
+    "stock": 12,
+    "createdAt": "2025-06-24T16:19:17.827Z"
+  },
+  {
+    "id": "cmcdgv3s00001j7s03b1t2vph",
+    "image": "lavender",
+    "title": "Lavender",
+    "description": "Fragrant purple blooms, attracts bees, loves full sun.",
+    "price": 8,
+    "slug": "lavender",
+    "isSale": false,
+    "isBestSelling": true,
+    "category": "outdoor_plants",
+    "view": 5,
+    "prevPrice": null,
+    "stock": 12,
+    "createdAt": "2025-06-26T14:16:23.521Z"
+  },
+  {
+    "id": "cmcdgxi9p0007j7s0kmu1yos3",
+    "image": "geranium",
+    "title": "Geranium",
+    "description": "Colorful blooms, heat-tolerant, popular balcony plant.",
+    "price": 12,
+    "slug": "geranium",
+    "isSale": false,
+    "isBestSelling": true,
+    "category": "outdoor_plants",
+    "view": 3,
+    "prevPrice": null,
+    "stock": 12,
+    "createdAt": "2025-06-26T14:18:15.613Z"
+  },
+  {
+    "id": "cmcm1bote0008z90x0kfglwi8",
+    "image": "zebra-cactus",
+    "title": "Zebra Cactus",
+    "description": "Looks like Haworthia, striped leaves, very hardy.",
+    "price": 6,
+    "slug": "zebra-cactus",
+    "isSale": false,
+    "isBestSelling": false,
+    "category": "succulents_cacti",
+    "view": 0,
+    "prevPrice": null,
+    "stock": 17,
+    "createdAt": "2025-07-02T14:11:18.944Z"
   },
   {
     "id": "cmcm1dhj4000cz90xtcs8f3d5",
@@ -441,12 +426,27 @@
     "description": "Small cactus with many tubercles, often flowers in a ring.",
     "price": 7,
     "slug": "mammillaria",
-    "isSale": true,
+    "isSale": false,
     "isBestSelling": false,
     "category": "succulents_cacti",
-    "createdAt": "2025-07-02T14:12:42.807Z",
     "view": 1,
-    "prevPrice": 10,
-    "stock": 27
+    "prevPrice": null,
+    "stock": 27,
+    "createdAt": "2025-07-02T14:12:42.807Z"
+  },
+  {
+    "id": "cmcaqbyx50004j7kbutazgwdq",
+    "image": "pothos",
+    "title": "Pothos",
+    "description": "Fast-growing vine, trailing or hanging, adaptable to many conditions.",
+    "price": 12,
+    "slug": "pothos",
+    "isSale": true,
+    "isBestSelling": true,
+    "category": "indoor_plants",
+    "view": 5,
+    "prevPrice": 13,
+    "stock": 12,
+    "createdAt": "2025-06-24T16:18:08.393Z"
   }
 ]

@@ -189,6 +189,7 @@ export default function Home() {
               
               <Product
                 key={product.slug}
+                slug={product.slug}
                 title={product.title}
                 image={product.image}
                 price={product.price}

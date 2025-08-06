@@ -4,7 +4,7 @@ import styes from "./page.module.scss"
 import React, { useEffect, useState, useMemo } from 'react';
 import { Product } from "@/components/ui/ui";
 import clsx from "clsx";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type ProductType = {
   id?: string
@@ -51,7 +51,6 @@ export default function Products() {
   const [showFilterCategoy, setShowFilterCategory] = useState(false)
   const [filter, setFilter] = useState<string[]>([])
   const [searchValue, setSearchValue] = useState<string>("")
-  const searchParams = useSearchParams()
   const [ShowSortCategory, setShowSortCategory] = useState(false)
   const [sort, setSort] = useState("")
   const [products, setProducts] = useState<ProductType[]>()
@@ -67,11 +66,12 @@ export default function Products() {
   }, [])
 
   useEffect(() => {
-    const query = searchParams.get("p");
-    if (query) {
-      setSearchValue(query); 
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("p");
+    if (q) {
+      setSearchValue(q);
     }
-  }, [searchParams]);
+  }, []);
 
   const filteredProducts = useMemo(() => {
     let result = products ?? [];

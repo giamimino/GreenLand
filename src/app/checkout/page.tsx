@@ -1,13 +1,15 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import styles from './page.module.scss'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Icon } from '@iconify/react/dist/iconify.js'
 
 type CartType = {
-  product_id: string,
-  qty: number
+  title: string,
+  price: number,
+  slug: string,
+  prevPrice: number,
 }
 
 type User = {
@@ -24,12 +26,8 @@ type User = {
 }
 
 type ProductType = {
-  id: string,
-  title: string,
-  price: number,
-  slug: string,
-  prevPrice: number,
-  qty: number
+  quantity: number,
+  product: CartType
 }
 
 export default function CheckOut() {
@@ -47,10 +45,22 @@ export default function CheckOut() {
       }
     })
   }, [router])
+  useEffect(() => {
+    if(user) {
+      fetch("/api/cart/checkout/get").then(res => res.json())
+      .then(data => {
+        if(data.success) {
+          setProducts(data.cart)
+        } else {
+          setMessage(data.message)
+        }
+      })
+    }
+  }, [user])
 
 
   const createOrder = async () => {
-    const checkoutPrice = products.reduce((acc, product) => (acc + product.price) * product.qty, 0)
+    const checkoutPrice = products.reduce((acc, p) => (acc + p.product.price) * p.quantity, 0)
     const res = await fetch('/api/checkout', {
       method: 'POST',
       body: JSON.stringify({ amount: checkoutPrice }),
@@ -77,21 +87,21 @@ export default function CheckOut() {
         <div>
           <h1 >checkout</h1>
           <div className={styles.checklist}>
-            {products.map((product) => (
-              <div key={product.slug}>
+            {products.map((p) => (
+              <div key={p.product.slug}>
                 <h3>
-                  {product.title}: 
+                  {p.product.title}: 
                 </h3>
                 <p>
-                  {product.price}$ {`(${product.qty} items)`}
+                  {p.product.price}$ {`(${p.quantity} items)`}
                 </p>
               </div>
             ))}
           </div>
           <div className={styles.prices}>
-            <h4><span>Total:</span> <span>{products.reduce((acc, product) => (acc + (product.prevPrice ? product.prevPrice : product.price)) * product.qty, 0)}$</span></h4>
-            <h4><span>Discounts:</span> <span className='text-[#fb7701]'>-{products.reduce((acc, product) => (acc + (product.prevPrice ? product.prevPrice : product.price)) * product.qty, 0) - products.reduce((acc, product) => (acc + product.price) * product.qty, 0)}$</span></h4>
-            <h4><span>subtotal:</span> <span>{products.reduce((acc, product) => (acc + product.price) * product.qty, 0)}$</span></h4>
+            <h4><span>Total:</span> <span>{products.reduce((acc, p) => (acc + (p.product.prevPrice ? p.product.prevPrice : p.product.price)) * p.quantity, 0)}$</span></h4>
+            <h4><span>Discounts:</span> <span className='text-[#fb7701]'>-{products.reduce((acc, p) => (acc + (p.product.prevPrice ? p.product.prevPrice : p.product.price)) * p.quantity, 0) - products.reduce((acc, p) => (acc + p.product.price) * p.quantity, 0)}$</span></h4>
+            <h4><span>subtotal:</span> <span>{products.reduce((acc, p) => (acc + p.product.price) * p.quantity, 0)}$</span></h4>
           </div>
           <h1>Location</h1>
           <h2>Country: {user?.location}</h2>

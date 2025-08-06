@@ -10,46 +10,25 @@ function errorResponse(message: string) {
   })
 }
 
-type ProductProps = {
-  id: string,
-  title: string,
-  image: string,
-  price: number,
-  prevPrice?: number | null,
-  slug: string,
-  category: string,
-  isSale: boolean,
-  isBestSelling: boolean,
-  description: string,
-  view: number,
-  stock: number
-}
-
-type ProductType = {
-  quantity: number
-  product: ProductProps
-  id: string
-}
-
-let cache: ProductType[] = [];
-let lastFetched = 0;
-const CACHE_DURATION = 30 * 60 * 1000;
-
 export async function GET() {
-  const now = Date.now();
-  
-    if (cache && now - lastFetched < CACHE_DURATION) {
-      return NextResponse.json({
-        success: true,
-        cart: cache,
-      });
-    }
   try {
     const sessionId = (await cookies()).get("sessionId")?.value
+    if (!sessionId) return errorResponse("Not authenticated.")
+    const cartCacheKey = `cart:${sessionId}`;
+    const cachedCart = await redis.get(cartCacheKey);
+    if (cachedCart) {
+      return NextResponse.json({
+        success: true,
+        cart: cachedCart,
+      });
+    }
+
     const sessionRedisKey = `session:${sessionId}`
     const userId = await redis.get(sessionRedisKey) as string
-    if(!userId) return errorResponse("Not authenticated.")
-    
+    if (!userId) return errorResponse("Not authenticated.")
+
+
+
     const cart = await prisma.user.findUnique({
       where: { id: userId },
       select: {
@@ -76,18 +55,17 @@ export async function GET() {
           }
         }
       }
-    })
+    });
 
-    if(!cart) return errorResponse("no any product in your cart list")
-    cache = cart.cart || [];
-    lastFetched = now;
+    await redis.set(cartCacheKey, cart?.cart, { ex: 1800 });
 
     return NextResponse.json({
       success: true,
-      cart
-    })
-  }catch(err) {
+      cart: cart?.cart
+    });
+
+  } catch (err) {
     console.log("cart get error", err);
-    return errorResponse("Something went wrong.")
+    return errorResponse("Something went wrong.");
   }
 }

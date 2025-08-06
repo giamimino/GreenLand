@@ -192,6 +192,9 @@ export async function signIn(formData: FormData) {
 
 export async function logout(formData: FormData) {
   try {
+    if(formData) {
+      console.log("");
+    }
     const cookieStore = await cookies()
     const sessionId = cookieStore.get("sessionId")?.value
     const sessionRedisKey = `session:${sessionId}`
@@ -224,6 +227,9 @@ export async function editCart(formData: FormData, cartId: string) {
         message: "Something went wrong."
       }
     }
+    const sessionId = (await cookies()).get("sessionId")?.value
+    const cartRedisKey = `cart:${sessionId}`
+    await redis.del(cartRedisKey)
     return {
       success: true,
       qty
@@ -249,6 +255,9 @@ export async function deleteCart(formData: FormData, cartId: string) {
       }
     }
 
+    const sessionId = (await cookies()).get("sessionId")?.value
+    const cartRedisKey = `cart:${sessionId}`
+    await redis.del(cartRedisKey)
 
     return {
       success: true,
@@ -281,8 +290,21 @@ export async function editName(formData: FormData) {
         name
       }
     })
+    const cachedUserRedisKey = `cachedUser:${sessionId}`
+    const cachedUser = await redis.get(cachedUserRedisKey)
+    if(cachedUser) {
+      const newCachedUser = {
+        ...cachedUser,
+        name
+      }
+      await redis.set(cachedUserRedisKey, newCachedUser, { ex: 1800 })
+      return {
+        success: true
+      }
+    }
 
-    return {success: true}
+
+    return { success: true }
   } catch (err) {
     console.log("somthing went wrong edit name:", err);
     return {
@@ -294,14 +316,34 @@ export async function editName(formData: FormData) {
 export async function editEmail(formData: FormData) {
   try {
     const email = formData.get("email") as string
-    const id = formData.get("id") as string
+    if(!email) {
+      return {
+        success: false,
+        message: "Email field required."
+      }
+    }
+    const sessionId = (await cookies()).get("sessionId")?.value
+    const sessionRedisKey = `session:${sessionId}`
+    const userId = await redis.get(sessionRedisKey) as string
 
     await prisma.user.update({
-      where: { id },
+      where: { id: userId },
       data: {
         email
       }
     })
+    const cachedUserRedisKey = `cachedUser:${sessionId}`
+    const cachedUser = await redis.get(cachedUserRedisKey)
+    if(cachedUser) {
+      const newCachedUser = {
+        ...cachedUser,
+        email
+      }
+      await redis.set(cachedUserRedisKey, newCachedUser, { ex: 1800 })
+      return {
+        success: true
+      }
+    }
 
     return {success: true}
   } catch (err) {
@@ -315,7 +357,7 @@ export async function editEmail(formData: FormData) {
 export async function sendVerification(formData: FormData) {
   try {
     const email = formData.get('email') as string
-    if (!email) return {message: "Email is required"}
+    if (!email) return {success:false, message: "Email is required"}
 
     const code = await sendVerificationCodeEmail(email)
 
@@ -394,12 +436,15 @@ export async function editLocation(formData: FormData) {
     const city = formData.get("city") as string
     const address = formData.get("address") as string
     const postalCode = Number(formData.get("postalCode"))
-    const token = formData.get("token") as string
 
     if(!location || !address || !postalCode || !state || !city) return {success: false, error: "Some fields are missing. Please fill in all required information."}
 
+    const sessionId = (await cookies()).get("sessionId")?.value
+    const sessionRedisKey = `session:${sessionId}`
+    const userId = await redis.get(sessionRedisKey) as string
+
     await prisma.user.update({
-      where: { token },
+      where: { id: userId },
       data: {
         location,
         address,
@@ -408,6 +453,23 @@ export async function editLocation(formData: FormData) {
         city
       }
     })
+
+    const cachedUserRedisKey = `cachedUser:${sessionId}`
+    const cachedUser = await redis.get(cachedUserRedisKey)
+    if(cachedUser) {
+      const newCachedUser = {
+        ...cachedUser,
+        location,
+        address,
+        postalCode,
+        state,
+        city
+      }
+      await redis.set(cachedUserRedisKey, newCachedUser, { ex: 1800 })
+      return {
+        success: true
+      }
+    }
 
     return { success: true }
   } catch(error) {
@@ -419,12 +481,20 @@ export async function editLocation(formData: FormData) {
   }
 }
 
-export async function sendMessage(formData: FormData) {
+export async function sendMessage(formData: FormData, topic: string) {
   try {
-    const id = formData.get('id') as string;
     const name = formData.get('contactName') as string;
     const email = formData.get('contactEmail') as string;
-    const topic = formData.get('contactTopic') as string;
+    const sessionId = (await cookies()).get("sessionId")?.value
+    const sessionRedisKey = `session:${sessionId}`
+    const userId = await redis.get(sessionRedisKey) as string
+
+    if(!userId) {
+      return {
+        success: false,
+        message: "pls sign up before contact us"
+      }
+    }
 
     const job = formData.get('job')?.toString() || undefined;
     const reviewText = formData.get('reviewText')?.toString() || undefined;
@@ -446,7 +516,7 @@ export async function sendMessage(formData: FormData) {
     const proposal = formData.get('proposal')?.toString() || undefined;
 
     await sendContact({
-      id, name, email, topic,
+      id: userId, name, email, topic,
       job, reviewText, page, bugDiscribe,
       order_number, date, paid, describe_cart,
       issue_description, reason, item_condition,

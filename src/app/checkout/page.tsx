@@ -47,7 +47,11 @@ export default function CheckOut() {
   }, [router])
   useEffect(() => {
     if(user) {
-      fetch("/api/cart/checkout/get").then(res => res.json())
+      fetch("/api/cart/checkout/get", {
+        method: "POST",
+        headers: { "Content-Type": 'application/json' },
+        body: JSON.stringify({ userId: user.id })
+      }).then(res => res.json())
       .then(data => {
         if(data.success) {
           setProducts(data.cart)

@@ -34,6 +34,8 @@ export default function CartPage() {
   useEffect(() => {
     fetch('/api/cart/get').then(res => res.json())
       .then(data => {
+        console.log(data);
+        
         if (data.success && Array.isArray(data.cart)) {
           setProducts(data.cart)
         } else {
@@ -45,15 +47,17 @@ export default function CartPage() {
 
   const itemCount = products.reduce((acc, p) => acc + p.quantity, 0)
 
-  const subtotal = products.reduce(
-    (acc, p) => acc + ((p.product.prevPrice ?? p.product.price) * p.quantity),
-    0
-  )
+  const subtotal = products.reduce((acc, p) => {
+    if (!p?.product) return acc;
+    const price = p.product.prevPrice ?? p.product.price;
+    return acc + (price * p.quantity);
+  }, 0);
 
-  const total = products.reduce(
-    (acc, p) => acc + (p.product.price * p.quantity),
-    0
-  )
+  const total = products.reduce((acc, p) => {
+    if (!p?.product) return acc;
+    return acc + (p.product.price * p.quantity);
+  }, 0);
+
 
   const discountAmount = subtotal - total
   const discountPercent = subtotal > 0 ? (discountAmount / subtotal) * 100 : 0
@@ -79,26 +83,31 @@ export default function CartPage() {
             <p className="justify-self-end mr-7 mb-3">price</p>
 
             <aside className={styles.products}>
-              {products.map((p, index) => (
-                <Cart
-                  key={p.product.slug}
-                  id={p.id}
-                  title={p.product.title}
-                  price={p.product.price}
-                  description={p.product.description}
-                  prevPrice={p.product.prevPrice ?? undefined}
-                  delay={index * 100}
-                  slug={p.product.slug}
-                  category={p.product.category.replace("_", " ").toLowerCase()}
-                  isSale={p.product.isSale}
-                  isBestProducts={p.product.isBestSelling}
-                  view={p.product.view}
-                  stock={p.product.stock}
-                  qty={p.quantity}
-                  onDelete={() => handleDelete(p.id)}
-                  onEdit={(qty) => handleEditCart(p.id, qty)}
-                />
-              ))}
+              {products.map((p, index) => {
+                if (!p.product) return null;
+                
+                return (
+                  <Cart
+                    key={p.product.slug}
+                    id={p.id}
+                    title={p.product.title}
+                    price={p.product.price}
+                    description={p.product.description}
+                    prevPrice={p.product.prevPrice ?? undefined}
+                    delay={index * 100}
+                    slug={p.product.slug}
+                    category={p.product.category.replace("_", " ").toLowerCase()}
+                    isSale={p.product.isSale}
+                    isBestProducts={p.product.isBestSelling}
+                    view={p.product.view}
+                    stock={p.product.stock}
+                    qty={p.quantity}
+                    onDelete={() => handleDelete(p.id)}
+                    onEdit={(qty) => handleEditCart(p.id, qty)}
+                  />
+                )
+              })}
+
             </aside>
 
             <p className="justify-self-end mr-7">

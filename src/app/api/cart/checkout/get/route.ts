@@ -10,8 +10,9 @@ function errorResponse(message: string) {
   })
 }
 
-export async function GET() {
+export async function POST(req: Request) {
   try {
+    const { userId } = await req.json()
     const sessionId = (await cookies()).get("sessionId")?.value
     const cartCacheKey = `cart:${sessionId}`
     const cachedCart = await redis.get(cartCacheKey)
@@ -21,13 +22,11 @@ export async function GET() {
         cart: cachedCart
       })
     }
-    const sessionRedisKey = `session:${sessionId}`
-    const userId = await redis.get(sessionRedisKey) as string
     if(!userId) {
       return errorResponse("Not authenticated.")
     }
-    const cart = await prisma.cartItem.findUnique({
-      where: { userId: userId },
+    const cart = await prisma.cartItem.findMany({
+      where: { userId },
       select: {
         quantity: true,
         product: {
